@@ -3,7 +3,6 @@ import { Register } from './components/Register/Register';
 import { Routes, Route } from 'react-router-dom';
 import { Login } from './components/Login/Login';
 import { Subjects } from './components/Subjects/Subjects';
-import { Login } from './components/Login/Login';
 import { SubjectNotes } from './components/SubjectNotes/SubjectNotes';
 import { Admin } from './components/Admin/Admin'
 
