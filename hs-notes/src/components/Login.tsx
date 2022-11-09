@@ -50,6 +50,7 @@ export const Login = () => {
         <div className="login">
             {error && <div>{error}</div> }
             <form action="">
+                <h1>Login Panel</h1>
                 <div className="email-area">
                     <label htmlFor="email">Podaj email: </label>
                     <input type="text" name="email" id="email" onChange={handleEmail}/>

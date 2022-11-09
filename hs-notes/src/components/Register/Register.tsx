@@ -35,6 +35,7 @@ export const Register = () => {
         <>
             {error && <div>{error}</div> }
             <form onSubmit={handleRegister}>
+                <h1>Register Panel</h1>
                 <label htmlFor="register-input">Email:</label>
                 <input id="register-input" placeholder="JohnSnow34" onChange={(e) => setEmail(e.target.value)}/>
 
