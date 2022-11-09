@@ -6,6 +6,7 @@ export const Nav = () => {
       };
     return (
         <nav>
+            <h1>Nav Panel</h1>
             <ul>
                 <li>
                 <NavLink
