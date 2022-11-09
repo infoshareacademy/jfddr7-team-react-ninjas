@@ -4,7 +4,8 @@ export const Subjects = () => {
 
     return (
        <div>
-          <button className="subjects-btn"></button>
+         <h1>Subjects Panel</h1>
+         <button className="subjects-btn"></button>
        </div>
     )
 }
