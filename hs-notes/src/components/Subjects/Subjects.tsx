@@ -1,5 +1,5 @@
 import { db } from '../../firebase';
-import { collection, getDocs, QuerySnapshot, DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
 import { useEffect, useState } from 'react';
 export const Subjects = () => {
