@@ -2,6 +2,7 @@ import { db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 export const Subjects = () => {
 
    const [subjectList, setSubjectList] = useState(['']);
@@ -20,18 +21,11 @@ export const Subjects = () => {
       console.log(subjectList);
    },[])
    
-   const subjectNavigationHandler = (e: any) => {
-      // navigate()
-      const html = e.target;
-      console.log(html);
-      
-      
-   }
 
     return (
        <div>
           {subjectList.map((subject, number) => (
-            <div key={number} onClick={subjectNavigationHandler}> {subject}</div>
+            <div key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>
     )
