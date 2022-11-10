@@ -14,7 +14,7 @@ export const Admin = () => {
                         Subject: newSubject
             })
         } catch(error){console.log(error)}
-}
+    }
 
     return ( 
         <form onSubmit={addNewSubject}>

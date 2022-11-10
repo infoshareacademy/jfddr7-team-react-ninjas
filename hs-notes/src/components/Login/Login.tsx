@@ -1,7 +1,11 @@
 import { useState } from "react"
-import {  signInWithEmailAndPassword } from 'firebase/auth';
+import {  signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import './Login.style.css'
+
+
+
 
 
 export const Login = () => {
@@ -18,6 +22,37 @@ export const Login = () => {
 
     const handlePassword = (e: any) => {
         setPassword(e.target.value);
+    }
+
+    const SingInWithFacebook = (e: any) => {
+        e.preventDefault();
+        const facebookProvider = new FacebookAuthProvider();
+        signInWithPopup(auth, facebookProvider)
+        .then((re)=>{
+            console.log(re)
+        })
+        .catch((err)=> {
+            console.log(err.message)
+        })
+    }
+
+    const SingInWithGoogle = (e: any) => {
+        e.preventDefault();
+        const googleProvider = new GoogleAuthProvider();
+        signInWithPopup(auth , googleProvider)
+        .then((re)=>{
+            const credential = GoogleAuthProvider.credentialFromResult(re);
+            if (!credential) {
+                throw Error("No token")
+            }
+            console.log(re);
+            const token = credential.accessToken;    
+            const user = re.user;
+        })
+        .catch((err)=>{
+            console.log(err)
+            
+        })    
     }
 
     const loginHandler = (e: any) => {
@@ -50,17 +85,28 @@ export const Login = () => {
         <div className="login">
             {error && <div>{error}</div> }
             <form action="">
-                <h1>Login Panel</h1>
-                <div className="email-area">
-                    <label htmlFor="email">Podaj email: </label>
-                    <input type="text" name="email" id="email" onChange={handleEmail}/>
+
+                <div className="google-area">
+                    <button className="google-login" onClick={SingInWithGoogle}><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" alt=""/> <p>Zaloguj przez Google</p></button>
                 </div>
+
+                <div className="facebook-area">
+                    <button className="facebook-login" onClick={SingInWithFacebook}><img src="https://toppng.com/uploads/preview/facebook-social-icon-logo-joe-eckley-facebook-page-management-icon-11553485296y89sa59plk.png" alt=""/> <p>Zaloguj przez Facebook</p></button>
+                </div>
+                    
+                <span>Email:</span>
+                <div className="email-area">
+                    <label htmlFor="email"></label>
+                    <input type="text" name="email" id="email" placeholder="JohnSnow34" onChange={handleEmail}/>
+                </div>
+
+                <span>Hasło:</span>
                 <div className="password-area">
-                    <label htmlFor="email">Podaj hasło: </label>
-                    <input type="text" name="email" id="email" onChange={handlePassword}/>
+                    <label htmlFor="password"></label>
+                    <input type="password" name="password" id="password" placeholder="Tu wpisz swoje hasło" onChange={handlePassword}/>
                 </div>
             </form>
-            <button onClick={loginHandler}>Kliknij żeby zalogować</button>
+            <button className="login-btn" onClick={loginHandler}>Kliknij żeby zalogować</button>
         </div>
     )
 }

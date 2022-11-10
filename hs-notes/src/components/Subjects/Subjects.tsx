@@ -25,9 +25,9 @@ export const Subjects = () => {
    
 
     return (
-       <div>
+       <div className='div-subject'>
           {subjectList.map((subject, number) => (
-            <div key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
+            <div className='subject' key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>
     )

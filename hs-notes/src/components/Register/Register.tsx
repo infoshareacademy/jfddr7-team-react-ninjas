@@ -2,6 +2,7 @@ import { useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import './Register.style.css'
 
 export const Register = () => {
 
@@ -32,17 +33,29 @@ export const Register = () => {
     }
 
     return ( 
-        <>
-            {error && <div>{error}</div> }
-            <form onSubmit={handleRegister}>
-                <h1>Register Panel</h1>
-                <label htmlFor="register-input">Email:</label>
-                <input id="register-input" placeholder="JohnSnow34" onChange={(e) => setEmail(e.target.value)}/>
+        <>  <div className="register">
+                {error && <div>{error}</div> }
+                <form onSubmit={handleRegister}>
 
-                <label htmlFor="password-input">Hasło:</label>
-                <input id="password-input" onChange={(e) => setPassword(e.target.value)}/>
-                <button>Zarejestruj</button>
-            </form>
+                    <h1>Zarejestruj się</h1>
+
+                    <div className="email-area">
+                        <span>Email:</span>
+                        <label htmlFor="register-input"></label>
+                        <input className="register-input" placeholder="JohnSnow34" onChange={(e) => setEmail(e.target.value)}/>
+                    </div>
+
+                    <div className="email-area">
+                        <span>Hasło:</span>
+                        <label htmlFor="password-input"></label>
+                        <input className="password-input" onChange={(e) => setPassword(e.target.value)}/>
+                    </div>
+
+                                   
+
+                </form>
+                <button className="register-btn" >Zarejestruj</button>    
+            </div>
         </>
      );
 }
