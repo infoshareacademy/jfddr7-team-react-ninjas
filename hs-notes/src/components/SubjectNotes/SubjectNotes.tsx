@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom"
 import { db } from "../../firebase";
 
 export const SubjectNotes = () => {
+    const [subjectsObject, setSubjectObject] = useState([]);
     const params = useParams();
     
     const [topicList, setTopicList] = useState(['']);
     const downloadData = async () => {
-      getDocs(collection(db, '/Subjects/2VyggQ76uMI3CzPnwzUx/Topics')).then((querySnapshot) => {
+      getDocs(collection(db, `/Subjects/${subjectsObject}/Topics`)).then((querySnapshot) => {
         let topics: string[] = [];
          querySnapshot.forEach((doc) => {
             topics.push(doc.data().Topic);
@@ -16,11 +17,35 @@ export const SubjectNotes = () => {
         setTopicList(topics);
       })
    }
-   console.log(topicList);
+
+    const   paramsGetter: any = async (n: any) => {
+    const obj: object | any = {};
+    const querySnapshot = await  getDocs(collection(db, 'Subjects'));
+    let subjects: any = [];
+    let ids: any = [];
+    querySnapshot.docs.forEach((doc) => {
+        ids.push(doc.id);
+        subjects.push(doc.data().Subject)
+    })
+    subjects.forEach((element:any, index: any) => {
+        obj[element] = ids[index];
+    });
+    console.log(obj[n]);
+    console.log(obj);
+    
+    return obj[n];
+   }
+//    console.log(params);
    
+useEffect(() => {
+    paramsGetter(params.id)
+    .then((data: any) => setSubjectObject(data))
+}, [])
+
+
    useEffect(() => {
     downloadData();
-   }, [])
+   }, [subjectsObject])
    
     
     return (

@@ -14,6 +14,8 @@ export const Subjects = () => {
          })
          setSubjectList(subjects);
       })
+
+      
    }
 
    useEffect(() => {
