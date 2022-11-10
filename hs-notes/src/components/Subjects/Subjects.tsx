@@ -3,6 +3,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 export const Subjects = () => {
 
    const [subjectList, setSubjectList] = useState(['']);
