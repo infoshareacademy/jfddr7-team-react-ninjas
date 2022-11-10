@@ -1,10 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase";
 
 export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
+    const [newTopic, setNewTopic] = useState(null);
     const params = useParams();
     
     const [topicList, setTopicList] = useState(['']);
@@ -30,27 +31,33 @@ export const SubjectNotes = () => {
     subjects.forEach((element:any, index: any) => {
         obj[element] = ids[index];
     });
-    console.log(obj[n]);
-    console.log(obj);
-    
     return obj[n];
    }
-//    console.log(params);
+
+   const addTopicToDb = () => {
+    addDoc(collection(db, `/Subjects/${subjectsObject}/Topics`), {
+        Topic: newTopic,
+    })
+   }
+
    
-useEffect(() => {
-    paramsGetter(params.id)
-    .then((data: any) => setSubjectObject(data))
-}, [])
+    useEffect(() => {
+        paramsGetter(params.id)
+        .then((data: any) => setSubjectObject(data))
+    }, [])
 
 
    useEffect(() => {
     downloadData();
-   }, [subjectsObject])
+   }, [subjectsObject, addTopicToDb])
    
     
     return (
         <div>
-            <h1>Notatki z {params.id}</h1>
+            <h1>Tematy z {params.id}</h1>
+            <label htmlFor="newTopic">Dodaj nowy temat</label>
+            <input type="text" onChange={(e: any) => setNewTopic(e.target.value)}/>
+            <button onClick={addTopicToDb}>Dodaj nowy temat</button>
             <div className="topic-list">
                 {topicList.map((item, number) => (
                     <div key={number}>{item}</div>
