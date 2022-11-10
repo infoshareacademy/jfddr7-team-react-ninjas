@@ -1,6 +1,6 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 
 export const SubjectNotes = () => {
@@ -60,7 +60,7 @@ export const SubjectNotes = () => {
             <button onClick={addTopicToDb}>Dodaj nowy temat</button>
             <div className="topic-list">
                 {topicList.map((item, number) => (
-                    <div key={number}>{item}</div>
+                    <div key={number}><Link to={`/subjects/${item}`}> {item} </Link></div>
                 ))}
             </div>
         </div>
