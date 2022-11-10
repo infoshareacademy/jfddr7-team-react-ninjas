@@ -5,6 +5,7 @@ import { Login } from './components/Login/Login';
 import { Subjects } from './components/Subjects/Subjects';
 import { SubjectNotes } from './components/SubjectNotes/SubjectNotes';
 import { Admin } from './components/Admin/Admin'
+import { CityChoice } from './components/SchoolChoice/SchoolChoice';
 
 
 
@@ -21,6 +22,8 @@ function App() {
       <Route path='/subjects/:id' element={<SubjectNotes />}>
       </Route>
       <Route path='/admin' element={<Admin />}>
+      </Route>
+      <Route path='choice' element={<CityChoice />}>
       </Route>
     </Routes>
     </div>
