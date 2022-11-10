@@ -35,7 +35,7 @@ export const Register = () => {
     return ( 
         <>  <div className="register">
                 {error && <div>{error}</div> }
-                <form>
+                <form onSubmit={handleRegister}>
 
                     <h1>Zarejestruj się</h1>
 
@@ -54,7 +54,7 @@ export const Register = () => {
                                    
 
                 </form>
-                <button className="register-btn" onSubmit={handleRegister}>Zarejestruj</button>    
+                <button className="register-btn" >Zarejestruj</button>    
             </div>
         </>
      );
