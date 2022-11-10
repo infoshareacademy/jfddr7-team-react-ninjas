@@ -2,8 +2,9 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 
+
 export const CityChoice = () => {
-    const [citiesList, setCitiesList] = useState(['']);
+    const [citiesList, setCitiesList] = useState([""]);
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
          let city:string[] = [];
