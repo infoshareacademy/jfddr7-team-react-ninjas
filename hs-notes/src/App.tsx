@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Subjects } from './components/Subjects/Subjects';
 import { Login } from './components/Login/Login';
 import { SubjectNotes } from './components/SubjectNotes/SubjectNotes';
+import { Admin } from './components/Admin/Admin'
+
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
       <Route path='/subjects' element={<Subjects />}>
       </Route>
       <Route path='/subjects/:id' element={<SubjectNotes />}>
+      </Route>
+      <Route path='/admin' element={<Admin />}>
       </Route>
     </Routes>
     </div>
