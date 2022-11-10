@@ -37,7 +37,7 @@ export const Register = () => {
                 {error && <div>{error}</div> }
                 <form>
 
-                    <h1>Register Panel</h1>
+                    <h1>Zarejestruj się</h1>
 
                     <div className="email-area">
                         <span>Email:</span>
