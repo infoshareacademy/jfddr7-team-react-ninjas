@@ -1,6 +1,7 @@
 import {FormEventHandler, useState} from 'react';
 import {doc, setDoc} from 'firebase/firestore';
 import {db} from '../../firebase'
+import './Admin.style.css';
 
 
 export const Admin = () => {
@@ -17,11 +18,16 @@ export const Admin = () => {
     }
 
     return ( 
-        <form onSubmit={addNewSubject}>
-            <label htmlFor="add-subject-input">Nazwa przedmiotu:</label>
-            <input id="add-subject-input" type="text" placeholder="Matematyka" onChange={(e)=> setNewSubject(e.target.value)}/>
-            <button>Dodaj przedmiot</button>
-        </form>
+        <div className='admin-div'>
+            <div className='admin-h1-div'>
+                <h1 className='admin-h1'>Panel Administratora</h1>
+            </div>
+            <form onSubmit={addNewSubject}>
+                <label className='admin-label' htmlFor="add-subject-input">Nazwa przedmiotu:</label>
+                <input className='add-subject-input' type="text" placeholder="Matematyka" onChange={(e)=> setNewSubject(e.target.value)}/>
+                <button className='admin-botton'>Dodaj przedmiot</button>
+            </form>
+        </div>
      );
 }
 

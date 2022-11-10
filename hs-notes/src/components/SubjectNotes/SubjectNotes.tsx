@@ -2,6 +2,7 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { db } from "../../firebase";
+import './SubjectNotes.style.css'
 
 export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
@@ -53,16 +54,21 @@ export const SubjectNotes = () => {
    
     
     return (
-        <div>
-            <h1>Tematy z {params.id}</h1>
-            <label htmlFor="newTopic">Dodaj nowy temat</label>
-            <input type="text" onChange={(e: any) => setNewTopic(e.target.value)}/>
-            <button onClick={addTopicToDb}>Dodaj nowy temat</button>
+        <div className="subjectNotes">
+            <h1>{params.id}</h1>
+
+            <div className="newTopicPanel">
+             <label htmlFor="newTopic">Dodaj nowy temat</label>
+             <input type="text" placeholder="Wpisz temat ..." onChange={(e: any) => setNewTopic(e.target.value)}/>
+             <button onClick={addTopicToDb}>Dodaj nowy temat</button>
+            </div>
+
             <div className="topic-list">
                 {topicList.map((item, number) => (
-                    <div key={number}><Link to={`/subjects/${item}`}> {item} </Link></div>
-                ))}
+                    <div className="one-topic" key={number}>{item}</div>
+                ))}                
             </div>
+
         </div>
     )
 }

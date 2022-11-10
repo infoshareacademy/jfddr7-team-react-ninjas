@@ -3,6 +3,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 export const Subjects = () => {
 
    const [subjectList, setSubjectList] = useState(['']);
@@ -26,6 +27,7 @@ export const Subjects = () => {
 
     return (
        <div className='div-subject'>
+         <div className='div-subjects'><h1 className='h1-subjects'>Przedmioty</h1></div>
           {subjectList.map((subject, number) => (
             <div className='subject' key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
