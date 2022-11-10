@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+p {
+    font-size: 18px;
+    font-weight: bold;
+}
 .login {
     border: 1px solid black;
     width: 35%;
@@ -28,8 +32,9 @@ form {
 
 .google-login {
     width: 70%;
+    height: 54.66px;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid rgb(7, 143, 152);
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 5px;
@@ -37,6 +42,7 @@ form {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    color: rgb(7, 143, 152);
 }
 
 .google-login:hover {
@@ -51,8 +57,9 @@ form {
 
 .facebook-login {
     width: 70%;
+    height: 54.66px;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid rgb(7, 143, 152);
     border-radius: 5px;
     margin-bottom: 20px;
     padding: 5px;
@@ -60,6 +67,7 @@ form {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    color: rgb(7, 143, 152);
 }
 
 .facebook-login:hover {
@@ -72,6 +80,7 @@ span {
     display: flex;
     justify-content: left;
     margin-left: 16%;
+    color: rgb(7, 143, 152);
 }
 
 input {
@@ -103,6 +112,5 @@ input {
 }
 
 img {
-    width: 5%;
-    height: 5%;
+width: 30px;
 }
