@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import './Register.style.css'
 import { UserContext } from "../UserProvider/userProvider";
+import image from '../../img/bookshelf.jpeg'
+import logo from '../../img/logo.png'
 
 export const Register = () => {
 
@@ -12,7 +14,6 @@ export const Register = () => {
     const navigate = useNavigate();
 
     const handleRegister = (e: any) => {
-        console.log("OK")
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
         .then(() => navigate('/login'))
@@ -36,22 +37,26 @@ export const Register = () => {
     }
 
     return ( 
-        <>  <div className="register">
-                {error && <div>{error}</div> }
-                <form onSubmit={handleRegister}>
 
-                    <h1>Zarejestruj się</h1>
+        <div className="register-container" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+
+              <div className="register">
+                <img className="logo" src={logo} alt={'hs notes'}/>
+                <h3>Zarejestruj się i korzystaj z bazy notatek!</h3>
+                {error && <div className="error-message">{error}</div>}
+               
+                <form onSubmit={handleRegister}>
 
                     <div className="email-area">
                         <span>Email:</span>
                         <label htmlFor="register-input"></label>
-                        <input className="register-input" placeholder="JohnSnow34" onChange={(e) => setEmail(e.target.value)}/>
+                        <input className="register-input" placeholder="JohnSnow34" required onChange={(e) => setEmail(e.target.value)}/>
                     </div>
 
                     <div className="email-area">
                         <span>Hasło:</span>
                         <label htmlFor="password-input"></label>
-                        <input className="password-input" onChange={(e) => setPassword(e.target.value)}/>
+                        <input className="password-input" type='password' required onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
                     <button className="register-btn">Zarejestruj</button>    
@@ -59,7 +64,9 @@ export const Register = () => {
 
                 <p className="register-p">Masz konto? <Link to='/login' className="login-link">Przejdź do logowania!</Link></p>
             </div>
-        </>
+
+        </div>
+
      );
 }
  

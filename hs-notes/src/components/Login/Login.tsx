@@ -2,10 +2,9 @@ import { useState } from "react"
 import {  signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
 import { auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
-import './Login.style.css'
-
-
-
+import './Login.style.css';
+import image from '../../../src/img/bookshelf.jpeg';
+import logo from '../../img/logo.png';
 
 
 export const Login = () => {
@@ -82,6 +81,12 @@ export const Login = () => {
 
 
     return (
+    
+    // <img className="logo" src={logo} alt={'logo'}/>
+
+    <div className="login-container">
+        
+
         <div className="login">
             {error && <div>{error}</div> }
             <form action="">
@@ -110,5 +115,12 @@ export const Login = () => {
 
             <p className="register-p">Nie masz konta? <Link to='/register' className="register-link">Zarejestruj się!</Link></p>
         </div>
+
+        <div className="picture-gallery" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+            
+
+        </div>
+    </div>
+    // </>
     )
 }
