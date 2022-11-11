@@ -1,43 +1,62 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import './Nav.style.css';
+import { UserContext } from "../UserProvider/userProvider";
+import { useContext } from "react";
+import { auth } from '../../firebase';
+import { signOut } from "firebase/auth";
 
 export const Nav = () => {
+
+  const {email, setEmail} = useContext(UserContext)
+
+  const navigate = useNavigate()
+
+  const handleLogOut = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    signOut(auth)
+    .then(()=> {
+      console.log('user signed out')
+      setEmail('')
+      navigate('/login')
+    })
+    .catch((error) => console.log(error.message))
+  }
+
     let activeStyle = {
-        textDecoration: "underline",
+        textDecoration: "none",
+        background: "#75bbbb",
+        color: "white", 
+        height: "70px"
       };
+
     return (
         <nav>
-            <h1>Nav Panel</h1>
-            <ul>
-                <li>
+          <div className='div-nav-container'>      
+              <div>
                 <NavLink
-                   to="/"
+                   to="/Subjects"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
 
-                   Home
+                   Przedmioty
                 </NavLink>
-                </li>            
-            
-                <li>
+              </div>
+
+              <div className='div-my-notes-signout-button'>
+                
                 <NavLink
-                   to="register"
+                   to="/myNotes"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
 
-                   Register
+                   Moje notatki
                 </NavLink>
-                </li>
 
-                <li>
-                <NavLink
-                   to="login"
-                   style={({ isActive }) =>
-                   isActive ? activeStyle : undefined}>
+                <button onClick={handleLogOut}>Wyloguj</button>
+              </div>
+            </div>
 
-                   Login
-                </NavLink>
-                </li>
-            </ul>
+              
         </nav>
     );
 };
