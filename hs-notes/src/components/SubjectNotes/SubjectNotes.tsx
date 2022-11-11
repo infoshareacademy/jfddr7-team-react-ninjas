@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
+import { Nav } from '../Nav/Nav'
 
 export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
@@ -54,6 +55,8 @@ export const SubjectNotes = () => {
    
     
     return (
+        <>
+        <Nav/>
         <div className="subjectNotes">
             <h1>{params.id}</h1>
 
@@ -70,5 +73,6 @@ export const SubjectNotes = () => {
             </div>
 
         </div>
+        </>
     )
 }

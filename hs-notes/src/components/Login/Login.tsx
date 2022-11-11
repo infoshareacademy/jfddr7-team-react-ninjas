@@ -62,7 +62,7 @@ export const Login = () => {
             .then(() => setLoggedUser(email))
             .then(() => console.log(loggedUser))
             .then(() => console.log(auth.currentUser))
-            .then(() => navigate('/home'))
+            .then(() => navigate('/Subjects'))
             .catch((e) => {
                 if (e.code === 'auth/user-not-found') {
                     setError('Brak takiego użytkownika w bazie danych - spróbuj ponownie.');
