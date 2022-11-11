@@ -1,20 +1,20 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './Register.style.css'
+import { UserContext } from "../UserProvider/userProvider";
 
 export const Register = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const {email, setEmail, password, setPassword} = useContext(UserContext)
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleRegister = (e:any) => {
+    const handleRegister = (e: any) => {
+        console.log("OK")
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("OK"))
         .then(() => navigate('/login'))
         .catch((e)=> {
             if (e.code === 'auth/invalid-email') {
@@ -25,6 +25,9 @@ export const Register = () => {
             } 
             if (e.code === 'auth/weak-password') {
                 setError('Hasło jest za słabe - spróbuj ponownie.');
+            } 
+            if (e.code === 'auth/wrong-password'){
+                setError('Błędne hasło - spróbuj ponownie');
             } else {
                 console.log(e.code);
                 setError('Hasło jest za słabe - spróbuj ponownie.');
@@ -51,10 +54,10 @@ export const Register = () => {
                         <input className="password-input" onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
-                                   
-
+                    <button className="register-btn">Zarejestruj</button>    
                 </form>
-                <button className="register-btn" >Zarejestruj</button>    
+
+                <p className="register-p">Masz konto? <Link to='/login' className="login-link">Przejdź do logowania!</Link></p>
             </div>
         </>
      );

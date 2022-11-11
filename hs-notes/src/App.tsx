@@ -17,20 +17,21 @@ function App() {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const {email, setEmail} = useContext(UserContext) // wez email z firebase i ustaw w context
-  
+  const {email, setEmail, isAdmin, setIsAdmin} = useContext(UserContext) 
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user){
         navigate('/subjects')
         setEmail(user.email || '')
+        if(user.uid == 'wr2dvp3MI8eMGpkYpmtEjkY2in82'){
+          setIsAdmin(true)
+        }
       }else{
         navigate('/login')
       }
     })
   },[])
-
-  console.log(email)
 
   return (
     <div className="App">

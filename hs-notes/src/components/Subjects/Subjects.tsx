@@ -1,13 +1,18 @@
 import { db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Nav } from '../Nav/Nav'
+import { UserContext } from '../UserProvider/userProvider';
 
 export const Subjects = () => {
 
+   const {isAdmin, setIsAdmin} = useContext(UserContext)
+
    const [subjectList, setSubjectList] = useState(['']);
+   const navigate = useNavigate()
+
    const downloadData = async () => {
       getDocs(collection(db, 'Subjects')).then((querySnapshot) => {
          let subjects:string[] = [];
@@ -23,6 +28,9 @@ export const Subjects = () => {
       console.log(subjectList);
    },[])
    
+   const navigateToAdmin = () => {
+      navigate('/admin')
+   }
 
     return (
       <>
@@ -32,6 +40,7 @@ export const Subjects = () => {
             <div className='subject' key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>
+       {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
        </>
     )
 }
