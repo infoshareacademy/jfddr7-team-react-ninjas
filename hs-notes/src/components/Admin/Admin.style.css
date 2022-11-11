@@ -4,7 +4,6 @@
 
 .admin-div {
     display: flex;
-    border: 1px solid black;
     width: 100%;
     height: 100%;
     flex-wrap: wrap;
@@ -38,7 +37,7 @@
     margin-bottom: 5px;
 }
 
-.admin-botton {
+.add-subject-button {
     width: 30%;
     height: 54.66px;
     margin-left: 35%;
@@ -49,7 +48,11 @@
     border: none;
 }
 
-.admin-botton:hover {
+.add-subject-button:hover {
     background-color: rgb(8, 178, 190);
     padding: 6px;
+}
+
+.subject-link{
+    color: black;
 }
