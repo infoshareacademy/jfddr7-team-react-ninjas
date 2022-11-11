@@ -20,6 +20,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
     margin-bottom: 10px;
 }
@@ -43,7 +44,6 @@ input {
     font-size: 20px;
 }
 
-
 .register-btn {
     width: 69%;
     height: 54.66px;
@@ -53,9 +53,16 @@ input {
     border: 1px solid rgb(8, 178, 190);
     border-radius: 5px;
     padding: 5px;
+    align-self: center;
     }
 
 .register-btn:hover {
     background-color: rgb(8, 178, 190);
     padding: 6px;
+}
+
+.login-link{
+    color: teal;
+    font-size: 14px;
+    /* margin-left: 5px; */
 }

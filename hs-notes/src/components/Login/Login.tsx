@@ -1,7 +1,7 @@
 import { useState } from "react"
 import {  signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
 import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './Login.style.css'
 
 
@@ -107,6 +107,8 @@ export const Login = () => {
                 </div>
             </form>
             <button className="login-btn" onClick={loginHandler}>Kliknij żeby zalogować</button>
+
+            <p className="register-p">Nie masz konta? <Link to='/register' className="register-link">Zarejestruj się!</Link></p>
         </div>
     )
 }

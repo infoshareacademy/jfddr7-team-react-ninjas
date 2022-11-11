@@ -114,3 +114,13 @@ input {
 img {
 width: 30px;
 }
+
+.register-link{
+    color: teal;
+    font-size: 14px;
+}
+
+.register-p{
+    margin-top: 30px;
+    font-size: 14px;
+}
