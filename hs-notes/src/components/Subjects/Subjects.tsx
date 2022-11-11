@@ -28,19 +28,17 @@ export const Subjects = () => {
       console.log(subjectList);
    },[])
    
-   const navigateToAdmin = () => {
-      navigate('/admin')
-   }
+   
 
     return (
       <>
        <Nav/>
        <div className='div-subject'>
           {subjectList.map((subject, number) => (
-            <div className='subject' key={number}><Link to={`/subjects/${subject}`}> {subject} </Link></div>
+            <div className='subject' key={number}><Link className='subject-link' to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>
-       {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
+      
        </>
     )
 }

@@ -7,7 +7,7 @@ import { signOut } from "firebase/auth";
 
 export const Nav = () => {
 
-  const {email, setEmail} = useContext(UserContext)
+  const {email, setEmail, isAdmin} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -21,6 +21,10 @@ export const Nav = () => {
     })
     .catch((error) => console.log(error.message))
   }
+
+  const navigateToAdmin = () => {
+    navigate('/admin')
+ }
 
     let activeStyle = {
         textDecoration: "none",
@@ -44,15 +48,19 @@ export const Nav = () => {
 
               <div className='div-my-notes-signout-button'>
                 
-                <NavLink
+              {!isAdmin &&
+               <NavLink
                    to="/myNotes"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
 
                    Moje notatki
                 </NavLink>
+              }
 
-                <button onClick={handleLogOut}>Wyloguj</button>
+            {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
+
+                <button className='button-logout' onClick={handleLogOut}>Wyloguj</button>
               </div>
             </div>
 

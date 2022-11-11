@@ -29,6 +29,17 @@ a:hover{
     color: white;
 }
 
-button{
+.button-logout{
     height: 40px;
+    background: rgb(7, 143, 152);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.button-add-subject{
+    background: rgb(7, 143, 152);
+    border: none;
+    color: white;
+    cursor: pointer;
 }
