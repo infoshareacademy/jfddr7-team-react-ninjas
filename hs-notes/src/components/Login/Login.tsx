@@ -82,8 +82,6 @@ export const Login = () => {
 
     return (
     
-    // <img className="logo" src={logo} alt={'logo'}/>
-
     <div className="login-container">
         
 

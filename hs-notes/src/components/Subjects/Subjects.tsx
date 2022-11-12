@@ -2,16 +2,13 @@ import { db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
 import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Nav } from '../Nav/Nav'
-import { UserContext } from '../UserProvider/userProvider';
+import { SubjectsListContext } from '../SubjectsListProvider/SubjectListProvider';
 
 export const Subjects = () => {
 
-   const {isAdmin, setIsAdmin} = useContext(UserContext)
-
-   const [subjectList, setSubjectList] = useState(['']);
-   const navigate = useNavigate()
+   const {subjects, setSubjects} = useContext(SubjectsListContext);
 
    const downloadData = async () => {
       getDocs(collection(db, 'Subjects')).then((querySnapshot) => {
@@ -19,13 +16,13 @@ export const Subjects = () => {
          querySnapshot.docs.forEach((doc) => {
             subjects.push(doc.data().Subject)
          })
-         setSubjectList(subjects);
+         setSubjects(subjects);
       })
    }
 
    useEffect(() => {
       downloadData();
-      console.log(subjectList);
+      console.log(subjects);
    },[])
    
    
@@ -34,7 +31,7 @@ export const Subjects = () => {
       <>
        <Nav/>
        <div className='div-subject'>
-          {subjectList.map((subject, number) => (
+          {subjects.map((subject, number) => (
             <div className='subject' key={number}><Link className='subject-link' to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>

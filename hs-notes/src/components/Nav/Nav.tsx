@@ -7,12 +7,13 @@ import { signOut } from "firebase/auth";
 
 export const Nav = () => {
 
-  const {email, setEmail, isAdmin} = useContext(UserContext)
+  const {email, setEmail, isAdmin, avatar} = useContext(UserContext)
 
   const navigate = useNavigate()
 
   const handleLogOut = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+    alert('Czy na pewno chcesz się wylogować?')
     signOut(auth)
     .then(()=> {
       console.log('user signed out')
@@ -30,13 +31,13 @@ export const Nav = () => {
         textDecoration: "none",
         background: "#75bbbb",
         color: "white", 
-        height: "70px"
       };
 
     return (
         <nav>
           <div className='div-nav-container'>      
               <div>
+                {avatar !== '' && <img className="avatar" src={avatar}></img>}
                 <NavLink
                    to="/Subjects"
                    style={({ isActive }) =>
@@ -50,7 +51,7 @@ export const Nav = () => {
                 
               {!isAdmin &&
                <NavLink
-                   to="/myNotes"
+                   to="/my-notes"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
 
