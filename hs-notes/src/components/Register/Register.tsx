@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { ReactEventHandler, useContext, useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
@@ -13,10 +13,10 @@ export const Register = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleRegister = (e: any) => {
+    const handleRegister = (e: React.FormEvent) => {
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => navigate('/login'))
+        .then(() => navigate('/avatar-choice'))
         .catch((e)=> {
             if (e.code === 'auth/invalid-email') {
                 setError('Podana wartość nie jest adresem email - spróbuj ponownie.');
