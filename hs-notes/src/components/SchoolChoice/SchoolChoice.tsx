@@ -1,11 +1,15 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
+import image from '../../img/bookshelf.jpeg'
+import './SchoolChoice.style.css'
+import logo from '../../img/logo.png'
 
 
 export const CityChoice = () => {
     const [citiesList, setCitiesList] = useState([""]);
     const [schoolList, setSchoolList] = useState([""])
+    const [filterSchoolList, setFilterSchoolList] = useState([""])
     
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
@@ -22,10 +26,11 @@ export const CityChoice = () => {
       getDocs(collection(db, 'Schools')).then((querySnapshot) => {
          let school:string[] = [];
          querySnapshot.docs.forEach((doc) => {
-            school.push(doc.data().Schools)
+            school.push(doc.data().School)
          })
          console.log(school)
          setSchoolList(school);
+         setFilterSchoolList(school)
       })
     }
     
@@ -40,23 +45,36 @@ export const CityChoice = () => {
         console.log(schoolList)
       },[])
 
+      const cityHandler = (e: any) => {
+        console.log(e.target.value)
+        const test = schoolList.filter((school) => 
+          school.includes(e.target.value)
+        )
+        setFilterSchoolList(test)
+      }
+
       
 
    
     return (
-      <>
-      <div>
-          <select name="selectCity" className="selectCity">
-              {citiesList.map((city, number) => (
-              <option key={number}> {city} </option>))}
-          </select>                    
-      </div>
-      <div>
-          <select name="selectSchool" className="selectSchool">
-              {citiesList.map((number, school) => (
-              <option key={number}> {school} </option>))}
-          </select>    
-      </div>
-      </>
+  <div className='background' style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+
+    <div className="school-container">
+      <img className="logo" src={logo} alt={'hs notes'}/>
+      <h3>Wybierz swoje miasto oraz szkołę!</h3>
+      <span className="schoolSpan">Wybierz misto!</span>
+      <select onChange={cityHandler}  name="selectCity" className="selectCity">
+          {citiesList.map((city, number) => (
+          <option key={number}> {city} </option>))}
+        </select>        
+      
+        <span className="schoolSpan">Wybierz szkołę!</span>
+        <select name="selectSchool" className="selectCity">
+          {filterSchoolList.map((school, number) => (
+          <option key={number}> {school} </option>))}
+      </select>
+    </div>             
+      
+  </div>
     )
 }

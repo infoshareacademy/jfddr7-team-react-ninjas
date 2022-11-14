@@ -1,0 +1,26 @@
+.school-container{
+    width: 600px;
+    height: 600px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);  
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.selectCity {
+    max-width: 520px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schoolSpan {
+    margin-left: 0;
+}
