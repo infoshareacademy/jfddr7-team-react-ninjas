@@ -27,10 +27,11 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user){
+        console.log(user)
         navigate('/subjects')
         setEmail(user.email || '')
         setIsAdmin(false)
-        if(user.uid == 'wr2dvp3MI8eMGpkYpmtEjkY2in82'){
+        if(user.uid == '0DmA8oprXPMRKV0J9d788vW29OU2'){
           setIsAdmin(true)
           console.log('admin')
         }
