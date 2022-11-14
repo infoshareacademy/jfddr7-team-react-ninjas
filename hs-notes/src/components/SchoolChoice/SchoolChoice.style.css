@@ -25,7 +25,7 @@
 
 .school-choice-select {
     margin-top: 10px;
-    width: 95%;
+    width: 530px;
     border-radius: 5px;
     border: 1px solid rgb(175, 175, 175);
     margin-bottom: 10px;
@@ -41,7 +41,7 @@
 .school-choice-btn-add
 {
     margin-top: 10px;
-    width: 95%;
+    width: 530px;
     height: 54.66px;
     font-size: 20px;
     color: white;
