@@ -1,6 +1,6 @@
 import { addDoc, collection, collectionGroup, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import { Nav } from "../Nav/Nav"
 
@@ -8,6 +8,7 @@ export const NoteList = () => {
 
     const params = useParams();
     const subject = window.location.href.split('/')[4];
+    const topic  = window.location.href.split('/')[5];
     const [note, setNote] = useState(['']);
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
@@ -64,7 +65,7 @@ export const NoteList = () => {
             </div>
 
             {note.map((note, number) => (
-                <div key={number}>{note}</div>
+                <div key={number}><Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}> {note} </Link></div>
             ))}
         </>
         
