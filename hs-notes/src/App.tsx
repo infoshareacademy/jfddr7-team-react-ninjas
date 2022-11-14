@@ -12,6 +12,7 @@ import { useContext, useEffect } from 'react';
 import { UserContext } from './components/UserProvider/userProvider'
 import { SubjectsListContext } from './components/SubjectsListProvider/SubjectListProvider'
 import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
+import { NoteList } from './components/NoteList/NoteList';
 
 
 
@@ -51,6 +52,8 @@ function App() {
       <Route path='/subjects' element={<Subjects />}>
       </Route>
       <Route path='/subjects/:id' element={<SubjectNotes />}>
+      </Route>
+      <Route path='/subjects/:id/:id' element={<NoteList />}>
       </Route>
       <Route path='/admin' element={<Admin />}>
       </Route>
