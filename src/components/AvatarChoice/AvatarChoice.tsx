@@ -19,31 +19,43 @@ import { useNavigate } from 'react-router-dom'
 
 export const AvatarChoice = () => {
 
-    const [current, setCurrent] = useState('')
+    const [current, setCurrent] = useState(0)
     const {avatar, setAvatar} = useContext(UserContext)
     const navigate = useNavigate()
-    const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12]
-
-    const handleClick = (e: React.MouseEvent) => {
-        e.currentTarget.classList.add('active')
-        const src = e.currentTarget.getAttribute('src')
-        setCurrent(src || '') 
-   }
+    const avatars = 
+    [
+        {id:1, src:avatar1}, 
+        {id:2, src:avatar2}, 
+        {id:3, src:avatar3}, 
+        {id:4, src:avatar4}, 
+        {id:5, src:avatar5}, 
+        {id:6, src:avatar6}, 
+        {id:7, src:avatar7}, 
+        {id:8, src:avatar8}, 
+        {id:9, src:avatar9}, 
+        {id:10, src:avatar10}, 
+        {id:11, src:avatar11}, 
+        {id:12, src:avatar12}
+    ]
 
     const addAvatar = () => {
-        setAvatar(current)
         navigate('/city-choice')
-
     }
 
-    
 
     return ( 
         
         <div className='background' style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
             <div className="avatars-container">
                 {avatars.map((avatar) => (
-                    <img src={avatar} onClick={handleClick}></img>
+                    <img 
+                        key={avatar.id}
+                        src={avatar.src} 
+                        onClick={()=>{
+                        setCurrent(avatar.id)
+                        setAvatar(avatar.src)}} 
+                        className={avatar.id === current ? 'active' : ''} 
+                    />
                 ))}
                 
                 <button className='Next-button' onClick={addAvatar}>Dalej</button>
