@@ -1,0 +1,12 @@
+.tabs-container{
+    width: 100vw;
+    height: 100px;
+}
+
+.subject-link{
+    margin-right: 20px;
+}
+
+.subject-link:hover{
+    color: teal;
+}

@@ -1,11 +1,10 @@
 import { useState } from "react"
 import {  signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
 import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
-import './Login.style.css'
-
-
-
+import { useNavigate, Link } from "react-router-dom";
+import './Login.style.css';
+import image from '../../../src/img/bookshelf.jpeg';
+import logo from '../../img/logo.png';
 
 
 export const Login = () => {
@@ -62,7 +61,7 @@ export const Login = () => {
             .then(() => setLoggedUser(email))
             .then(() => console.log(loggedUser))
             .then(() => console.log(auth.currentUser))
-            .then(() => navigate('/home'))
+            .then(() => navigate('/Subjects'))
             .catch((e) => {
                 if (e.code === 'auth/user-not-found') {
                     setError('Brak takiego użytkownika w bazie danych - spróbuj ponownie.');
@@ -82,6 +81,10 @@ export const Login = () => {
 
 
     return (
+    
+    <div className="login-container">
+        
+
         <div className="login">
             {error && <div>{error}</div> }
             <form action="">
@@ -107,6 +110,15 @@ export const Login = () => {
                 </div>
             </form>
             <button className="login-btn" onClick={loginHandler}>Kliknij żeby zalogować</button>
+
+            <p className="register-p">Nie masz konta? <Link to='/register' className="register-link">Zarejestruj się!</Link></p>
         </div>
+
+        <div className="picture-gallery" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+            
+
+        </div>
+    </div>
+    // </>
     )
 }

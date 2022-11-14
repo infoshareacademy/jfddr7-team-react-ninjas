@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+
+.div-nav-container {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(7, 143, 152);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+.avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.div-my-notes-signout-button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: white;
+}
+
+.button-logout{
+    height: 40px;
+    background: rgb(7, 143, 152);
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.button-add-subject{
+    background: rgb(7, 143, 152);
+    border: none;
+    color: white;
+    cursor: pointer;
+}

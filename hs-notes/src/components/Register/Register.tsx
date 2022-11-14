@@ -1,21 +1,22 @@
-import { useState } from "react";
+import React, { ReactEventHandler, useContext, useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import './Register.style.css'
+import { UserContext } from "../UserProvider/userProvider";
+import image from '../../img/bookshelf.jpeg'
+import logo from '../../img/logo.png'
 
 export const Register = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const {email, setEmail, password, setPassword} = useContext(UserContext)
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleRegister = (e:any) => {
+    const handleRegister = (e: React.FormEvent) => {
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log("OK"))
-        .then(() => navigate('/login'))
+        .then(() => navigate('/avatar-choice'))
         .catch((e)=> {
             if (e.code === 'auth/invalid-email') {
                 setError('Podana wartość nie jest adresem email - spróbuj ponownie.');
@@ -25,6 +26,9 @@ export const Register = () => {
             } 
             if (e.code === 'auth/weak-password') {
                 setError('Hasło jest za słabe - spróbuj ponownie.');
+            } 
+            if (e.code === 'auth/wrong-password'){
+                setError('Błędne hasło - spróbuj ponownie');
             } else {
                 console.log(e.code);
                 setError('Hasło jest za słabe - spróbuj ponownie.');
@@ -33,30 +37,36 @@ export const Register = () => {
     }
 
     return ( 
-        <>  <div className="register">
-                {error && <div>{error}</div> }
-                <form onSubmit={handleRegister}>
 
-                    <h1>Zarejestruj się</h1>
+        <div className="register-container" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+
+              <div className="register">
+                <img className="logo" src={logo} alt={'hs notes'}/>
+                <h3>Zarejestruj się i korzystaj z bazy notatek!</h3>
+                {error && <div className="error-message">{error}</div>}
+               
+                <form onSubmit={handleRegister}>
 
                     <div className="email-area">
                         <span>Email:</span>
                         <label htmlFor="register-input"></label>
-                        <input className="register-input" placeholder="JohnSnow34" onChange={(e) => setEmail(e.target.value)}/>
+                        <input className="register-input" placeholder="JohnSnow34" required onChange={(e) => setEmail(e.target.value)}/>
                     </div>
 
                     <div className="email-area">
                         <span>Hasło:</span>
                         <label htmlFor="password-input"></label>
-                        <input className="password-input" onChange={(e) => setPassword(e.target.value)}/>
+                        <input className="password-input" type='password' required onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
-                                   
-
+                    <button className="register-btn">Zarejestruj</button>    
                 </form>
-                <button className="register-btn" >Zarejestruj</button>    
+
+                <p className="register-p">Masz konto? <Link to='/login' className="login-link">Przejdź do logowania!</Link></p>
             </div>
-        </>
+
+        </div>
+
      );
 }
  
