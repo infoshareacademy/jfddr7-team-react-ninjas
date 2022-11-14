@@ -1,14 +1,16 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
 
+// //map zamiast forEach
+
 export const SubjectNotes = () => {
-//     const [subjectsObject, setSubjectObject] = useState([]);
-//     const [newTopic, setNewTopic] = useState(null);
-//     const params = useParams();
+    const [subjectsObject, setSubjectObject] = useState([]);
+    const [newTopic, setNewTopic] = useState(null);
+    const params = useParams();
     
 //     const [topicList, setTopicList] = useState(['']);
 //     const downloadData = async () => {
@@ -20,10 +22,12 @@ export const SubjectNotes = () => {
 //         setTopicList(topics);
 //       })
 //    }
+// //  zamknąć w useCallback()
 
-//     const   paramsGetter: any = async (n: any) => {
+
+//     const   paramsGetter: any = useCallback(async(n: any) => {
 //     const obj: object | any = {};
-//     const querySnapshot = await  getDocs(collection(db, 'Subjects'));
+//     const querySnapshot = await getDocs(collection(db, 'Subjects'));
 //     let subjects: any = [];
 //     let ids: any = [];
 //     querySnapshot.docs.forEach((doc) => {
@@ -36,7 +40,7 @@ export const SubjectNotes = () => {
 //         obj[element] = ids[index];
 //     });
 //     return obj[n];
-//    }
+//    }, [])
 
 //    const addTopicToDb = () => {
 //     addDoc(collection(db, `/Subjects/${subjectsObject}/Topics`), {
@@ -44,9 +48,9 @@ export const SubjectNotes = () => {
 //     })
 //    }
 
-   
+
 //     useEffect(() => {
-//         paramsGetter(params.id)
+//         paramsGetter(params.id) //useCallback()
 //         .then((data: any) => setSubjectObject(data))
 //     }, [])
 
@@ -60,19 +64,19 @@ export const SubjectNotes = () => {
         <>
         <Nav/>
         <div className="subjectNotes">
-            {/* <h1>{params.id}</h1>
+            <h1>{params.id}</h1>
 
             <div className="newTopicPanel">
              <label htmlFor="newTopic">Dodaj nowy temat</label>
              <input type="text" placeholder="Wpisz temat ..." onChange={(e: any) => setNewTopic(e.target.value)}/>
-             <button onClick={addTopicToDb}>Dodaj nowy temat</button>
+             {/* <button onClick={addTopicToDb}>Dodaj nowy temat</button> */}
             </div>
 
             <div className="topic-list">
-                {topicList.map((item, number) => (
-                    <div className="one-topic" key={number}>{item}</div>
-                ))}                
-            </div> */}
+                {/* {topicList.map((item, number) => (
+                    <div className="one-topic" key={number}>{item}</div> */}
+                {/* ))}                 */}
+            </div>
 
         </div>
         </>

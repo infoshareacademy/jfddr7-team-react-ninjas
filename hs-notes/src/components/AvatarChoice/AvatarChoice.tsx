@@ -23,7 +23,6 @@ export const AvatarChoice = () => {
     const {avatar, setAvatar} = useContext(UserContext)
     const navigate = useNavigate()
 
-
     const addAvatar = () => {
         setAvatar(trialAvatar)
         navigate('/subjects')

@@ -23,21 +23,21 @@ function App() {
   const {email, setEmail, isAdmin, setIsAdmin} = useContext(UserContext) 
   const {subjects, setSubjects} = useContext(SubjectsListContext)
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if(user){
-  //       navigate('/subjects')
-  //       setEmail(user.email || '')
-  //       setIsAdmin(false)
-  //       if(user.uid == 'wr2dvp3MI8eMGpkYpmtEjkY2in82'){
-  //         setIsAdmin(true)
-  //         console.log('admin')
-  //       }
-  //     }else{
-  //       navigate('/login')
-  //     }
-  //   })
-  // },[])
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user){
+        navigate('/subjects')
+        setEmail(user.email || '')
+        setIsAdmin(false)
+        if(user.uid == 'wr2dvp3MI8eMGpkYpmtEjkY2in82'){
+          setIsAdmin(true)
+          console.log('admin')
+        }
+      }else{
+        navigate('/login')
+      }
+    })
+  },[])
 
   return (
     <div className="App">
