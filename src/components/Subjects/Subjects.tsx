@@ -5,10 +5,13 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav } from '../Nav/Nav'
 import { SubjectsListContext } from '../SubjectsListProvider/SubjectListProvider';
+import { UserContext } from '../UserProvider/userProvider';
 
 export const Subjects = () => {
 
    const {subjects, setSubjects} = useContext(SubjectsListContext);
+   
+   
 
    const downloadData = async () => {
       getDocs(collection(db, 'Subjects')).then((querySnapshot) => {

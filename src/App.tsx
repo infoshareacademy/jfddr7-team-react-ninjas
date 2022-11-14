@@ -14,6 +14,7 @@ import { SubjectsListContext } from './components/SubjectsListProvider/SubjectLi
 import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
 import { NoteList } from './components/NoteList/NoteList';
 import { Note } from './components/Note/Note';
+import { UserPanel } from './components/UserPanel/UserPanel';
 
 
 
@@ -66,6 +67,7 @@ function App() {
       </Route>
       <Route path='/my-notes' element={<MyNotes />}>
       </Route>
+      <Route path='/user-panel' element={<UserPanel />}/>
     </Routes>
     </div>
   );
