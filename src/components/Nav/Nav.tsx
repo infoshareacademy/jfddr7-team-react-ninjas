@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 export const Nav = () => {
 
   const {email, setEmail, isAdmin, avatar} = useContext(UserContext)
+  const {school, setSchool} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -38,11 +39,12 @@ export const Nav = () => {
           <div className='div-nav-container'>      
               <div>
                 {avatar !== '' && <img className="avatar" src={avatar}></img>}
+                <p>{school}</p>
                 <NavLink
                    to="/Subjects"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
-
+                   
                    Przedmioty
                 </NavLink>
               </div>

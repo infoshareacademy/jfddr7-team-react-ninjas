@@ -51,17 +51,20 @@ export const CityChoice = () => {
 
       const cityHandler = (e: any) => {
         console.log(e.target.value)
-        const test = schoolList.filter((school) => 
+        const cityChoiceSelect = schoolList.filter((school) => 
           school.includes(e.target.value)
         )
-        setFilterSchoolList(test)
+        setFilterSchoolList(cityChoiceSelect)
+      }
+
+      const selectSchool = (e: any) => {
+        console.log(e.target.value)
+        setSchool(e.target.value)        
       }
 
       const addSchool = () => {
-        setSchool(school)
         navigate('/subjects')
       }
-
       
 
    
@@ -82,7 +85,7 @@ export const CityChoice = () => {
       
       <span className="school-choice-span">Wybierz szkołę!</span>
 
-      <select name="select" className="school-choice-select">
+      <select onChange={selectSchool} name="select" className="school-choice-select">
           {filterSchoolList.map((school, number) => (
           <option key={number}> {school} </option>))}
       </select>
