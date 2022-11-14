@@ -44,7 +44,6 @@ export const NoteList = () => {
              setNote(notes);
         }
         downloadData();
-        console.log("test useeffecta");
        }, [object])
 
        const addNoteToDb = () => {
