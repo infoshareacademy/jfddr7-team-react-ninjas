@@ -1,29 +1,23 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
 
 export const SubjectNotes = () => {
-//     const [subjectsObject, setSubjectObject] = useState([]);
-//     const [newTopic, setNewTopic] = useState(null);
-//     const params = useParams();
+    const [subjectsObject, setSubjectObject] = useState([]);
+    const [newTopic, setNewTopic] = useState(null);
+    const params = useParams();
     
-//     const [topicList, setTopicList] = useState(['']);
+    const [topicList, setTopicList] = useState(['']);
 //     const downloadData = async () => {
-//       getDocs(collection(db, `/Subjects/${subjectsObject}/Topics`)).then((querySnapshot) => {
-//         let topics: string[] = [];
-//          querySnapshot.forEach((doc) => {
-//             topics.push(doc.data().Topic);
-//          })
-//         setTopicList(topics);
-//       })
+      
 //    }
 
-//     const   paramsGetter: any = async (n: any) => {
+//     const paramsGetter: any = useCallback( async (n: any) => {
 //     const obj: object | any = {};
-//     const querySnapshot = await  getDocs(collection(db, 'Subjects'));
+//     const querySnapshot = await getDocs(collection(db, 'Subjects'));
 //     let subjects: any = [];
 //     let ids: any = [];
 //     querySnapshot.docs.forEach((doc) => {
@@ -35,32 +29,42 @@ export const SubjectNotes = () => {
 //     subjects.forEach((element:any, index: any) => {
 //         obj[element] = ids[index];
 //     });
-//     return obj[n];
-//    }
 
-//    const addTopicToDb = () => {
-//     addDoc(collection(db, `/Subjects/${subjectsObject}/Topics`), {
-//         Topic: newTopic,
-//     })
-//    }
+//     console.log('obj[n]', obj[n])
+//     return obj[n];
+//    }, []);
+
+   const addTopicToDb = () => {
+    addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
+        Topic: newTopic,
+    })
+   }
 
    
-//     useEffect(() => {
-//         paramsGetter(params.id)
-//         .then((data: any) => setSubjectObject(data))
-//     }, [])
+    // useEffect(() => {
+    //     paramsGetter(params.id)
+    //     // .then((data: any) => setSubjectObject(data))
+    // }, [params.id, paramsGetter])
 
 
-//    useEffect(() => {
-//     downloadData();
-//    }, [subjectsObject, addTopicToDb])
+   useEffect(() => {
+    getDocs(collection(db, `/Subjects/${params.id}/Topics`)).then((querySnapshot) => {
+        let topics: string[] = [];
+         querySnapshot.forEach((doc) => {
+            topics.push(doc.data().Topic);
+         })
+        setTopicList(topics);
+      })
+    console.log(params.id);
+      
+   }, [])
    
     
     return (
         <>
         <Nav/>
         <div className="subjectNotes">
-            {/* <h1>{params.id}</h1>
+            <h1>{params.id}</h1>
 
             <div className="newTopicPanel">
              <label htmlFor="newTopic">Dodaj nowy temat</label>
@@ -72,7 +76,7 @@ export const SubjectNotes = () => {
                 {topicList.map((item, number) => (
                     <div className="one-topic" key={number}>{item}</div>
                 ))}                
-            </div> */}
+            </div> 
 
         </div>
         </>
