@@ -5,34 +5,33 @@ import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
 
+// //map zamiast forEach
+
 export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
     const [newTopic, setNewTopic] = useState(null);
     const params = useParams();
     
-    const [topicList, setTopicList] = useState(['']);
-//     const downloadData = async () => {
-      
-//    }
+    const [topicList, setTopicList] = useState([''])
 
-//     const paramsGetter: any = useCallback( async (n: any) => {
-//     const obj: object | any = {};
-//     const querySnapshot = await getDocs(collection(db, 'Subjects'));
-//     let subjects: any = [];
-//     let ids: any = [];
-//     querySnapshot.docs.forEach((doc) => {
-//         console.log(doc)
-//         console.log('querySnapshot')
-//         ids.push(doc.id);
-//         subjects.push(doc.data().Subject)
-//     })
-//     subjects.forEach((element:any, index: any) => {
-//         obj[element] = ids[index];
-//     });
+    const paramsGetter: any = useCallback( async (n: any) => {
+    const obj: object | any = {};
+    const querySnapshot = await getDocs(collection(db, 'Subjects'));
+    let subjects: any = [];
+    let ids: any = [];
+    querySnapshot.docs.forEach((doc) => {
+        console.log(doc)
+        console.log('querySnapshot')
+        ids.push(doc.id);
+        subjects.push(doc.data().Subject)
+    })
+    subjects.forEach((element:any, index: any) => {
+        obj[element] = ids[index];
+    });
 
-//     console.log('obj[n]', obj[n])
-//     return obj[n];
-//    }, []);
+    console.log('obj[n]', obj[n])
+    return obj[n];
+   }, []);
 
    const addTopicToDb = () => {
     addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
@@ -40,11 +39,10 @@ export const SubjectNotes = () => {
     })
    }
 
-   
-    // useEffect(() => {
-    //     paramsGetter(params.id)
-    //     // .then((data: any) => setSubjectObject(data))
-    // }, [params.id, paramsGetter])
+    useEffect(() => {
+        paramsGetter(params.id)
+        .then((data: any) => setSubjectObject(data))
+    }, [params.id, paramsGetter])
 
 
    useEffect(() => {
@@ -74,8 +72,8 @@ export const SubjectNotes = () => {
 
             <div className="topic-list">
                 {topicList.map((item, number) => (
-                    <div className="one-topic" key={number}>{item}</div>
-                ))}                
+                    <div className="one-topic" key={number}><Link className='subject-link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
+                    ))}
             </div> 
 
         </div>
