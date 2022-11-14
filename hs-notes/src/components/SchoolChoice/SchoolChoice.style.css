@@ -1,0 +1,58 @@
+.school-choice-container{
+    width: 600px;
+    height: 700px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);  
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.school-choice-h2 {
+    color: rgb(7, 143, 152);
+}
+
+.school-choice-logo {
+    width: 200px;
+
+}
+
+.school-choice-select {
+    margin-top: 10px;
+    width: 95%;
+    border-radius: 5px;
+    border: 1px solid rgb(175, 175, 175);
+    margin-bottom: 10px;
+    padding-left: 15px;
+    height: 54.66px;
+    font-size: 20px;
+}
+
+.school-choice-span {
+    margin-left: 2.5%;
+}
+
+.school-choice-btn-add
+{
+    margin-top: 10px;
+    width: 95%;
+    height: 54.66px;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(7, 143, 152);
+    border: 1px solid rgb(8, 178, 190);
+    border-radius: 5px;
+    padding: 5px;
+    align-self: center;
+    }
+
+.school-choice-btn-add:hover {
+    background-color: rgb(8, 178, 190);
+    padding: 6px;
+}

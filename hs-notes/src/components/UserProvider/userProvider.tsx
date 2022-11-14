@@ -9,6 +9,8 @@ interface UserContextState {
     setIsAdmin: (isAdmin: boolean) => void;
     avatar: string;
     setAvatar: (avatar: string) => void;
+    school: string;
+    setSchool: (school: string) => void;
 }
 
 interface UserProviderProps {
@@ -23,10 +25,11 @@ export const UserProvider: FC<UserProviderProps> =({children}) => {
     const [password, setPassword] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
     const [avatar, setAvatar] = useState('')
+    const [school, setSchool] = useState("")
    
 
     return (
-        <UserContext.Provider value={{email, setEmail, password, setPassword, isAdmin, setIsAdmin, avatar, setAvatar}}>
+        <UserContext.Provider value={{email, setEmail, password, setPassword, isAdmin, setIsAdmin, avatar, setAvatar, school, setSchool}}>
             {children}
         </UserContext.Provider>
     )

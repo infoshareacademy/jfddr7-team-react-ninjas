@@ -12,6 +12,7 @@ import { useContext, useEffect } from 'react';
 import { UserContext } from './components/UserProvider/userProvider'
 import { SubjectsListContext } from './components/SubjectsListProvider/SubjectListProvider'
 import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
+import { NoteList } from './components/NoteList/NoteList';
 
 
 
@@ -26,10 +27,11 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if(user){
+        console.log(user)
         navigate('/subjects')
         setEmail(user.email || '')
         setIsAdmin(false)
-        if(user.uid == 'wr2dvp3MI8eMGpkYpmtEjkY2in82'){
+        if(user.uid == '0DmA8oprXPMRKV0J9d788vW29OU2'){
           setIsAdmin(true)
           console.log('admin')
         }
@@ -51,6 +53,8 @@ function App() {
       <Route path='/subjects' element={<Subjects />}>
       </Route>
       <Route path='/subjects/:id' element={<SubjectNotes />}>
+      </Route>
+      <Route path='/subjects/:id/:id' element={<NoteList />}>
       </Route>
       <Route path='/admin' element={<Admin />}>
       </Route>
