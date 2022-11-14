@@ -36,6 +36,8 @@ export const AvatarChoice = () => {
 
     }
 
+    
+
     return ( 
         
         <div className='background' style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
