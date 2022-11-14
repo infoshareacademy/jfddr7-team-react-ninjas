@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/jfddr7-team-react-ninjas/static/css/main.0ee30af3.css",
-    "main.js": "/jfddr7-team-react-ninjas/static/js/main.61446ca7.js",
+    "main.css": "/jfddr7-team-react-ninjas/static/css/main.1b643b9b.css",
+    "main.js": "/jfddr7-team-react-ninjas/static/js/main.955e8323.js",
     "static/js/787.b270a4fc.chunk.js": "/jfddr7-team-react-ninjas/static/js/787.b270a4fc.chunk.js",
     "static/media/bookshelf.jpeg": "/jfddr7-team-react-ninjas/static/media/bookshelf.f64a507aaddf50e724da.jpeg",
     "static/media/av5.png": "/jfddr7-team-react-ninjas/static/media/av5.a7063790e058286502d3.png",
@@ -18,12 +18,12 @@
     "static/media/av7.png": "/jfddr7-team-react-ninjas/static/media/av7.fdfe1342c5b9b2f4f058.png",
     "static/media/logo.png": "/jfddr7-team-react-ninjas/static/media/logo.72284095ff7c82f6286a.png",
     "index.html": "/jfddr7-team-react-ninjas/index.html",
-    "main.0ee30af3.css.map": "/jfddr7-team-react-ninjas/static/css/main.0ee30af3.css.map",
-    "main.61446ca7.js.map": "/jfddr7-team-react-ninjas/static/js/main.61446ca7.js.map",
+    "main.1b643b9b.css.map": "/jfddr7-team-react-ninjas/static/css/main.1b643b9b.css.map",
+    "main.955e8323.js.map": "/jfddr7-team-react-ninjas/static/js/main.955e8323.js.map",
     "787.b270a4fc.chunk.js.map": "/jfddr7-team-react-ninjas/static/js/787.b270a4fc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0ee30af3.css",
-    "static/js/main.61446ca7.js"
+    "static/css/main.1b643b9b.css",
+    "static/js/main.955e8323.js"
   ]
 }
