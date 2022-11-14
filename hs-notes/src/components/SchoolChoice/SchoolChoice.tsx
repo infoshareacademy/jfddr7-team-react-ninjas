@@ -68,23 +68,28 @@ export const CityChoice = () => {
     return (
   <div className='background' style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
 
-    <div className="school-container">
-      <img className="logo" src={logo} alt={'hs notes'}/>
-      <h3>Wybierz swoje miasto oraz szkołę!</h3>
-      <span className="schoolSpan">Wybierz misto!</span>
-      <select onChange={cityHandler}  name="selectCity" className="selectCity">
+    <div className="school-choice-container">
+      <img className="school-choice-logo" src={logo} alt={'hs notes'}/>
+      <h2 className="school-choice-h2">Wybierz swoje miasto oraz szkołę!</h2>
+
+      <div className="school-choice-div">
+      <span className="school-choice-span">Wybierz misto!</span>
+
+      <select onChange={cityHandler}  name="selectCity" className="school-choice-select">
           {citiesList.map((city, number) => (
           <option key={number}> {city} </option>))}
-        </select>        
+      </select>        
       
-        <span className="schoolSpan">Wybierz szkołę!</span>
-        <select name="selectSchool" className="selectCity">
+      <span className="school-choice-span">Wybierz szkołę!</span>
+
+      <select name="select" className="school-choice-select">
           {filterSchoolList.map((school, number) => (
           <option key={number}> {school} </option>))}
       </select>
-    </div>    \
-
-    <button onClick={addSchool}>Dodaj</button>         
+       <button onClick={addSchool} className="school-choice-btn-add">Dodaj</button> 
+       </div>
+    </div>    
+  
       
   </div>
     )
