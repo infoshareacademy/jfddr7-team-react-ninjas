@@ -31,7 +31,7 @@ export const AvatarChoice = () => {
    }
 
     const addAvatar = () => {
-        setAvatar(trialAvatar)
+        setAvatar(current)
         navigate('/city-choice')
 
     }
