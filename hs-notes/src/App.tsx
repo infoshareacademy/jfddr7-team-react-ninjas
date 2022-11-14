@@ -13,6 +13,8 @@ import { UserContext } from './components/UserProvider/userProvider'
 import { SubjectsListContext } from './components/SubjectsListProvider/SubjectListProvider'
 import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
 import { NoteList } from './components/NoteList/NoteList';
+import { Note } from './components/Note/Note';
+
 
 
 
@@ -54,6 +56,8 @@ function App() {
       <Route path='/subjects/:id' element={<SubjectNotes />}>
       </Route>
       <Route path='/subjects/:id/:id' element={<NoteList />}>
+      </Route>
+      <Route path='/subjects/:id/:id/:id' element={<Note />}>
       </Route>
       <Route path='/admin' element={<Admin />}>
       </Route>
