@@ -26,7 +26,7 @@ export const AvatarChoice = () => {
 
     const addAvatar = () => {
         setAvatar(trialAvatar)
-        navigate('/subjects')
+        navigate('/city-choice')
     }
 
     return ( 
