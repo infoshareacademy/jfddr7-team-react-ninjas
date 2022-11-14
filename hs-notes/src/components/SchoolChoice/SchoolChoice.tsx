@@ -1,15 +1,17 @@
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase";
 import image from '../../img/bookshelf.jpeg'
 import './SchoolChoice.style.css'
 import logo from '../../img/logo.png'
+import { UserContext } from "../UserProvider/userProvider";
 
 
 export const CityChoice = () => {
     const [citiesList, setCitiesList] = useState([""]);
-    const [schoolList, setSchoolList] = useState([""])
-    const [filterSchoolList, setFilterSchoolList] = useState([""])
+    const [schoolList, setSchoolList] = useState([""]);
+    const [filterSchoolList, setFilterSchoolList] = useState([""]);
+    const {school, setSchool} = useContext(UserContext)
     
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
@@ -73,7 +75,9 @@ export const CityChoice = () => {
           {filterSchoolList.map((school, number) => (
           <option key={number}> {school} </option>))}
       </select>
-    </div>             
+    </div>    \
+
+    <button>Dodaj</button>         
       
   </div>
     )
