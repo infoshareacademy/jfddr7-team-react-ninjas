@@ -37,9 +37,9 @@ export const Nav = () => {
     return (
         <nav>
           <div className='div-nav-container'>      
-              <div>
-                {avatar !== '' && <img className="avatar" src={avatar}></img>}
-                <p>{school}</p>
+              <div className="avatar-school-container">
+                  <img className="avatar" src={avatar}></img>
+                  <div>{school}</div>
                 <NavLink
                    to="/Subjects"
                    style={({ isActive }) =>

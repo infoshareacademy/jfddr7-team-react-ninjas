@@ -13,10 +13,16 @@
     padding-right: 20px;
   }
 
+.avatar-school-container{
+    display: flex;
+    width: 700px;
+}
+
 .avatar{
     width: 60px;
     height: 60px;
     border-radius: 10px;
+    align-self: center;
 }
 
 .div-my-notes-signout-button {
