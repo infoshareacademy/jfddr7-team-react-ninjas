@@ -17,7 +17,6 @@ export const Note = () => {
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
     const user = auth.currentUser;
-    const notesArray = []
     
     
     
@@ -53,7 +52,6 @@ export const Note = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
-                console.log(doc.data());
             })
         }
         downloadData();
@@ -61,8 +59,9 @@ export const Note = () => {
 
 
     const addToMyNotes = async () => {
-        notesArray.push(note)
         await setDoc(doc(db, `${user?.email}`, `${note.Note}`), {note})
+        window.alert('notatka dodana do Twojej bazy')
+
     }
     
     return (

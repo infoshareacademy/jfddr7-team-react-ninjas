@@ -31,9 +31,7 @@ export const MyNotes = () => {
         .then((querySnapshot) => {
             let items: string[] = [];
             querySnapshot.docs.forEach((doc) => {
-                // console.log(doc.data().note.Note)
                 items.push(doc.data().note.Note)
-                console.log(items)
                 setMyNotes(items)
             })
         })
