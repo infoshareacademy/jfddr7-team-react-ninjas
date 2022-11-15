@@ -16,6 +16,8 @@
 .avatar-school-container{
     display: flex;
     width: 700px;
+    gap: 20px;
+    align-items: center;
 }
 
 .avatar{
@@ -23,6 +25,17 @@
     height: 60px;
     border-radius: 10px;
     align-self: center;
+}
+
+.user-name{
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.user-school{
+    color: white;
+    font-size: 18px;
 }
 
 .div-my-notes-signout-button {

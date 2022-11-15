@@ -1,10 +1,9 @@
 import { useState } from "react"
-import {  signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
+import { signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, FacebookAuthProvider} from 'firebase/auth';
 import { auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import './Login.style.css';
 import image from '../../../src/img/bookshelf.jpeg';
-import logo from '../../img/logo.png';
 
 
 export const Login = () => {
@@ -82,43 +81,37 @@ export const Login = () => {
 
     return (
     
-    <div className="login-container">
+    <div className="login-container" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
         
-
         <div className="login">
-            {error && <div>{error}</div> }
-            <form action="">
 
+            {error && <div>{error}</div> }
+    
                 <div className="google-area">
-                    <button className="google-login" onClick={SingInWithGoogle}><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" alt=""/> <p>Zaloguj przez Google</p></button>
+                    <button className="google-login" onClick={SingInWithGoogle}><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" alt=""/>Zaloguj przez Google</button>
                 </div>
 
                 <div className="facebook-area">
-                    <button className="facebook-login" onClick={SingInWithFacebook}><img src="https://toppng.com/uploads/preview/facebook-social-icon-logo-joe-eckley-facebook-page-management-icon-11553485296y89sa59plk.png" alt=""/> <p>Zaloguj przez Facebook</p></button>
+                    <button className="facebook-login" onClick={SingInWithFacebook}><img src="https://toppng.com/uploads/preview/facebook-social-icon-logo-joe-eckley-facebook-page-management-icon-11553485296y89sa59plk.png" alt=""/>Zaloguj przez Facebook</button>
                 </div>
-                    
-                <span>Email:</span>
+            
+            <form action=''>    
                 <div className="email-area">
-                    <label htmlFor="email"></label>
+                    <label htmlFor="email">Email:</label>
                     <input type="text" name="email" id="email" placeholder="JohnSnow34" onChange={handleEmail}/>
                 </div>
 
-                <span>Hasło:</span>
                 <div className="password-area">
-                    <label htmlFor="password"></label>
+                    <label htmlFor="password">Password:</label>
                     <input type="password" name="password" id="password" placeholder="Tu wpisz swoje hasło" onChange={handlePassword}/>
                 </div>
             </form>
             <button className="login-btn" onClick={loginHandler}>Kliknij żeby zalogować</button>
 
             <p className="register-p">Nie masz konta? <Link to='/register' className="register-link">Zarejestruj się!</Link></p>
-        </div>
-
-        <div className="picture-gallery" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
-            
+        </div>            
 
         </div>
-    </div>
-    // </>
+ 
     )
 }
