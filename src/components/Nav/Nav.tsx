@@ -1,16 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import './Nav.style.css';
 import { UserContext } from "../UserProvider/userProvider";
-import { useContext, useState, useEffect } from "react";
+import { useContext} from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { userInfo } from "os";
 
 export const Nav = () => {
 
-  const {email, setEmail, isAdmin, avatar} = useContext(UserContext)
-  const {school, setSchool} = useContext(UserContext)
+  const {setEmail, isAdmin} = useContext(UserContext)
+  const {school} = useContext(UserContext)
 
   const user = auth.currentUser
 
@@ -21,14 +19,11 @@ export const Nav = () => {
     alert('Czy na pewno chcesz się wylogować?')
     signOut(auth)
     .then(()=> {
-      console.log('user signed out')
       setEmail('')
       navigate('/login')
     })
     .catch((error) => console.log(error.message))
   }
-
-  console.log(`to jest ${user?.photoURL}`)
 
   const navigateToAdmin = () => {
     navigate('/admin')
