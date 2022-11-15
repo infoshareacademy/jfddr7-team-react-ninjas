@@ -27,6 +27,7 @@ function App() {
   const {email, setEmail, isAdmin, setIsAdmin} = useContext(UserContext) 
   const {subjects, setSubjects} = useContext(SubjectsListContext)
 
+
   // useEffect(() => {
   //   onAuthStateChanged(auth, (user) => {
   //     if(user){
@@ -43,6 +44,7 @@ function App() {
   //     }
   //   })
   // },[])
+
 
   return (
     <div className="App">

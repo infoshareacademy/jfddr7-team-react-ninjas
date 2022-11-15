@@ -29,7 +29,7 @@ export const UserPanel = () => {
     const navigate = useNavigate()
     const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12]
     const user = auth.currentUser
-    user?photoURL
+    
     
 
 
@@ -39,6 +39,7 @@ export const UserPanel = () => {
             <h1>Panel Użytkownika</h1>
             <div className="user-panel">
                 <p>avatar {avatar}</p>
+                {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
                 <p>Zmień avatara</p>
                 <p>emial {email}</p>
                 <p>Zmień emial</p>
