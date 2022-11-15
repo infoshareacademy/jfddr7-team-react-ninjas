@@ -16,12 +16,7 @@ export const Note = () => {
     const topic  = decodeURIComponent(window.location.href.split('/')[5]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
-    console.log(subject);
-    console.log(topic);
-    console.log(params.id);
-    console.log(decodeURIComponent(topic));
     
-
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
         let topics: any = [];
@@ -44,9 +39,7 @@ export const Note = () => {
         getCurrentDoc(topic)        
         .then((data: any) => {
             setObject(data);
-            console.log(data);
         })
-
     }, [])
     
     useEffect(() => {
@@ -57,13 +50,9 @@ export const Note = () => {
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
                 console.log(doc.data());
-                
-                console.log(note);
             })
         }
         downloadData();
-        console.log(note);
-        
     }, [object])
     
     return (
@@ -74,8 +63,6 @@ export const Note = () => {
             <div>Autor notatki: {note?.Author}</div>
             <div>Tytuł notatki: {note?.Title}</div>
             <div>Treśc notatki: {note?.Note}</div>
-
-            
         </>
     )
 }
