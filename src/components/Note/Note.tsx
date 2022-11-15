@@ -1,13 +1,20 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom"
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
+import { Nav } from "../Nav/Nav";
 
 export const Note = () => {
+
+    interface Obj {
+        Title: string,
+        Author: string,
+        Note: string,
+    }
     const params = useParams();
     const subject = window.location.href.split('/')[4];
     const topic  = window.location.href.split('/')[5];
-    const [note, setNote] = useState({});
+    const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
     console.log(subject);
     console.log(topic);
@@ -42,7 +49,6 @@ export const Note = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
-                
             })
              
         }
@@ -56,13 +62,18 @@ export const Note = () => {
     
     
     
+    
+    
+    
 
     return (
+        
         <>
-            <div>Notatka : {params.id}</div>
-            {/* <div>{note[Author]}</div>
-            <div>{note[Title]}</div>
-            <div>{note[Note]}</div> */}
+            <Nav/>
+            <div>Notatka</div>
+            <div>Autor notatki: {note?.Author}</div>
+            <div>Tytuł notatki: {note?.Title}</div>
+            <div>Treśc notatki: {note?.Note}</div>
 
             
         </>
