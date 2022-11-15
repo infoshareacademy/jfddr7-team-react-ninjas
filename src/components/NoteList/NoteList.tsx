@@ -1,7 +1,7 @@
 import { addDoc, collection, collectionGroup, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { Nav } from "../Nav/Nav"
 
 export const NoteList = () => {
@@ -12,6 +12,8 @@ export const NoteList = () => {
     const [note, setNote] = useState(['']);
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
+    const [newTitle, setNewTitle] = useState('');
+    const [showAddInput, setShowAddInput] = useState(false);
 
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
@@ -50,7 +52,11 @@ export const NoteList = () => {
        const addNoteToDb = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`), {
             Note: newNote,
+            Title: newTitle,
+            Author: auth.currentUser?.email,
         })
+        console.log('Notatka została dodana do bazy danych...');
+        setShowAddInput(false);
        }
 
     return (
@@ -59,10 +65,18 @@ export const NoteList = () => {
             <div>Notatki z tematu: {params.id}</div>
 
             <div className="newTopicPanel">
-             <label htmlFor="newTopic">Dodaj nową notatkę</label>
-             <input type="text" placeholder="Wpisz temat ..." onChange={(e) => setNewNote(e.target.value)}/>
-             <button onClick={addNoteToDb}>Dodaj nowy temat</button>
+             <button onClick={() => setShowAddInput(true)}>Kliknij aby dodać nową notatkę</button>
             </div>
+            {showAddInput && (
+                <>
+                    <h1>Dodaj nową notatkę</h1>
+                    <label htmlFor="title">Tytuł notatki</label>
+                    <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                    <label htmlFor="title">Treść Notatki</label>
+                    <input type="textarea" onChange={(e) => setNewNote(e.target.value)}/>
+                    <button onClick={addNoteToDb}>Dodaj notatkę:</button>
+                </>
+             )}
 
             {note.map((note, number) => (
                 <div key={number}><Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}> {note} </Link></div>
