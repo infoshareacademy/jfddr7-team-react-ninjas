@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
@@ -16,6 +16,8 @@ export const Note = () => {
     const topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
+    const user = auth.currentUser;
+    const notesArray = []
     
     
     
@@ -56,6 +58,12 @@ export const Note = () => {
         }
         downloadData();
     }, [object])
+
+
+    const addToMyNotes = async () => {
+        notesArray.push(note)
+        await setDoc(doc(db, `${user?.email}`, `${note.Note}`), {note})
+    }
     
     return (
         
@@ -65,6 +73,7 @@ export const Note = () => {
             <div>Autor notatki: {note?.Author}</div>
             <div>Tytuł notatki: {note?.Title}</div>
             <div>Treśc notatki: {note?.Note}</div>
+            <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
         </>
     )
 }
