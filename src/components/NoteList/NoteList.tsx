@@ -7,8 +7,8 @@ import { Nav } from "../Nav/Nav"
 export const NoteList = () => {
 
     const params = useParams();
-    const subject = window.location.href.split('/')[4];
-    const topic  = window.location.href.split('/')[5];
+    const subject = decodeURIComponent(window.location.href.split('/')[4]);
+    const topic  = decodeURIComponent(window.location.href.split('/')[5]);
     const [note, setNote] = useState(['']);
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
