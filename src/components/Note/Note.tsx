@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ export const Note = () => {
     const params = useParams();
     const subject = window.location.href.split('/')[4];
     const topic  = window.location.href.split('/')[5];
-    const [note, setNote] = useState(['']);
+    const [note, setNote] = useState({});
     const [object, setObject] = useState([]);
     console.log(subject);
     console.log(topic);
@@ -36,15 +36,19 @@ export const Note = () => {
     
     useEffect(() => {
         const downloadData = async () => {
-            let notes: string[] = [];
-            const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
+            
+            const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
+            const q = query(notesRef, where("Note", "==", params.id))
+            const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
-                notes.push(doc.data().Note);
+                setNote(doc.data());
+                
             })
-             setNote(notes);
+             
         }
         downloadData();
         console.log('useEffect');
+        
         
     }, [object])
     
@@ -56,9 +60,9 @@ export const Note = () => {
     return (
         <>
             <div>Notatka : {params.id}</div>
-            {note.map((note, number) => (
-                <div key={number}>{note}</div>
-            ))}
+            {/* <div>{note[Author]}</div>
+            <div>{note[Title]}</div>
+            <div>{note[Note]}</div> */}
 
             
         </>
