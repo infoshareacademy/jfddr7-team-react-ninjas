@@ -1,14 +1,18 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import './Nav.style.css';
 import { UserContext } from "../UserProvider/userProvider";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import { userInfo } from "os";
 
 export const Nav = () => {
 
   const {email, setEmail, isAdmin, avatar} = useContext(UserContext)
   const {school, setSchool} = useContext(UserContext)
+
+  const user = auth.currentUser
 
   const navigate = useNavigate()
 
@@ -24,6 +28,8 @@ export const Nav = () => {
     .catch((error) => console.log(error.message))
   }
 
+  console.log(`to jest ${user?.photoURL}`)
+
   const navigateToAdmin = () => {
     navigate('/admin')
  }
@@ -38,7 +44,7 @@ export const Nav = () => {
         <nav>
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
-                  <img className="avatar" src={avatar}></img>
+                  {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
                   <div>{school}</div>
                 <NavLink
                    to="/Subjects"

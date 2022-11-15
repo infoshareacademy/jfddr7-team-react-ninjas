@@ -34,7 +34,7 @@ function App() {
         navigate('/subjects')
         setEmail(user.email || '')
         setIsAdmin(false)
-        if(user.uid == '0DmA8oprXPMRKV0J9d788vW29OU2'){
+        if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
           setIsAdmin(true)
           console.log('admin')
         }
