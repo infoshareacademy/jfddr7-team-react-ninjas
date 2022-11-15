@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../UserProvider/userProvider"
 import "./UserPanel.style.css"
+import { auth } from "../../firebase"
 import avatar1 from '../../../src/img/avatars/av1.png'
 import avatar2 from '../../../src/img/avatars/av2.png'
 import avatar3 from '../../../src/img/avatars/av3.png'
@@ -16,6 +17,7 @@ import avatar11 from '../../../src/img/avatars/av11.png'
 import avatar12 from '../../../src/img/avatars/av12.png'
 
 
+
 export const UserPanel = () => {
     const {avatar, setAvatar} = useContext(UserContext)
     const {email, setEmail} = useContext(UserContext)
@@ -26,6 +28,8 @@ export const UserPanel = () => {
     const [current, setCurrent] = useState('')
     const navigate = useNavigate()
     const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12]
+    const user = auth.currentUser
+    user?photoURL
     
 
 
