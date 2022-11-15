@@ -40,7 +40,8 @@ export const Nav = () => {
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
                   {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
-                  <div>{school}</div>
+                  <div className="user-name">{user?.displayName}</div>
+                  <div className="user-school">{school}</div>
                 <NavLink
                    to="/Subjects"
                    style={({ isActive }) =>

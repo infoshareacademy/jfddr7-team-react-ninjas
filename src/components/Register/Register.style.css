@@ -11,23 +11,25 @@
 
 .register {
     width: 500px;
-    height: 600px;
+    height: 700px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: white;
     border-radius: 10px;
-    margin: 200px auto;
+    margin: 150px auto;
 }
 
 .logo{
-    margin-bottom: 30px;
+    width: 200px;
+    height: 100px;
+    margin-top: 30px;
 }
 
 h3{
     font-size: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .error-message{
@@ -39,32 +41,49 @@ h3{
 form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    align-items: center;
     margin-bottom: 10px;
 }
 
-span {
+.name-area{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.email-area{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.password-area{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+label {
     font-weight: bold;
     font-size: 15px;
     display: flex;
-    justify-content: left;
-    margin-left: 16%;
+    margin-top: 20px;
+    color: teal;
 }
 
 input {
     margin-top: 5px;
-    width: 69%;
     border-radius: 5px;
     border: 1px solid rgb(175, 175, 175);
     margin-bottom: 10px;
     padding-left: 15px;
     height: 54.66px;
+    width: 400px;
     font-size: 20px;
 }
 
 .register-btn {
-    width: 69%;
+    width: 400px;
     height: 54.66px;
     font-size: 20px;
     color: white;
@@ -89,7 +108,4 @@ input {
     color: black;
 }
 
-.picture-gallery{
-    height: 100vh;
-    width: 100vw;
-}
+

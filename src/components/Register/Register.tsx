@@ -1,6 +1,6 @@
-import React, { ReactEventHandler, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import './Register.style.css'
 import { UserContext } from "../UserProvider/userProvider";
@@ -9,13 +9,14 @@ import logo from '../../img/logo.png'
 
 export const Register = () => {
 
-    const {email, setEmail, password, setPassword} = useContext(UserContext)
+    const {userName, setUserName, email, setEmail, password, setPassword} = useContext(UserContext)
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleRegister = (e: React.FormEvent) => {
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
+        
         .then(() => navigate('/avatar-choice', {state: {from: '/register'}}))
         .catch((e)=> {
             if (e.code === 'auth/invalid-email') {
@@ -47,16 +48,19 @@ export const Register = () => {
                
                 <form onSubmit={handleRegister}>
 
-                    <div className="email-area">
-                        <span>Email:</span>
-                        <label htmlFor="register-input"></label>
-                        <input className="register-input" placeholder="JohnSnow34" required onChange={(e) => setEmail(e.target.value)}/>
+                    <div className="name-area">
+                        <label htmlFor="name-input">Nick:</label>
+                        <input className="name-input" id="name-input" placeholder="Johnny34" required onChange={(e) => setUserName(e.target.value)}/>
                     </div>
 
                     <div className="email-area">
-                        <span>Hasło:</span>
-                        <label htmlFor="password-input"></label>
-                        <input className="password-input" type='password' required onChange={(e) => setPassword(e.target.value)}/>
+                        <label htmlFor="register-input">Email:</label>
+                        <input className="register-input" id="register-input" placeholder="JohnSnow34" required onChange={(e) => setEmail(e.target.value)}/>
+                    </div>
+
+                    <div className="password-area">
+                        <label htmlFor="password-input">Hasło:</label>
+                        <input className="password-input" id="password-input" type='password' required onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
                     <button className="register-btn">Zarejestruj</button>    
