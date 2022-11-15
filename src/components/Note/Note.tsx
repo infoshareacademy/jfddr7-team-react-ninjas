@@ -12,13 +12,15 @@ export const Note = () => {
         Note: string,
     }
     const params = useParams();
-    const subject = window.location.href.split('/')[4];
-    const topic  = window.location.href.split('/')[5];
+    const subject = decodeURIComponent(window.location.href.split('/')[4]);
+    const topic  = decodeURIComponent(window.location.href.split('/')[5]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
     console.log(subject);
     console.log(topic);
     console.log(params.id);
+    console.log(decodeURIComponent(topic));
+    
 
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
@@ -33,12 +35,18 @@ export const Note = () => {
                 topics.forEach((element:any, index: any) => {
                     obj[element] = ids[index];
                 });
+                
+                
             return obj[n];
     }
 
     useEffect(() => {
-        getCurrentDoc(topic)
-        .then((data: any) => setObject(data))
+        getCurrentDoc(topic)        
+        .then((data: any) => {
+            setObject(data);
+            console.log(data);
+        })
+
     }, [])
     
     useEffect(() => {
@@ -48,10 +56,13 @@ export const Note = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
+                console.log(doc.data());
+                
+                console.log(note);
             })
         }
         downloadData();
-        console.log(note?.Author);
+        console.log(note);
         
     }, [object])
     
