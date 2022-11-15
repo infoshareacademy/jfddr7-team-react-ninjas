@@ -12,10 +12,12 @@ export const Note = () => {
         Note: string,
     }
     const params = useParams();
-    const subject = decodeURIComponent(window.location.href.split('/')[4]);
-    const topic  = decodeURIComponent(window.location.href.split('/')[5]);
+    const subject = decodeURIComponent(window.location.href.split('/')[5]);
+    const topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
+    
+    
     
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};

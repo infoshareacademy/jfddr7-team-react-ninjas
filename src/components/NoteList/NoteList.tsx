@@ -7,13 +7,16 @@ import { Nav } from "../Nav/Nav"
 export const NoteList = () => {
 
     const params = useParams();
-    const subject = decodeURIComponent(window.location.href.split('/')[4]);
-    const topic  = decodeURIComponent(window.location.href.split('/')[5]);
+    const subject = decodeURIComponent(window.location.href.split('/')[5]);
+    const topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState(['']);
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
     const [newTitle, setNewTitle] = useState('');
     const [showAddInput, setShowAddInput] = useState(false);
+    const array = window.location.href.split('/');
+    console.log(array);
+    
 
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
