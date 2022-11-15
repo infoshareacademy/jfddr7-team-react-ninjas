@@ -12,14 +12,13 @@ export const Note = () => {
         Note: string,
     }
     const params = useParams();
-    const subject = window.location.href.split('/')[4];
-    const topic  = window.location.href.split('/')[5];
+    const subject = decodeURIComponent(window.location.href.split('/')[5]);
+    const topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
-    console.log(subject);
-    console.log(topic);
-    console.log(params.id);
-
+    
+    
+    
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
         let topics: any = [];
@@ -33,12 +32,16 @@ export const Note = () => {
                 topics.forEach((element:any, index: any) => {
                     obj[element] = ids[index];
                 });
+                
+                
             return obj[n];
     }
 
     useEffect(() => {
-        getCurrentDoc(topic)
-        .then((data: any) => setObject(data))
+        getCurrentDoc(topic)        
+        .then((data: any) => {
+            setObject(data);
+        })
     }, [])
     
     useEffect(() => {
@@ -48,11 +51,10 @@ export const Note = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
+                console.log(doc.data());
             })
         }
         downloadData();
-        console.log(note?.Author);
-        
     }, [object])
     
     return (
@@ -63,8 +65,6 @@ export const Note = () => {
             <div>Autor notatki: {note?.Author}</div>
             <div>Tytuł notatki: {note?.Title}</div>
             <div>Treśc notatki: {note?.Note}</div>
-
-            
         </>
     )
 }
