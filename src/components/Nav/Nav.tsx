@@ -62,6 +62,16 @@ export const Nav = () => {
                 </NavLink>
               }
 
+              {!isAdmin &&
+               <NavLink
+                   to="/user-panel"
+                   style={({ isActive }) =>
+                   isActive ? activeStyle : undefined}>
+
+                   User Panel
+                </NavLink>
+              }
+
             {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
 
                 <button className='button-logout' onClick={handleLogOut}>Wyloguj</button>

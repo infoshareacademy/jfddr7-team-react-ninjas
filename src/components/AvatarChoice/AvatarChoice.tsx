@@ -3,9 +3,10 @@ import { avatars } from '../Avatars/Avatars'
 import image from '../../img/bookshelf.jpeg'
 import { useContext, useState } from 'react'
 import { UserContext } from '../UserProvider/userProvider'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import { updateProfile } from 'firebase/auth'
+
 
 
 export const AvatarChoice = () => {
@@ -14,16 +15,22 @@ export const AvatarChoice = () => {
     const [current, setCurrent] = useState(0)
     const {avatar, setAvatar} = useContext(UserContext)
     const navigate = useNavigate()
+    const location = useLocation()
 
     const addAvatar = () => {
         if(user){
-            console.log(user)
             updateProfile(user, {photoURL: avatar})
-            console.log(user)
         }
-       
-        navigate('/city-choice')
+           if(location.state.from === "/register"){
+            navigate("/school-choice")
+           }else {
+            navigate("/user-panel")
+           }     
         };
+
+        console.log(location)
+
+    
 
     return ( 
         

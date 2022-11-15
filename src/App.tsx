@@ -65,7 +65,7 @@ function App() {
       </Route>
       <Route path='/admin' element={<Admin />}>
       </Route>
-      <Route path='/city-choice' element={<CityChoice />}>
+      <Route path='/school-choice' element={<CityChoice />}>
       </Route>
       <Route path='/my-notes' element={<MyNotes />}>
       </Route>
