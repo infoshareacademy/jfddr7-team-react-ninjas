@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/jfddr7-team-react-ninjas/static/css/main.9e483bcd.css",
-    "main.js": "/jfddr7-team-react-ninjas/static/js/main.542b079c.js",
+    "main.js": "/jfddr7-team-react-ninjas/static/js/main.5b278b52.js",
     "static/js/787.b270a4fc.chunk.js": "/jfddr7-team-react-ninjas/static/js/787.b270a4fc.chunk.js",
     "static/media/bookshelf.jpeg": "/jfddr7-team-react-ninjas/static/media/bookshelf.f64a507aaddf50e724da.jpeg",
     "static/media/av5.png": "/jfddr7-team-react-ninjas/static/media/av5.a7063790e058286502d3.png",
@@ -19,11 +19,11 @@
     "static/media/logo.png": "/jfddr7-team-react-ninjas/static/media/logo.72284095ff7c82f6286a.png",
     "index.html": "/jfddr7-team-react-ninjas/index.html",
     "main.9e483bcd.css.map": "/jfddr7-team-react-ninjas/static/css/main.9e483bcd.css.map",
-    "main.542b079c.js.map": "/jfddr7-team-react-ninjas/static/js/main.542b079c.js.map",
+    "main.5b278b52.js.map": "/jfddr7-team-react-ninjas/static/js/main.5b278b52.js.map",
     "787.b270a4fc.chunk.js.map": "/jfddr7-team-react-ninjas/static/js/787.b270a4fc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9e483bcd.css",
-    "static/js/main.542b079c.js"
+    "static/js/main.5b278b52.js"
   ]
 }
