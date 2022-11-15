@@ -35,7 +35,7 @@ export const Note = () => {
                 });
             return obj[n];
     }
-    
+
     useEffect(() => {
         getCurrentDoc(topic)
         .then((data: any) => setObject(data))
@@ -51,6 +51,8 @@ export const Note = () => {
             })
         }
         downloadData();
+        console.log(note?.Author);
+        
     }, [object])
     
     return (
