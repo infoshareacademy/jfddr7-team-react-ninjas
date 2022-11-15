@@ -34,8 +34,8 @@ export const Note = () => {
                     obj[element] = ids[index];
                 });
             return obj[n];
-
     }
+    
     useEffect(() => {
         getCurrentDoc(topic)
         .then((data: any) => setObject(data))
@@ -43,29 +43,16 @@ export const Note = () => {
     
     useEffect(() => {
         const downloadData = async () => {
-            
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
             const q = query(notesRef, where("Note", "==", params.id))
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
             })
-             
         }
         downloadData();
-        console.log('useEffect');
-        
-        
     }, [object])
     
-    
-    
-    
-    
-    
-    
-    
-
     return (
         
         <>
