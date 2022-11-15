@@ -18,7 +18,8 @@ export const Note = () => {
     const [object, setObject] = useState([]);
     
     
-    
+    // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
+    //obj = {Biologia: asudausbdubasdasd, Matematyka: asdasdasd}
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
         let topics: any = [];
@@ -36,7 +37,7 @@ export const Note = () => {
                 
             return obj[n];
     }
-
+    //useEffect używa funkcji i w obiekcie szuka id dokumentu, który będzie pobierany
     useEffect(() => {
         getCurrentDoc(topic)        
         .then((data: any) => {
@@ -44,6 +45,7 @@ export const Note = () => {
         })
     }, [])
     
+    //W tym useEffecie pobieramy dane z bazy danych, przy parametrach, które ustaliła wcześniejsza funkcja.
     useEffect(() => {
         const downloadData = async () => {
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
