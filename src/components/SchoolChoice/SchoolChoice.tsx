@@ -21,7 +21,6 @@ export const CityChoice = () => {
          querySnapshot.docs.forEach((doc) => {
             city.push(doc.data().City)
          })
-         console.log(city)
          setCitiesList(city);
       })
     }
@@ -32,25 +31,20 @@ export const CityChoice = () => {
          querySnapshot.docs.forEach((doc) => {
             school.push(doc.data().School)
          })
-         console.log(school)
          setSchoolList(school);
          setFilterSchoolList(school)
       })
     }
     
-
       useEffect(() => {
         DownladCities();
-        console.log(citiesList)  
       },[])
 
       useEffect(()=> {
         DownladSchools();
-        console.log(schoolList)
       },[])
 
       const cityHandler = (e: any) => {
-        console.log(e.target.value)
         const cityChoiceSelect = schoolList.filter((school) => 
           school.includes(e.target.value)
         )
