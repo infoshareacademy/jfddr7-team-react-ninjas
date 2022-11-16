@@ -24,8 +24,9 @@ function App() {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const {email, setEmail, isAdmin, setIsAdmin} = useContext(UserContext) 
+  const {email, setEmail, isAdmin, setIsAdmin, setUserName} = useContext(UserContext) 
   const {subjects, setSubjects} = useContext(SubjectsListContext)
+  
 
 
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
         navigate('/subjects')
         setEmail(user.email || '')
         setIsAdmin(false)
+        setUserName(user.displayName || "")
         if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
           setIsAdmin(true)
           console.log('admin')

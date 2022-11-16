@@ -4,6 +4,7 @@ import { auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import './Login.style.css';
 import image from '../../../src/img/bookshelf.jpeg';
+import logo from '../../img/logo.png'
 
 
 export const Login = () => {
@@ -86,6 +87,8 @@ export const Login = () => {
         <div className="login">
 
             {error && <div>{error}</div> }
+                
+                <img className="logo" src={logo} alt={'hs notes'}/>
     
                 <div className="google-area">
                     <button className="google-login" onClick={SingInWithGoogle}><img src="https://image.similarpng.com/thumbnail/2020/12/Flat-design-Google-logo-design-Vector-PNG.png" alt=""/>Zaloguj przez Google</button>

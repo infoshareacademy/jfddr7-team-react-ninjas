@@ -18,33 +18,39 @@ import avatar12 from '../../../src/img/avatars/av12.png'
 import profilelogo from '../../../src/img/profilelogo.png'
 import editlogo from '../../../src/img/editlogo.png'
 import { Nav } from "../Nav/Nav"
+import { updateProfile } from "firebase/auth"
+import { async } from "@firebase/util"
 
 
 
 
 export const UserPanel = () => {
-    const {school, setSchool} = useContext(UserContext)
+    const {school, setSchool, setUserName} = useContext(UserContext)
     const [current, setCurrent] = useState('')
+    const [isNickDisable, setIsNickDisable] = useState(true)
     const navigate = useNavigate()
     const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar7, avatar8, avatar9, avatar10, avatar11, avatar12]
     const user = auth.currentUser
+    const [userNick, setUserNick] = useState(user?.displayName)
 
     console.log(user)
 
     const navigateToAvatar = () => {
         navigate('/avatar-choice', {state: {from: '/user-panel'}})
     }
-    
-    const navigateToEmail = () => {
-        navigate("/avatar-choice")
-    }
-
-    const navigateToNick = () => {
-        navigate("/avatar-choice")
-    }
 
     const navigateToSchool = () => {
         navigate("/school-choice" , {state: {from: '/user-panel'}})
+    }
+
+    const navigateToNick = async () => {
+        setIsNickDisable(!isNickDisable)
+        console.log(isNickDisable)
+        console.log(user)
+        if(!isNickDisable && user){
+            await updateProfile(user, {displayName: userNick})     
+            setUserName(userNick || "")
+        }
     }
     
     
@@ -69,7 +75,7 @@ export const UserPanel = () => {
                 </div>
                 
                 <div className="user-panel-nick user-panel-block">
-                    Nick:
+                    Nick: <input onChange={(e) => setUserNick(e.target.value)} className={isNickDisable ? "disable" : "enabled"} disabled={isNickDisable} type="text" value={userNick || ""}/> 
                    <img onClick={navigateToNick} className="edit-nick edit-button" src={editlogo} alt="editlogo" />
                 </div>
 

@@ -33,11 +33,14 @@ export const Subjects = () => {
     return (
       <>
        <Nav/>
+       <div className='subject-container'>
        <div className='div-subject'>
           {subjects.map((subject, number) => (
             <div className='subject' key={number}><Link className='subject-link' to={`/subjects/${subject}`}> {subject} </Link></div>
           ))}
        </div>
+       </div>
+       
       
        </>
     )
