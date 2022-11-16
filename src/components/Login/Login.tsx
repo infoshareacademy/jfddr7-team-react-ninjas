@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword,  GoogleAuthProvider, signInWithPopup, Faceb
 import { auth } from "../../firebase";
 import { useNavigate, Link } from "react-router-dom";
 import './Login.style.css';
-import image from '../../../src/img/bookshelf.jpeg';
+import image from '../../../src/img/takingNotes.png';
 import logo from '../../img/logo.png'
 
 

@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { db } from "../../firebase";
-import image from '../../img/bookshelf.jpeg'
+import image from '../../img/takingNotes.png'
 import './SchoolChoice.style.css'
 import logo from '../../img/logo.png'
 import { UserContext } from "../UserProvider/userProvider";
@@ -73,17 +73,15 @@ export const CityChoice = () => {
 
     <div className="school-choice-container">
       <img className="school-choice-logo" src={logo} alt={'hs notes'}/>
-      <h2 className="school-choice-h2">Wybierz swoje miasto oraz szkołę!</h2>
+      <h2 className="school-choice-h2">Wybierz swoje miasto oraz szkołę</h2>
 
       <div className="school-choice-div">
-      <span className="school-choice-span">Wybierz misto!</span>
 
       <select onChange={cityHandler}  name="selectCity" className="school-choice-select">
           {citiesList.map((city, number) => (
           <option key={number}> {city} </option>))}
       </select>        
       
-      <span className="school-choice-span">Wybierz szkołę!</span>
 
       <select onChange={selectSchool} name="select" className="school-choice-select">
           {filterSchoolList.map((school, number) => (

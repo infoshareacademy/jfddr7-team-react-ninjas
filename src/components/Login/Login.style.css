@@ -10,11 +10,19 @@
 
 }
 
+.logo{
+    margin-bottom: 40px;
+    width: 200px;
+    height: 100px;
+    
+}
+
+
 .login {
     width: 500px;
     height: 700px;
     margin: 150px auto;
-    border-radius: 10px;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
