@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, query, where } from "firebase/firestore";
 import { useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
@@ -16,6 +16,7 @@ export const Note = () => {
     const topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
+    const user = auth.currentUser;
     
     
     // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
@@ -53,11 +54,17 @@ export const Note = () => {
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
-                console.log(doc.data());
             })
         }
         downloadData();
     }, [object])
+
+
+    const addToMyNotes = async () => {
+        await setDoc(doc(db, `${user?.email}`, `${note.Note}`), {note})
+        window.alert('notatka dodana do Twojej bazy')
+
+    }
     
     return (
         
@@ -67,6 +74,7 @@ export const Note = () => {
             <div>Autor notatki: {note?.Author}</div>
             <div>Tytuł notatki: {note?.Title}</div>
             <div>Treśc notatki: {note?.Note}</div>
+            <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
         </>
     )
 }

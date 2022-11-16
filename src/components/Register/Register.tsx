@@ -16,7 +16,7 @@ export const Register = () => {
     const handleRegister = (e: React.FormEvent) => {
         e.preventDefault()
         createUserWithEmailAndPassword(auth, email, password)
-        
+        .then((data)=> updateProfile(data.user, {displayName: userName}))
         .then(() => navigate('/avatar-choice', {state: {from: '/register'}}))
         .catch((e)=> {
             if (e.code === 'auth/invalid-email') {
