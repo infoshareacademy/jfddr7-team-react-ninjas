@@ -6,13 +6,16 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db, auth } from '../../firebase'
 import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 interface MyNotesInterface{
+    Author: string;
     ID: number;
     Note: string;
+    Ranking: 0;
+    Subject: string;
+    Title: string;
     Topic: string;
-    Author: string;
 }
 
 export const MyNotes = () => {
@@ -22,6 +25,7 @@ export const MyNotes = () => {
     const user = auth.currentUser;
     const [url, setUrl] = useState('')
     const [myNotes, setMyNotes] = useState<MyNotesInterface[]>([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         getDownloadURL(notatkiRef)
@@ -37,14 +41,16 @@ export const MyNotes = () => {
     useEffect(()=> {
         getDocs(collection( db, `${user?.email}`))
         .then((querySnapshot) => {
-            let items: MyNotesInterface[] = [];
+            let myNotes: MyNotesInterface[] = [];
             querySnapshot.docs.forEach((doc) => {
-                let zmienna = doc.data() as MyNotesInterface
-                items.push(zmienna)
+                let noteObject = doc.data().note as MyNotesInterface
+                console.log(noteObject)
+                myNotes.push(noteObject)
+                setMyNotes(myNotes)
             })
-            setMyNotes(items)
         })
     },[])
+
    
     return ( 
         <div>
@@ -52,11 +58,11 @@ export const MyNotes = () => {
             {/* <TabsSubjects/> */}
             <div className='div-my-notes-container'>
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
-                {myNotes.map((note)=> (
-                    <div key={note.ID}>
-                        {/* <Link to={`/subjects/${subject}/${topic}/${note}`}> */}
-                            {note.Author}
-                            {/* </Link> */}
+                {myNotes && myNotes.map((note)=> (
+                    <div key={note.ID} className="div-notes-card" onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}>
+                            <p>Temat: {note.Note}</p>
+                            <p>Autor: {note.Author}</p>
+                            <p>Liczba polubień:{note.Ranking}</p>
                     </div>
                  ))}
             </div>

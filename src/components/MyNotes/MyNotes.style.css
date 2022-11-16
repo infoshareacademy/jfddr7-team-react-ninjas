@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .div-notes-card{
@@ -11,11 +12,17 @@
     border: none;
     border-radius: 8px;
     box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);  
-    display: flex;
     align-items: center;
+    color: black;
+    cursor: pointer;
+    margin-top: 30px;
 }
 
 img{
     width: 20%;
     height: 80%;
+}
+
+.link{
+    color: black;
 }
