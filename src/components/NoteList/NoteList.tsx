@@ -60,6 +60,9 @@ export const NoteList = () => {
             Note: newNote,
             Title: newTitle,
             Author: auth.currentUser?.email,
+            Topic: topic,
+            Subject: subject,
+            Ranking: 0,
         })
         console.log('Notatka została dodana do bazy danych...');
         setShowAddInput(false);
