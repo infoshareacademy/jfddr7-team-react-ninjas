@@ -58,10 +58,11 @@ export const CityChoice = () => {
       }
 
       const addSchool = () => {
-        if(location.state.from === "/avatar-choice"){
-          navigate("/school-choice")
-         }else {
+        console.log(location)
+        if(location.state?.from !== "/avatar-choice"){
           navigate("/user-panel")
+         }else {
+          navigate("/subjects")
          } 
       }
       

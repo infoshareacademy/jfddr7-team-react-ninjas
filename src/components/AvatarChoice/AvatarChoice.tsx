@@ -22,7 +22,7 @@ export const AvatarChoice = () => {
            await updateProfile(user, {photoURL: avatar})
         }
             if(location.state.from === "/register"){
-            navigate("/school-choice")
+            navigate("/school-choice", {state: {from: '/avatar-choice'}})
            }else {
             navigate("/user-panel")
            }    
