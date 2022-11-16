@@ -24,6 +24,7 @@ export const Note = () => {
     const [newBody, setNewBody] = useState('');
     const [ranking, setRanking] = useState<string | any>();
     const [comment ,setComment] = useState('');
+    const [commentList, setCommentList] = useState<string | any>([]);
     const user = auth.currentUser;
     const navigate = useNavigate();
     
@@ -64,9 +65,23 @@ export const Note = () => {
                 setDocument(doc.id);
             })
         }
-        downloadNote();
-    }, [object])
 
+        const downloadComments = async () => {
+            let comments: string[] = [];
+            if(!object.length){return}
+            const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`));
+            querySnapshot.docs.forEach((doc) => {
+                comments.push(doc.data().Body);
+                console.log(doc.data());
+                
+            })
+            setCommentList(comments);
+        }
+        downloadNote();
+        downloadComments();
+    }, [object])
+    console.log(commentList);
+    
 
     
     //Funkcja, która dodaje notatkę do notatek użytkownika
