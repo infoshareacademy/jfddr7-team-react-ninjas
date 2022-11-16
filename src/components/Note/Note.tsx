@@ -87,6 +87,9 @@ export const Note = () => {
             {user?.email === note?.Author && (
                 <button onClick={handleDelete}>Delte note</button>
             )}
+            {user?.email === 'admin@gmail.com' && (
+                <button onClick={handleDelete}>Delte note</button>
+            )}
         </>
     )
 }
