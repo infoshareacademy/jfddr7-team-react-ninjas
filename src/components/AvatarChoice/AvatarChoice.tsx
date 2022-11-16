@@ -17,9 +17,9 @@ export const AvatarChoice = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const addAvatar = () => {
+    const addAvatar = async () => {
         if(user){
-            updateProfile(user, {photoURL: avatar})
+           await updateProfile(user, {photoURL: avatar})
         }
             if(location.state.from === "/register"){
             navigate("/school-choice")

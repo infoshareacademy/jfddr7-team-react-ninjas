@@ -17,7 +17,8 @@ export const NoteList = () => {
     const array = window.location.href.split('/');
     console.log(array);
     
-
+    // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
+    //obj = {Biologia: asudausbdubasdasd, Matematyka: asdasdasd}
     const getCurrentDoc = async (n: any)  => {
         const obj: object | any = {};
         let topics: any = [];
@@ -34,15 +35,18 @@ export const NoteList = () => {
             return obj[n];
 
     }
-
+    //useEffect używa funkcji i w obiekcie szuka id dokumentu, który będzie pobierany
     useEffect(() => {
         getCurrentDoc(params.id)
         .then((data: any) => setObject(data))
     }, [])
     
+    //Dzięki użyciu f. getCurrentDoc możemy pobrać numer dokumentu -> {object}, który jest parametrem querry do bazy danych
     useEffect(() => {
         const downloadData = async () => {
             let notes: string[] = [];
+            console.log(subject, object)
+            if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
             querySnapshot.docs.forEach((doc) => {
                 notes.push(doc.data().Note);
@@ -52,11 +56,16 @@ export const NoteList = () => {
         downloadData();
        }, [object])
 
+       //Funkcja, która dodaj notatkę do bazy danych
        const addNoteToDb = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`), {
+            ID: new Date(). getTime(),
             Note: newNote,
             Title: newTitle,
             Author: auth.currentUser?.email,
+            Topic: topic,
+            Subject: subject,
+            Ranking: 0,
         })
         console.log('Notatka została dodana do bazy danych...');
         setShowAddInput(false);
