@@ -66,6 +66,10 @@ export const Note = () => {
 
     }
     
+    const handleDelete = () => {
+        console.log('Delete note');
+    }
+    
     return (
         
         <>
@@ -75,6 +79,9 @@ export const Note = () => {
             <div>Tytuł notatki: {note?.Title}</div>
             <div>Treśc notatki: {note?.Note}</div>
             <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
+            {user?.email === note?.Author && (
+                <button onClick={handleDelete}>Delte note</button>
+            )}
         </>
     )
 }
