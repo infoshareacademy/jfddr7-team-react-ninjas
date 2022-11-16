@@ -1,11 +1,9 @@
 import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc } from "firebase/firestore";
-import { Navigate, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
-import { ref } from "firebase/storage";
-import { render } from "@testing-library/react";
-import { CommentSection } from "../CommentSection/CommentSection";
+
 
 export const Note = () => {
 
@@ -25,6 +23,7 @@ export const Note = () => {
     const [newTitle, setNewTitle] = useState('');
     const [newBody, setNewBody] = useState('');
     const [ranking, setRanking] = useState<string | any>();
+    const [comment ,setComment] = useState('');
     const user = auth.currentUser;
     const navigate = useNavigate();
     
@@ -93,11 +92,18 @@ export const Note = () => {
         navigate(`/subjects/${subject}/${topic}`);
     }
 
+    //Funkcja, która na wciśniecie plusa zwiększa ranking notatki
     const handleRanking = async () => {
         await setRanking(note.Ranking + 1);
         await updateDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`), {
             Ranking: note.Ranking + 1,
         })
+    }
+
+    //Funkcja, która dodaje komentarz
+    const addCommentHandler = () => {
+        console.log(comment);
+        console.log('Add comment');
     }
     
     return (
@@ -143,7 +149,15 @@ export const Note = () => {
             {user?.email === 'admin@gmail.com' && (
                 <button onClick={handleDelete}>Delte note</button>
             )}
-            <CommentSection />
+            <div className="comment-section">
+                <h1>Sekcja komentarzy</h1>
+                    <>
+                        <label htmlFor="comment">Treść komentarza: </label>
+                        <input type="text" onChange={(e) => setComment(e.target.value)}/>
+                        <button onClick={addCommentHandler}>Dodaj Komentarz</button>
+                    </>
+
+            </div>
         </>
     )
 }
