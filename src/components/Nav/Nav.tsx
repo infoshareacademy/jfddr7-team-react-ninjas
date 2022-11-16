@@ -30,8 +30,13 @@ export const Nav = () => {
  }
 
     let activeStyle = {
-        textDecoration: "none",
-        background: "#75bbbb",
+        borderBottom: "1px solid white",   
+        borderLeft: "0px solid white",    
+        borderRight: "0px solid white",    
+        borderTop: "0px solid white",    
+        padding: "5px",    
+        fontWeight: "bold",
+        background: "rgb(7, 143, 152)",
         color: "white", 
       };
 
@@ -54,7 +59,7 @@ export const Nav = () => {
               <div className='div-my-notes-signout-button'>
                 
               {!isAdmin &&
-               <NavLink
+               <NavLink className="my-notes-style"
                    to="/my-notes"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
