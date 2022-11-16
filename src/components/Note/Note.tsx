@@ -7,9 +7,10 @@ import { Nav } from "../Nav/Nav";
 export const Note = () => {
 
     interface Obj {
-        Title: string,
         Author: string,
+        ID: number,
         Note: string,
+        Title: string,
     }
     const params = useParams();
     const subject = decodeURIComponent(window.location.href.split('/')[5]);
@@ -47,6 +48,7 @@ export const Note = () => {
     
     useEffect(() => {
         const downloadData = async () => {
+            if(!object.length){return}
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
             const q = query(notesRef, where("Note", "==", params.id))
             const querySnapshot = await getDocs(q);
@@ -65,6 +67,8 @@ export const Note = () => {
     }
     
     return (
+
+
         
         <>
             <Nav/>
