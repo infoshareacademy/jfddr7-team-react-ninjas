@@ -1,8 +1,9 @@
-import { collection, doc, setDoc, getDocs, query, where, deleteDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc } from "firebase/firestore";
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
+import { ref } from "firebase/storage";
 
 export const Note = () => {
 
@@ -74,6 +75,13 @@ export const Note = () => {
         alert('Notatka została usunięta');
         navigate(`/subjects/${subject}/${topic}`)
     }
+
+    const handleEdit = async () => {
+        await updateDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`), {
+            Note: 'TESTTTTTT',
+            Title: 'TESTTTTTTT',
+        })
+    }
     
     return (
         
@@ -85,7 +93,10 @@ export const Note = () => {
             <div>Treśc notatki: {note?.Note}</div>
             <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
             {user?.email === note?.Author && (
-                <button onClick={handleDelete}>Delte note</button>
+                <>
+                    <button onClick={handleDelete}>Delte note</button>
+                    <button onClick={handleEdit}>Edit note</button>
+                </>
             )}
             {user?.email === 'admin@gmail.com' && (
                 <button onClick={handleDelete}>Delte note</button>
