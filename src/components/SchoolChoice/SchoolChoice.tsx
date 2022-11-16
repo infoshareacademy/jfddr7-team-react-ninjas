@@ -5,7 +5,7 @@ import image from '../../img/bookshelf.jpeg'
 import './SchoolChoice.style.css'
 import logo from '../../img/logo.png'
 import { UserContext } from "../UserProvider/userProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export const CityChoice = () => {
@@ -14,6 +14,7 @@ export const CityChoice = () => {
     const [filterSchoolList, setFilterSchoolList] = useState([""]);
     const {school, setSchool} = useContext(UserContext)
     const navigate = useNavigate()
+    const location = useLocation()
     
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
@@ -57,7 +58,11 @@ export const CityChoice = () => {
       }
 
       const addSchool = () => {
-        navigate('/subjects')
+        if(location.state.from === "/avatar-choice"){
+          navigate("/school-choice")
+         }else {
+          navigate("/user-panel")
+         } 
       }
       
 

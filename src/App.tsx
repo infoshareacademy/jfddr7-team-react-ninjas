@@ -28,22 +28,22 @@ function App() {
   const {subjects, setSubjects} = useContext(SubjectsListContext)
 
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if(user){
-  //       console.log(user)
-  //       navigate('/subjects')
-  //       setEmail(user.email || '')
-  //       setIsAdmin(false)
-  //       if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
-  //         setIsAdmin(true)
-  //         console.log('admin')
-  //       }
-  //     }else{
-  //       navigate('/login')
-  //     }
-  //   })
-  // },[])
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if(user){
+        console.log(user)
+        navigate('/subjects')
+        setEmail(user.email || '')
+        setIsAdmin(false)
+        if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
+          setIsAdmin(true)
+          console.log('admin')
+        }
+      }else{
+        navigate('/login')
+      }
+    })
+  },[])
 
 
   return (
