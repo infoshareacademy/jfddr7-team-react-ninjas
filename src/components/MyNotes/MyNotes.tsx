@@ -51,6 +51,10 @@ export const MyNotes = () => {
         })
     },[])
 
+    const removeFromMyNotes = () => {
+
+    }
+
    
     return ( 
         <div>
@@ -60,9 +64,16 @@ export const MyNotes = () => {
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}>
-                            <p>Temat: {note.Note}</p>
-                            <p>Autor: {note.Author}</p>
-                            <p>Liczba polubień:{note.Ranking}</p>
+                        <div className='note-details'>
+                            <div className='topic'>Temat: {note.Note}</div>
+                            <div>Autor: {note.Author}</div>
+                            <div>Liczba polubień:{note.Ranking}</div>
+                        </div>
+                        <div className='note-buttons'>
+                            <button>Przeglądaj fiszki</button>
+                            <button>Zrób test</button>
+                            <button className='remove-note-button' onClick={removeFromMyNotes}>Usuń z moich notatek</button>
+                        </div>
                     </div>
                  ))}
             </div>
