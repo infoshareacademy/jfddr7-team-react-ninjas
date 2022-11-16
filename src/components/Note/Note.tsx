@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
 import { ref } from "firebase/storage";
 import { render } from "@testing-library/react";
+import { CommentSection } from "../CommentSection/CommentSection";
 
 export const Note = () => {
 
@@ -142,6 +143,7 @@ export const Note = () => {
             {user?.email === 'admin@gmail.com' && (
                 <button onClick={handleDelete}>Delte note</button>
             )}
+            <CommentSection />
         </>
     )
 }
