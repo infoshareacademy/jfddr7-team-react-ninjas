@@ -44,6 +44,10 @@
     background: rgb(232, 86, 111);
 }
 
+.remove-note-button:hover{
+    background: rgb(234, 106, 127);
+}
+
 .topic{
     font-size: 24px;
 }
