@@ -18,6 +18,9 @@ export const Note = () => {
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
     const [document, setDocument] = useState('');
+    const [showEdit, setShowEdit] = useState(false);
+    const [newTitle, setNewTitle] = useState('');
+    const [newBody, setNewBody] = useState('');
     const user = auth.currentUser;
     const navigate = useNavigate();
     
@@ -78,9 +81,11 @@ export const Note = () => {
 
     const handleEdit = async () => {
         await updateDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`), {
-            Note: 'TESTTTTTT',
-            Title: 'TESTTTTTTT',
+            Note: newBody,
+            Title: newTitle,
         })
+        alert('Notatka została edytowana')
+        navigate(`/subjects/${subject}/${topic}`);
     }
     
     return (
@@ -93,10 +98,23 @@ export const Note = () => {
             <div>Treśc notatki: {note?.Note}</div>
             <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
             {user?.email === note?.Author && (
-                <>
-                    <button onClick={handleDelete}>Delte note</button>
-                    <button onClick={handleEdit}>Edit note</button>
-                </>
+                <div className="container">
+                    <>
+                        <button onClick={handleDelete}>Delte note</button>
+                        <button onClick={() => setShowEdit(true)}>Edit note</button>
+                    </>
+                    {showEdit && (
+                        <div className="edit-section">
+                            <label htmlFor="title">Change title</label>
+                            <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                            <label htmlFor="title">Change body of the note</label>
+                            <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
+                            <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
+                        </div>
+                    )}
+                    
+                </div>
+                
             )}
             {user?.email === 'admin@gmail.com' && (
                 <button onClick={handleDelete}>Delte note</button>
