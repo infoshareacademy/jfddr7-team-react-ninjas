@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc, addDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { useEffect, useState } from "react";
@@ -54,7 +54,7 @@ export const Note = () => {
     
     //W tym useEffecie pobieramy dane z bazy danych, przy parametrach, które ustaliła wcześniejsza funkcja.
     useEffect(() => {
-        const downloadData = async () => {
+        const downloadNote = async () => {
             if(!object.length){return}
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
             const q = query(notesRef, where("Title", "==", params.id))
@@ -64,7 +64,7 @@ export const Note = () => {
                 setDocument(doc.id);
             })
         }
-        downloadData();
+        downloadNote();
     }, [object])
 
 
@@ -103,7 +103,11 @@ export const Note = () => {
     //Funkcja, która dodaje komentarz
     const addCommentHandler = () => {
         console.log(comment);
-        console.log('Add comment');
+        addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`), {
+            Date: new Date(). getTime(),
+            Body: comment,
+            Author: auth.currentUser?.email,
+        })
     }
     
     return (
