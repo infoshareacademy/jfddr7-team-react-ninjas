@@ -57,7 +57,7 @@ export const Note = () => {
         const downloadData = async () => {
             if(!object.length){return}
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
-            const q = query(notesRef, where("Note", "==", params.id))
+            const q = query(notesRef, where("Title", "==", params.id))
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());

@@ -49,7 +49,7 @@ export const NoteList = () => {
             if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
             querySnapshot.docs.forEach((doc) => {
-                notes.push(doc.data().Note);
+                notes.push(doc.data().Title);
             })
              setNote(notes);
         }
