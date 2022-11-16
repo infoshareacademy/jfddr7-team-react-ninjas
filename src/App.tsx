@@ -39,7 +39,7 @@ function App() {
           setIsAdmin(true)
           console.log('admin')
         }
-      }else{
+      } else {
         navigate('/login')
       }
     })
