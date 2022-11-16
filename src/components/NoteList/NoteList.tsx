@@ -43,6 +43,8 @@ export const NoteList = () => {
     useEffect(() => {
         const downloadData = async () => {
             let notes: string[] = [];
+            console.log(subject, object)
+            if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
             querySnapshot.docs.forEach((doc) => {
                 notes.push(doc.data().Note);
@@ -54,6 +56,7 @@ export const NoteList = () => {
 
        const addNoteToDb = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`), {
+            ID: new Date(). getTime(),
             Note: newNote,
             Title: newTitle,
             Author: auth.currentUser?.email,
