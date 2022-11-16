@@ -65,8 +65,6 @@ export const Note = () => {
             })
         }
         downloadData();
-        setRanking(note?.Ranking)
-        
     }, [object])
 
 
@@ -97,12 +95,9 @@ export const Note = () => {
     const handleRanking = async () => {
         await setRanking(note.Ranking + 1);
         await updateDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`), {
-            Ranking: ranking
+            Ranking: note.Ranking + 1,
         })
-        console.log(ranking);
-        
     }
-    
     
     return (
         <>
