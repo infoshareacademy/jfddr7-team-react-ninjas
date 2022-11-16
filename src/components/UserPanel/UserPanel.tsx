@@ -17,6 +17,7 @@ import avatar11 from '../../../src/img/avatars/av11.png'
 import avatar12 from '../../../src/img/avatars/av12.png'
 import profilelogo from '../../../src/img/profilelogo.png'
 import editlogo from '../../../src/img/editlogo.png'
+import { Nav } from "../Nav/Nav"
 
 
 
@@ -43,7 +44,7 @@ export const UserPanel = () => {
     }
 
     const navigateToSchool = () => {
-        navigate("/school-choice")
+        navigate("/school-choice" , {state: {from: '/user-panel'}})
     }
     
     
@@ -52,6 +53,7 @@ export const UserPanel = () => {
 
     return (
         <div className="user-panel-container">
+            <Nav />
             <div className="user-panel-header">
               <h1>Panel Użytkownika</h1>
               <img className="profile-logo" src={profilelogo} alt="profilelogo" />

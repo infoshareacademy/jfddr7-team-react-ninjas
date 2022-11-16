@@ -21,11 +21,11 @@ export const AvatarChoice = () => {
         if(user){
            await updateProfile(user, {photoURL: avatar})
         }
-           if(location.state.from === "/register"){
+            if(location.state.from === "/register"){
             navigate("/school-choice")
            }else {
             navigate("/user-panel")
-           }     
+           }    
         };
 
         console.log(location)
