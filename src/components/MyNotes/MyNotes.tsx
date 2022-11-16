@@ -7,6 +7,7 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase'
 import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
 import {Link, useNavigate} from 'react-router-dom';
+import like from '../../img/like.png' 
 
 
 interface MyNotesInterface{
@@ -46,12 +47,11 @@ export const MyNotes = () => {
             let myNotes: MyNotesInterface[] = [];
             querySnapshot.docs.forEach((doc) => {
                 let noteObject = doc.data().note as MyNotesInterface
-                console.log(noteObject)
                 myNotes.push(noteObject)
-                setMyNotes(myNotes)
             })
+            setMyNotes(myNotes)
         })
-    },[])
+    },[noteToBeDeleted])
 
 
     return ( 
@@ -62,19 +62,20 @@ export const MyNotes = () => {
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" 
-                    // onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}
+                    onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}
                     >
                         <div className='note-details'>
                             <div className='topic'>Temat: {note.Note}</div>
                             <div>Autor: {note.Author}</div>
-                            <div>Liczba polubień:{note.Ranking}</div>
+                            <div className='ranking'>{note.Ranking} <img className="like-img" src={like}></img></div>
                         </div>
                         <div className='note-buttons'>
                             <button>Przeglądaj fiszki</button>
                             <button>Zrób test</button>
                             <button className='remove-note-button' 
-                                    onClick={async ()=>(
-                                        deleteDoc(doc(db, `${user?.email}`, `${note.Note}`))
+                                    onClick={async () => (
+                                       await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
+                                       setNoteToBeDeleted(note?.Note)
                                     )}
                             >Usuń z moich notatek</button>
                         </div>
