@@ -70,7 +70,7 @@ export const MyNotes = () => {
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" 
                     onClick={(event)=> (
-                        navigate(`/subjects/${note.Subject}/${note.Topic}/${note.Note}`)
+                        navigate(`/subjects/${note.Subject}/${note.Topic}/${note.Title}`)
                     )
                 }
                     >
