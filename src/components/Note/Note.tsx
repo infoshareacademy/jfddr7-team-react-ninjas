@@ -132,7 +132,13 @@ export const Note = () => {
         })
     }
 
-    console.log(typeof date);
+    const isEdited = () => {
+        if (showEdit === true) {
+            setShowEdit(false);
+        } else {
+            setShowEdit(true);
+        }
+    }
     
     return (
         <>
@@ -163,27 +169,29 @@ export const Note = () => {
             <hr />
                 <div className="title">{note?.Title}</div>
                 <article>{note?.Note}</article>
-                <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
-                {user?.email === note?.Author && (
-                    <div className="container">
-                        <>
-                            <button onClick={handleDelete}>Delte note</button>
-                            <button onClick={() => setShowEdit(true)}>Edit note</button>
-                        </>
-                        {showEdit && (
-                            <div className="edit-section">
-                                <label htmlFor="title">Change title</label>
-                                <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
-                                <label htmlFor="title">Change body of the note</label>
-                                <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
-                                <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
-                            </div>
-                        )}
+                <div className="button-section">
+                    <button className="add-btn" onClick={addToMyNotes}>Dodaj do moich notatek</button>
+                    {user?.email === note?.Author && (
+                        <div className="edit-and-delete-btn">
+                            <>
+                                <button className="del-btn" onClick={handleDelete}>Usuń notatkę</button>
+                                <button className="edit-btn" onClick={isEdited}>Edytuj notatkę</button>
+                            </>
+                        </div>
+                    )}
+                    {user?.email === 'admin@gmail.com' && (
+                        <button onClick={handleDelete}>Delte note</button>
+                    )}
                     </div>
-                )}
-                {user?.email === 'admin@gmail.com' && (
-                    <button onClick={handleDelete}>Delte note</button>
-                )}
+                    {showEdit && (
+                                <div className="edit-section">
+                                    <label htmlFor="title">Change title</label>
+                                    <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                                    <label htmlFor="title">Change body of the note</label>
+                                    <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
+                                    <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
+                                </div>
+                            )}
                 <div className="comment-section">
                     <h1>Sekcja komentarzy</h1>
                         <div className="comments">
