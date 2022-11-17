@@ -69,7 +69,10 @@ export const MyNotes = () => {
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" 
-                    onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}
+                    onClick={(event)=> (
+                        navigate(`/subjects/${note.Subject}/${note.Topic}/${note.Note}`)
+                    )
+                }
                     >
                         <div className='note-details'>
                             <div className='topic'>{note.Note}</div>
@@ -80,9 +83,10 @@ export const MyNotes = () => {
                             <button className='cards-button'><img src={cards}></img>Fiszki</button>
                             <button className='quiz-button'><img src={quiz}></img>Quiz</button>
                             <button className='remove-note-button' 
-                                    onClick={async () => (
-                                       await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
-                                       setNoteToBeDeleted(note?.Note)
+                                    onClick={async (event) => (
+                                        event.stopPropagation(),
+                                        await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
+                                        setNoteToBeDeleted(note?.Note)
                                     )}
                             ><img className="bin-img" src={bin}></img></button>
                         </div>
