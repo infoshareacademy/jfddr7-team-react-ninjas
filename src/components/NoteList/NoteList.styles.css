@@ -1,0 +1,43 @@
+.note-list-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1050px;
+    justify-content: center;
+    margin: 30px auto;
+    gap:30px;
+    letter-spacing: 1.2px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.title {
+    
+    font-size: 2rem;
+    color: rgb(7, 143, 152);
+     font-weight: bold;
+
+}
+
+.add-note button {
+    width: 200px;
+    height: 80px;
+    padding: 10px;
+}
+
+.add-note-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.add-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-body {
+    display: flex;
+    flex-direction: column;
+}
+
