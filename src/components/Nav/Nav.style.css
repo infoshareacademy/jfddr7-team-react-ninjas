@@ -80,3 +80,22 @@ a:hover{
 .my-notes-style{
     width: 120px;
 }
+
+
+.isHover {
+    position: absolute;
+    top: 2px;
+    background-color: white;
+    border: 1px solid black;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.isNotHover {
+    position: absolute;
+    top: -500px;
+}
