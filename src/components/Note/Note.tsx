@@ -1,10 +1,9 @@
-import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc } from "firebase/firestore";
-import { Navigate, useNavigate, useParams } from "react-router-dom"
+import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc, addDoc } from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
-import { ref } from "firebase/storage";
-import { render } from "@testing-library/react";
+
 
 export const Note = () => {
 
@@ -24,6 +23,8 @@ export const Note = () => {
     const [newTitle, setNewTitle] = useState('');
     const [newBody, setNewBody] = useState('');
     const [ranking, setRanking] = useState<string | any>();
+    const [comment ,setComment] = useState('');
+    const [commentList, setCommentList] = useState<string | any>([]);
     const user = auth.currentUser;
     const navigate = useNavigate();
     
@@ -54,19 +55,32 @@ export const Note = () => {
     
     //W tym useEffecie pobieramy dane z bazy danych, przy parametrach, które ustaliła wcześniejsza funkcja.
     useEffect(() => {
-        const downloadData = async () => {
+        const downloadNote = async () => {
             if(!object.length){return}
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
-            const q = query(notesRef, where("Note", "==", params.id))
+            const q = query(notesRef, where("Title", "==", params.id))
             const querySnapshot = await getDocs(q);
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
                 setDocument(doc.id);
             })
         }
-        downloadData();
-    }, [object])
+        //Ta funkcja w useEffecie pobiera komentarze
+        const downloadComments = async () => {
+            let comments: string[] = [];
+            if(!object.length){return}
+            const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`));
+            querySnapshot.docs.forEach((doc) => {
+                comments.push(doc.data().Body);
+            })
+            setCommentList(comments);
+        }
+        downloadNote();
+        downloadComments();
 
+    }, [object, document])
+
+    
 
     
     //Funkcja, która dodaje notatkę do notatek użytkownika
@@ -92,10 +106,21 @@ export const Note = () => {
         navigate(`/subjects/${subject}/${topic}`);
     }
 
+    //Funkcja, która na wciśniecie plusa zwiększa ranking notatki
     const handleRanking = async () => {
         await setRanking(note.Ranking + 1);
         await updateDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`), {
             Ranking: note.Ranking + 1,
+        })
+    }
+
+    //Funkcja, która dodaje komentarz
+    const addCommentHandler = () => {
+        console.log(comment);
+        addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`), {
+            Date: new Date(). getTime(),
+            Body: comment,
+            Author: auth.currentUser?.email,
         })
     }
     
@@ -142,6 +167,20 @@ export const Note = () => {
             {user?.email === 'admin@gmail.com' && (
                 <button onClick={handleDelete}>Delte note</button>
             )}
+            <div className="comment-section">
+                <h1>Sekcja komentarzy</h1>
+                    <div className="comments">
+                        {commentList.map((comment: string, number: Key) => (
+                            <div className="comment" key={number}>{comment}</div>
+                        ))}
+                    </div>
+                    <>
+                        <label htmlFor="comment">Treść komentarza: </label>
+                        <input type="text" onChange={(e) => setComment(e.target.value)}/>
+                        <button onClick={addCommentHandler}>Dodaj Komentarz</button>
+                    </>
+
+            </div>
         </>
     )
 }
