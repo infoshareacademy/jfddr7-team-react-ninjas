@@ -71,3 +71,7 @@ a:hover{
     color: white;
     cursor: pointer;
 }
+
+.my-notes-style{
+    width: 120px;
+}

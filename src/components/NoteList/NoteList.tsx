@@ -62,7 +62,7 @@ export const NoteList = () => {
             ID: new Date(). getTime(),
             Note: newNote,
             Title: newTitle,
-            Author: auth.currentUser?.email,
+            Author: auth.currentUser?.displayName,
             Topic: topic,
             Subject: subject,
             Ranking: 0,
@@ -85,7 +85,7 @@ export const NoteList = () => {
                     <label htmlFor="title">Tytuł notatki</label>
                     <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
                     <label htmlFor="title">Treść Notatki</label>
-                    <input type="textarea" onChange={(e) => setNewNote(e.target.value)}/>
+                    <input type="textarea" className='text-area' onChange={(e) => setNewNote(e.target.value)}/>
                     <button onClick={addNoteToDb}>Dodaj notatkę:</button>
                 </>
              )}

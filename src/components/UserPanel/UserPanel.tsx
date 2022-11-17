@@ -19,7 +19,7 @@ import profilelogo from '../../../src/img/profilelogo.png'
 import editlogo from '../../../src/img/editlogo.png'
 import { Nav } from "../Nav/Nav"
 import { updateProfile } from "firebase/auth"
-import { async } from "@firebase/util"
+import logo from '../../img/logo.png'
 
 
 
@@ -60,11 +60,13 @@ export const UserPanel = () => {
     return (
         <div className="user-panel-container">
             <Nav />
-            <div className="user-panel-header">
-              <h1>Panel Użytkownika</h1>
-              <img className="profile-logo" src={profilelogo} alt="profilelogo" />
-            </div>
+            <div className="user-panel-main">
             <div className="user-panel">
+            <div className="user-panel-header">
+              <img className="logo" src={logo} alt={'hs notes'}/>
+              <div className="user-panel-header"> <h1>Panel Użytkownika</h1>
+              <img className="profile-logo" src={profilelogo} alt="profilelogo" /></div>
+            </div>
                 <div className="user-panel-avatar user-panel-block">
                    Avatar: {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
                    <img onClick={navigateToAvatar} className="edit-avatar edit-button" src={editlogo} alt="editlogo" />
@@ -85,6 +87,8 @@ export const UserPanel = () => {
                 </div>
                 
             </div>
+            </div>
+            
         </div>
         
     )
