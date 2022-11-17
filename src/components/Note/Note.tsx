@@ -39,10 +39,10 @@ export const Note = () => {
     const array = window.location.href.split('/');
     console.log(array);
 
-    if (array.length == 8) {
+    if (array.length === 8) {
         subject = decodeURIComponent(window.location.href.split('/')[5]);
         topic  = decodeURIComponent(window.location.href.split('/')[6]);
-   } else if (array.length == 9) {
+   } else if (array.length === 9) {
        subject = decodeURIComponent(window.location.href.split('/')[6]);
         topic  = decodeURIComponent(window.location.href.split('/')[7]);
    }
@@ -74,7 +74,7 @@ export const Note = () => {
     //W tym useEffecie pobieramy dane z bazy danych, przy parametrach, które ustaliła wcześniejsza funkcja.
     useEffect(() => {
         const downloadNote = async () => {
-            if(!object.length){return}
+            // if(!object.length){return}
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
             const q = query(notesRef, where("Title", "==", params.id))
             const querySnapshot = await getDocs(q);
@@ -95,7 +95,7 @@ export const Note = () => {
             let comments: string[] = [];
             let authors: string[] = [];
             let dates: string[] = [];
-            if(!object.length){return}
+            // if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`));
             querySnapshot.docs.forEach((doc) => {
                 comments.push(doc.data().Body);

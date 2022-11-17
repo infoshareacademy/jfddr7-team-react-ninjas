@@ -20,10 +20,10 @@ export const NoteList = () => {
     const array = window.location.href.split('/');
     console.log(array);
 
-    if (array.length == 7) {
+    if (array.length === 7) {
          subject = decodeURIComponent(window.location.href.split('/')[5]);
          topic  = decodeURIComponent(window.location.href.split('/')[6]);
-    } else if (array.length == 8) {
+    } else if (array.length === 8) {
         subject = decodeURIComponent(window.location.href.split('/')[6]);
          topic  = decodeURIComponent(window.location.href.split('/')[7]);
     }
@@ -57,7 +57,7 @@ export const NoteList = () => {
         const downloadData = async () => {
             let notes: string[] = [];
             // console.log(subject, object)
-            if(!object.length){return}
+            // if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
             querySnapshot.docs.forEach((doc) => {
                 notes.push(doc.data().Title);
