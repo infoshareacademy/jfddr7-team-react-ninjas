@@ -93,7 +93,7 @@ export const Note = () => {
     
     //Funkcja, która dodaje notatkę do notatek użytkownika
     const addToMyNotes = async () => {
-        await setDoc(doc(db, `${user?.email}notes`, `${note.Note}`), {note})
+        await setDoc(doc(db, `${user?.email}notes`, `${note.ID}`), {note})
         window.alert('notatka dodana do Twojej bazy')
     }
     
