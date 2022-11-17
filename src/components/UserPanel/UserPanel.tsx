@@ -20,6 +20,7 @@ import editlogo from '../../../src/img/editlogo.png'
 import { Nav } from "../Nav/Nav"
 import { updateProfile } from "firebase/auth"
 import logo from '../../img/logo.png'
+import image from '../../img/takingNotes.png'
 
 
 
@@ -60,30 +61,32 @@ export const UserPanel = () => {
     return (
         <div className="user-panel-container">
             <Nav />
-            <div className="user-panel-main">
+            <div className="user-panel-main" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
             <div className="user-panel">
-            <div className="user-panel-header">
-              <img className="logo" src={logo} alt={'hs notes'}/>
-              <div className="user-panel-header"> <h1>Panel Użytkownika</h1>
-              <img className="profile-logo" src={profilelogo} alt="profilelogo" /></div>
-            </div>
-                <div className="user-panel-avatar user-panel-block">
-                   Avatar: {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
+            
+                <div className="user-panel-avatar-container">
+                   {user?.photoURL && <img className="user-panel-avatar" src={user?.photoURL}></img>}
                    <img onClick={navigateToAvatar} className="edit-avatar edit-button" src={editlogo} alt="editlogo" />
                 </div>
 
-                <div className="user-panel-emial user-panel-block">
-                   Email: {user?.email} 
-                </div>
+                <div className="user-panel-nick-container user-panel-block">
+                    <p className="user-panel-paragraf">Nick:</p>
+                     <div className="user-panel-information">
+                     <input onChange={(e) => setUserNick(e.target.value)} className={isNickDisable ? "disable" : "enabled"} disabled={isNickDisable} type="text" value={userNick || ""}/> 
+                     <img onClick={navigateToNick} className="edit-nick edit-button" src={editlogo} alt="editlogo" />
+                     </div>
+                </div>              
                 
-                <div className="user-panel-nick user-panel-block">
-                    Nick: <input onChange={(e) => setUserNick(e.target.value)} className={isNickDisable ? "disable" : "enabled"} disabled={isNickDisable} type="text" value={userNick || ""}/> 
-                   <img onClick={navigateToNick} className="edit-nick edit-button" src={editlogo} alt="editlogo" />
+                <div className="user-panel-school-container user-panel-block">
+                   <p className="user-panel-paragraf">Szkoła:</p>
+                    <div className="user-panel-information">
+                       {school}
+                       <img onClick={navigateToSchool} className="edit-school edit-button" src={editlogo} alt="editlogo" />
+                    </div>
                 </div>
 
-                <div className="user-panel-school user-panel-block">
-                   Szkoła: {school}
-                   <img onClick={navigateToSchool} className="edit-school edit-button" src={editlogo} alt="editlogo" />
+                <div className="user-panel-email-container user-panel-block">
+                   <p className="user-panel-paragraf">Email: </p> {user?.email} 
                 </div>
                 
             </div>

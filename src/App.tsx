@@ -15,6 +15,7 @@ import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
 import { NoteList } from './components/NoteList/NoteList';
 import { Note } from './components/Note/Note';
 import { UserPanel } from './components/UserPanel/UserPanel';
+import { TestDropdown } from './components/Nav/TestDropdown';
 
 
 
@@ -29,23 +30,23 @@ function App() {
   
 
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if(user){
-        console.log(user)
-        navigate('/subjects')
-        setEmail(user.email || '')
-        setIsAdmin(false)
-        setUserName(user.displayName || "")
-        if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
-          setIsAdmin(true)
-          console.log('admin')
-        }
-      } else {
-        navigate('/login')
-      }
-    })
-  },[])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if(user){
+  //       console.log(user)
+  //       navigate('/subjects')
+  //       setEmail(user.email || '')
+  //       setIsAdmin(false)
+  //       setUserName(user.displayName || "")
+  //       if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
+  //         setIsAdmin(true)
+  //         console.log('admin')
+  //       }
+  //     } else {
+  //       navigate('/login')
+  //     }
+  //   })
+  // },[])
 
 
   return (
@@ -72,6 +73,7 @@ function App() {
       <Route path='/my-notes' element={<MyNotes />}>
       </Route>
       <Route path='/user-panel' element={<UserPanel />}/>
+      <Route path='/dropdown' element={<TestDropdown />}/>
     </Routes>
     </div>
   );

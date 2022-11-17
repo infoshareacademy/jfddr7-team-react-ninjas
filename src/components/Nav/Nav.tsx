@@ -4,15 +4,25 @@ import { UserContext } from "../UserProvider/userProvider";
 import { useContext} from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import logo from '../../img/logo.png'
+
 
 export const Nav = () => {
 
   const {setEmail, isAdmin} = useContext(UserContext)
   const {school} = useContext(UserContext)
-
+  const navigate = useNavigate()
   const user = auth.currentUser
 
-  const navigate = useNavigate()
+  // const userOptions = [
+  //   "one" , "two" , "three"
+  // ]
+
+  // const defaultUserOption = userOptions[0];
+  // <Dropdown options={userOptions} onChange={this?._onSelect} value={defaultUserOption} placeholder="Select an option" />
+  
 
   const handleLogOut = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -27,6 +37,10 @@ export const Nav = () => {
 
   const navigateToAdmin = () => {
     navigate('/admin')
+ }
+
+ const navigateToUserPanel = () => {
+  navigate("/user-panel")
  }
 
     let activeStyle = {
@@ -44,9 +58,8 @@ export const Nav = () => {
         <nav>
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
-                  {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
-                  <div className="user-name">{user?.displayName}</div>
-                  <div className="user-school">{school}</div>
+                  <img className="navigation-logo" src={logo} alt={'hs notes'}/>
+                  {/* <div className="user-school">{school}</div> */}
               </div>
 
               <div className='div-my-notes-signout-button'>
@@ -68,19 +81,17 @@ export const Nav = () => {
                 </NavLink>
               }
 
-              {!isAdmin &&
-               <NavLink
-                   to="/user-panel"
-                   style={({ isActive }) =>
-                   isActive ? activeStyle : undefined}>
+              {user?.photoURL && <img className="avatar" src={user?.photoURL} onClick={navigateToUserPanel}></img>}
 
-                   User Panel
-                </NavLink>
-              }
+              
 
             {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
 
-                <button className='button-logout' onClick={handleLogOut}>Wyloguj</button>
+                <div className="options-avatar-hover">
+                   <button className='button-logout' onClick={handleLogOut}>Wyloguj</button>
+                   {/* <div className="user-name">{user?.displayName}</div>
+                   <h2>Przejdz do panelu użytkownika</h2> */}
+                </div>
               </div>
             </div>
 
