@@ -47,7 +47,7 @@ export const MyNotes = () => {
 
 
     useEffect(()=> {
-        getDocs(collection( db, `${user?.email}`))
+        getDocs(collection( db, `${user?.email}notes`))
         .then((querySnapshot) => {
             let myNotes: MyNotesInterface[] = [];
             querySnapshot.docs.forEach((doc) => {
