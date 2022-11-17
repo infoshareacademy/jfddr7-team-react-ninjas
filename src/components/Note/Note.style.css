@@ -4,7 +4,7 @@
     max-width: 1050px;
     justify-content: center;
     margin: 30px auto;
-    gap:20px;
+    gap:30px;
     letter-spacing: 1.2px;
     padding: 20px;
     flex-wrap: wrap;
@@ -59,6 +59,7 @@ article {
     text-indent: 15px;
     letter-spacing: 1.5px;
     line-height: 25px;
+    padding: 20px 80px;
 }
 
 .button-section {
@@ -80,4 +81,60 @@ article {
 
 .edit-btn {
     background-color: rgb(58, 60, 175);
+}
+
+.edit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-section button {
+    width: 270px;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment-section h1 {
+    color: rgb(7, 143, 152);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    gap: 15px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    border: 0.2px solid rgb(175, 175, 175);
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.comment-info {
+    display: flex;
+    align-items: flex-start;
+}
+
+.comment-info span{
+    font-size: 60%;
+    color: gray;
+}
+
+.comment-section input {
+    width: 80%;
 }

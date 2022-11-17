@@ -128,7 +128,7 @@ export const Note = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`), {
             Date: new Date(). getTime(),
             Body: comment,
-            Author: auth.currentUser?.email,
+            Author: auth.currentUser?.displayName,
         })
     }
 
@@ -171,7 +171,7 @@ export const Note = () => {
                 <article>{note?.Note}</article>
                 <div className="button-section">
                     <button className="add-btn" onClick={addToMyNotes}>Dodaj do moich notatek</button>
-                    {user?.email === note?.Author && (
+                    {user?.displayName === note?.Author && (
                         <div className="edit-and-delete-btn">
                             <>
                                 <button className="del-btn" onClick={handleDelete}>Usuń notatkę</button>
@@ -179,24 +179,34 @@ export const Note = () => {
                             </>
                         </div>
                     )}
-                    {user?.email === 'admin@gmail.com' && (
+                    {user?.displayName === 'admin@gmail.com' && (
                         <button onClick={handleDelete}>Delte note</button>
                     )}
                     </div>
                     {showEdit && (
                                 <div className="edit-section">
-                                    <label htmlFor="title">Change title</label>
-                                    <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
-                                    <label htmlFor="title">Change body of the note</label>
-                                    <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
+                                    <div className="edit-title">
+                                        <label htmlFor="title">Zmień tytuł notatki</label>
+                                        <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                                    </div>
+                                    <div className="edit-body">
+                                        <label htmlFor="body">Zmień treść notatki</label>
+                                        <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
+                                    </div>
                                     <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
                                 </div>
                             )}
                 <div className="comment-section">
+                    <hr />
                     <h1>Sekcja komentarzy</h1>
                         <div className="comments">
                             {commentList.map((comment: string, number: Key) => (
-                                <div className="comment" key={number}>{comment}</div>
+                                <div className="comment">
+                                    <div className="comment-info">
+                                        <span>Autor: {note?.Author} w dniu {date}</span>
+                                    </div>
+                                    <div className="comment-body" key={number}>{comment}</div>
+                                </div>
                             ))}
                         </div>
                         <>
