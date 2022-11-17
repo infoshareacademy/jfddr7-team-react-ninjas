@@ -8,6 +8,11 @@ import { db, auth } from '../../firebase'
 import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
 import {Link, useNavigate} from 'react-router-dom';
 import like from '../../img/like.png' 
+import bin from '../../img/bin.png'
+import cards from '../../img/learn.png'
+import quiz from '../../img/quiz.png'
+import takingNotes from '../../img/takingNotes2.png'
+
 
 
 interface MyNotesInterface{
@@ -55,8 +60,10 @@ export const MyNotes = () => {
 
 
     return ( 
-        <div>
-            <Nav/>
+        <>
+        <Nav/>
+        <div className='wrapper'>
+           
             {/* <TabsSubjects/> */}
             <div className='div-my-notes-container'>
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
@@ -65,24 +72,27 @@ export const MyNotes = () => {
                     onClick={()=>navigate(`/subjects/${note.Subject}/${note.Topic}/${note}`)}
                     >
                         <div className='note-details'>
-                            <div className='topic'>Temat: {note.Note}</div>
-                            <div>Autor: {note.Author}</div>
+                            <div className='topic'>{note.Note}</div>
+                            <div className='author'>Autor: {note.Author}</div>
                             <div className='ranking'>{note.Ranking} <img className="like-img" src={like}></img></div>
                         </div>
                         <div className='note-buttons'>
-                            <button>Przeglądaj fiszki</button>
-                            <button>Zrób test</button>
+                            <button className='cards-button'><img src={cards}></img>Fiszki</button>
+                            <button className='quiz-button'><img src={quiz}></img>Quiz</button>
                             <button className='remove-note-button' 
                                     onClick={async () => (
                                        await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
                                        setNoteToBeDeleted(note?.Note)
                                     )}
-                            >Usuń z moich notatek</button>
+                            ><img className="bin-img" src={bin}></img></button>
                         </div>
                     </div>
                  ))}
             </div>
+
+            <div className='my-notes-picture' style={{backgroundImage:`url(${takingNotes})`}}></div>
         </div>
+        </>
 
      );
 }

@@ -15,7 +15,7 @@ export const NoteList = () => {
     const [newTitle, setNewTitle] = useState('');
     const [showAddInput, setShowAddInput] = useState(false);
     const array = window.location.href.split('/');
-    console.log(array);
+    // console.log(array);
     
     // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
     //obj = {Biologia: asudausbdubasdasd, Matematyka: asdasdasd}
@@ -45,7 +45,7 @@ export const NoteList = () => {
     useEffect(() => {
         const downloadData = async () => {
             let notes: string[] = [];
-            console.log(subject, object)
+            // console.log(subject, object)
             if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`));
             querySnapshot.docs.forEach((doc) => {

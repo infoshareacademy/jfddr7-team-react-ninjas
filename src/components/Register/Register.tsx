@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import './Register.style.css'
 import { UserContext } from "../UserProvider/userProvider";
-import image from '../../img/bookshelf.jpeg'
+import image from '../../img/takingNotes.png'
 import logo from '../../img/logo.png'
 
 export const Register = () => {

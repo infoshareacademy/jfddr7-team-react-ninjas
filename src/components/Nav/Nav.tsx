@@ -47,16 +47,16 @@ export const Nav = () => {
                   {user?.photoURL && <img className="avatar" src={user?.photoURL}></img>}
                   <div className="user-name">{user?.displayName}</div>
                   <div className="user-school">{school}</div>
-                <NavLink
+              </div>
+
+              <div className='div-my-notes-signout-button'>
+              <NavLink
                    to="/Subjects"
                    style={({ isActive }) =>
                    isActive ? activeStyle : undefined}>
                    
                    Przedmioty
                 </NavLink>
-              </div>
-
-              <div className='div-my-notes-signout-button'>
                 
               {!isAdmin &&
                <NavLink className="my-notes-style"
