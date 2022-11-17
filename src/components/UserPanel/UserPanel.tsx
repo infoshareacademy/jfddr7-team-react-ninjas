@@ -46,8 +46,6 @@ export const UserPanel = () => {
 
     const navigateToNick = async () => {
         setIsNickDisable(!isNickDisable)
-        console.log(isNickDisable)
-        console.log(user)
         if(!isNickDisable && user){
             await updateProfile(user, {displayName: userNick})     
             setUserName(userNick || "")

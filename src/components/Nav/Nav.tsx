@@ -1,27 +1,23 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import './Nav.style.css';
 import { UserContext } from "../UserProvider/userProvider";
-import { useContext, useEffect} from "react";
+import { useContext, useEffect, useState} from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
-// import Dropdown from 'react-dropdown';
-// import 'react-dropdown/style.css';
 import logo from '../../img/logo.png'
+import React from "react";
+
 
 
 export const Nav = () => {
 
+
   const {setEmail, isAdmin} = useContext(UserContext)
   const {school} = useContext(UserContext)
+  const [isHover, setIsHover] = useState(false)
   const navigate = useNavigate()
   const user = auth.currentUser
 
-  // const userOptions = [
-  //   "one" , "two" , "three"
-  // ]
-
-  // const defaultUserOption = userOptions[0];
-  // <Dropdown options={userOptions} onChange={this?._onSelect} value={defaultUserOption} placeholder="Select an option" />
   
 
   const handleLogOut = (e:React.MouseEvent<HTMLButtonElement>) => {
@@ -47,6 +43,26 @@ export const Nav = () => {
   navigate("/subjects")
  }
 
+
+ const userPanelBoxRef = React.useRef<HTMLDivElement>(null)
+ const userPanelIconRef = React.useRef<HTMLImageElement>(null)
+
+
+ React.useEffect(()=>{
+  if(userPanelBoxRef.current){
+    userPanelBoxRef.current.addEventListener('mouseleave',()=>{ 
+      setIsHover(false)  
+    })
+  }
+ },[])
+ 
+
+ const addAvatarHover = () => {
+  setIsHover(true)
+ }
+ 
+ const onSelect = ()=>{ }
+
     let activeStyle = {
         borderBottom: "1px solid white",   
         borderLeft: "0px solid white",    
@@ -62,7 +78,7 @@ export const Nav = () => {
         <nav>
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
-                  <img onClick={navigateToSubjects} className="navigation-logo" src={logo} alt={'hs notes'}/>
+                  <img onClick={navigateToSubjects}className="navigation-logo" src={logo} alt={'hs notes'}/>
                   {/* <div className="user-school">{school}</div> */}
               </div>
 
@@ -84,8 +100,15 @@ export const Nav = () => {
                    Moje notatki
                 </NavLink>
               }
-
-              {user?.photoURL && <img className="avatar" src={user?.photoURL} onClick={navigateToUserPanel}></img>}
+  
+              {user?.photoURL && <img ref={userPanelIconRef} className="avatar" src={user?.photoURL} onMouseOver={addAvatarHover}></img>}
+              
+              <div ref={userPanelBoxRef} className={isHover ? "isHover" : "isNotHover"}  >
+                 {user?.photoURL && <img className="user-avatar-dropdown" src={user?.photoURL}></img>}
+                 <div className="user-name-dropdown">{user?.displayName}</div>                       
+                 <div><button>Panel użytkownika</button></div>
+                 <button className='button-logout-dropdown' onClick={handleLogOut}>Wyloguj</button>
+              </div>
 
               
 
