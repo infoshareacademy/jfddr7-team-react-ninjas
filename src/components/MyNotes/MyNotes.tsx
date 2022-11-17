@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase'
 import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
-import {Link, useNavigate} from 'react-router-dom';
+import {Router, Routes, Link, useNavigate} from 'react-router-dom';
 import like from '../../img/like.png' 
 import bin from '../../img/bin.png'
 import cards from '../../img/learn.png'
@@ -17,12 +17,14 @@ import takingNotes from '../../img/takingNotes2.png'
 
 interface MyNotesInterface{
     Author: string;
+    Cards: string;
     ID: number;
     Note: string;
     Ranking: 0;
     Subject: string;
     Title: string;
     Topic: string;
+    Quiz: string;
 }
 
 export const MyNotes = () => {
@@ -70,25 +72,50 @@ export const MyNotes = () => {
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" 
                     onClick={(event)=> (
-                        navigate(`/subjects/${note.Subject}/${note.Topic}/${note.Note}`)
+                        navigate(`/subjects/${note.Subject}/${note.Topic}/${note.Title}`)
                     )
                 }
                     >
                         <div className='note-details'>
-                            <div className='topic'>{note.Note}</div>
+                            <div className='topic'>{note.Title}</div>
                             <div className='author'>Autor: {note.Author}</div>
                             <div className='ranking'>{note.Ranking} <img className="like-img" src={like}></img></div>
                         </div>
                         <div className='note-buttons'>
-                            <button className='cards-button'><img src={cards}></img>Fiszki</button>
-                            <button className='quiz-button'><img src={quiz}></img>Quiz</button>
-                            <button className='remove-note-button' 
+
+                            <button 
+                                    className='cards-button'
+                                    onClick={(event)=>(
+                                        event.stopPropagation(),
+                                        window.open(note.Cards, '_blank', 'noopener, noreferrer')
+                                    )}
+                            >
+                                <img src={cards}></img>
+                                Fiszki
+                            </button>
+
+                            <button 
+                                    className='quiz-button' 
+                                    onClick={(event)=> (
+                                        event.stopPropagation(), 
+                                        window.open(note.Quiz, '_blank', 'noopener, noreferrer')
+                                    )}
+                            >
+                                <img src={quiz}></img>
+                                Quiz
+                            </button>
+
+                            <button 
+                                    className='remove-note-button' 
                                     onClick={async (event) => (
                                         event.stopPropagation(),
-                                        await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
-                                        setNoteToBeDeleted(note?.Note)
+                                        await deleteDoc(doc(db, `${user?.email}notes`, `${note.ID}`)), 
+                                        setNoteToBeDeleted(note?.Author)
                                     )}
-                            ><img className="bin-img" src={bin}></img></button>
+                            >
+                            <img className="bin-img" src={bin}></img>
+                            </button>
+
                         </div>
                     </div>
                  ))}
@@ -97,6 +124,8 @@ export const MyNotes = () => {
             <div className='my-notes-picture' style={{backgroundImage:`url(${takingNotes})`}}></div>
         </div>
         </>
+
+      
 
      );
 }

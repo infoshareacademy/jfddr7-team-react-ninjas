@@ -66,7 +66,7 @@ export const SubjectNotes = () => {
 
             <div className="topic-list">
                 {topicList.map((item, number) => (
-                    <div className="one-topic" key={number}><Link className='subject-link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
+                    <div className="one-topic" key={number}><Link className='link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
                     ))}
             </div> 
 

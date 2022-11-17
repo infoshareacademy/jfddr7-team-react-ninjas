@@ -119,11 +119,17 @@ button:hover{
     align-items: center;
     gap: 5px;
     font-size: 14px;
+    align-self: flex-start;
 }
 
 button img{
     width: 25px;
     height: 25px;
+}
+
+link img{
+    width: 25px;
+    height: 25px; 
 }
 
 button img:hover{

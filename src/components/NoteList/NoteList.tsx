@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { Nav } from "../Nav/Nav"
+import './NoteList.styles.css'
 
 export const NoteList = () => {
 
@@ -71,28 +72,50 @@ export const NoteList = () => {
         setShowAddInput(false);
        }
 
+       const showInputHandler = () => {
+        if (showAddInput == false) {
+            setShowAddInput(true);
+        } else {
+            setShowAddInput(false)
+        }
+       }
+
     return (
         <>
             <Nav/>
-            <div>Notatki z tematu: {params.id}</div>
-
-            <div className="newTopicPanel">
-             <button onClick={() => setShowAddInput(true)}>Kliknij aby dodać nową notatkę</button>
+            <div className="note-list-container">
+                <div className="title">Notatki z tematu: {params.id}</div>
+                <div className="add-note">
+                <button onClick={showInputHandler}>Kliknij aby dodać nową notatkę</button>
+                </div>
+                <div className="add-note-panel">
+                    {showAddInput && (
+                        <>
+                        <hr />
+                            <h1>Dodaj nową notatkę</h1>
+                            <div className="add-title">
+                                <label htmlFor="title">Tytuł notatki</label>
+                                <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                            </div>
+                            <div className="add-body">
+                                <label htmlFor="body">Treść Notatki</label>
+                                <input type="textarea" className='text-area' onChange={(e) => setNewNote(e.target.value)}/>
+                            </div>
+                            <button onClick={addNoteToDb}>Dodaj notatkę</button>
+                        </>
+                    )}
+                </div>
+                <hr />
+                <div className="notes-section">
+                    {note.map((note, number) => (
+                        <Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}>
+                            <div className="note">
+                                <div className="note-title" key={number}> {note} </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
-            {showAddInput && (
-                <>
-                    <h1>Dodaj nową notatkę</h1>
-                    <label htmlFor="title">Tytuł notatki</label>
-                    <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
-                    <label htmlFor="title">Treść Notatki</label>
-                    <input type="textarea" className='text-area' onChange={(e) => setNewNote(e.target.value)}/>
-                    <button onClick={addNoteToDb}>Dodaj notatkę:</button>
-                </>
-             )}
-
-            {note.map((note, number) => (
-                <div key={number}><Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}> {note} </Link></div>
-            ))}
         </>
         
     )
