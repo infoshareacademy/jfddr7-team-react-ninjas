@@ -101,14 +101,18 @@ export const NoteList = () => {
                                 <label htmlFor="body">Treść Notatki</label>
                                 <input type="textarea" className='text-area' onChange={(e) => setNewNote(e.target.value)}/>
                             </div>
-                            <button onClick={addNoteToDb}>Dodaj notatkę:</button>
+                            <button onClick={addNoteToDb}>Dodaj notatkę</button>
                         </>
                     )}
                 </div>
                 <hr />
                 <div className="notes-section">
                     {note.map((note, number) => (
-                        <div key={number}><Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}> {note} </Link></div>
+                        <Link className='subject-link' to={`/subjects/${subject}/${topic}/${note}`}>
+                            <div className="note">
+                                <div className="note-title" key={number}> {note} </div>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>
