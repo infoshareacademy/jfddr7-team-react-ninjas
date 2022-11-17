@@ -1,7 +1,7 @@
 import { collection, doc, setDoc, getDocs, query, where, deleteDoc,  updateDoc, addDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
 
 
@@ -65,22 +65,21 @@ export const Note = () => {
                 setDocument(doc.id);
             })
         }
-
+        //Ta funkcja w useEffecie pobiera komentarze
         const downloadComments = async () => {
             let comments: string[] = [];
             if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`));
             querySnapshot.docs.forEach((doc) => {
                 comments.push(doc.data().Body);
-                console.log(doc.data());
-                
             })
             setCommentList(comments);
         }
         downloadNote();
         downloadComments();
-    }, [object])
-    console.log(commentList);
+
+    }, [object, document])
+
     
 
     
@@ -170,6 +169,11 @@ export const Note = () => {
             )}
             <div className="comment-section">
                 <h1>Sekcja komentarzy</h1>
+                    <div className="comments">
+                        {commentList.map((comment: string, number: Key) => (
+                            <div className="comment" key={number}>{comment}</div>
+                        ))}
+                    </div>
                     <>
                         <label htmlFor="comment">Treść komentarza: </label>
                         <input type="text" onChange={(e) => setComment(e.target.value)}/>
