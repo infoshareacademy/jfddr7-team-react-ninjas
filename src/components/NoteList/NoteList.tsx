@@ -14,6 +14,8 @@ export const NoteList = () => {
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
     const [newTitle, setNewTitle] = useState('');
+    const [newCardsLink, setNewCardsLink] = useState('');
+    const [newQuizLink, setNewQuizLink] = useState('');
     const [showAddInput, setShowAddInput] = useState(false);
     const array = window.location.href.split('/');
     // console.log(array);
@@ -60,10 +62,12 @@ export const NoteList = () => {
        //Funkcja, która dodaj notatkę do bazy danych
        const addNoteToDb = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`), {
+            Author: auth.currentUser?.displayName,
+            Cards: newCardsLink,
             ID: new Date(). getTime(),
             Note: newNote,
+            Quiz: newQuizLink,
             Title: newTitle,
-            Author: auth.currentUser?.displayName,
             Topic: topic,
             Subject: subject,
             Ranking: 0,
@@ -101,6 +105,17 @@ export const NoteList = () => {
                                 <label htmlFor="body">Treść Notatki</label>
                                 <input type="textarea" className='text-area' onChange={(e) => setNewNote(e.target.value)}/>
                             </div>
+
+                            <div className="add-cards-link">
+                                <label htmlFor="cards-link">Link do Fiszek</label>
+                                <input type="text" onChange={(e) => setNewCardsLink(e.target.value)}/>
+                            </div>
+
+                            <div className="add-quiz-link">
+                                <label htmlFor="quiz-link">Link do quizu</label>
+                                <input type="text" id={"quiz-link"} onChange={(e) => setNewQuizLink(e.target.value)}/>
+                            </div>
+
                             <button onClick={addNoteToDb}>Dodaj notatkę</button>
                         </>
                     )}
