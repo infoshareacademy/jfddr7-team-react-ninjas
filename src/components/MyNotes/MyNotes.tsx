@@ -87,6 +87,7 @@ export const MyNotes = () => {
                                     className='cards-button'
                                     onClick={(event)=>(
                                         event.stopPropagation(),
+                                        console.log(note.Cards),
                                         window.open(note.Cards, '_blank', 'noopener, noreferrer')
                                     )}
                             >
