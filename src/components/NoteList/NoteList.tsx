@@ -72,13 +72,21 @@ export const NoteList = () => {
         setShowAddInput(false);
        }
 
+       const showInputHandler = () => {
+        if (showAddInput == false) {
+            setShowAddInput(true);
+        } else {
+            setShowAddInput(false)
+        }
+       }
+
     return (
         <>
             <Nav/>
             <div className="note-list-container">
                 <div className="title">Notatki z tematu: {params.id}</div>
                 <div className="add-note">
-                <button onClick={() => setShowAddInput(true)}>Kliknij aby dodać nową notatkę</button>
+                <button onClick={showInputHandler}>Kliknij aby dodać nową notatkę</button>
                 </div>
                 <div className="add-note-panel">
                     {showAddInput && (
