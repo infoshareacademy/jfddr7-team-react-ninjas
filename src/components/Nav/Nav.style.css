@@ -16,7 +16,11 @@
 
 .navigation-logo {
     width: 210px;
-    height: 70px;
+    height: 68px;
+}
+
+.navigation-logo:hover {
+    border: 1px solid black;
 }
 
 .avatar-school-container{
@@ -84,15 +88,32 @@ a:hover{
 
 .isHover {
     position: absolute;
-    top: 2px;
+    top: 62px;
+    right: 8px;
     background-color: white;
-    border: 1px solid black;
-    width: 200px;
+    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);
+    width: 240px;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 5px;
+    padding-bottom: 5px;
+}
+
+.user-avatar-dropdown {
+    width: 70px;
+    height: 70px;
+}
+
+.user-avatar-dropdown:hover {
+    width: 72px;
+    height: 72px;
+}
+
+.user-name-dropdown {
+    font-size: 20px;
 }
 
 .isNotHover {

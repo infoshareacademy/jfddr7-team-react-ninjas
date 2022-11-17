@@ -61,7 +61,6 @@ export const Nav = () => {
   setIsHover(true)
  }
  
- const onSelect = ()=>{ }
 
     let activeStyle = {
         borderBottom: "1px solid white",   
@@ -78,7 +77,7 @@ export const Nav = () => {
         <nav>
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
-                  <img onClick={navigateToSubjects}className="navigation-logo" src={logo} alt={'hs notes'}/>
+                  <img onClick={navigateToSubjects} className="navigation-logo" src={logo} alt={'hs notes'}/>
                   {/* <div className="user-school">{school}</div> */}
               </div>
 
@@ -101,24 +100,19 @@ export const Nav = () => {
                 </NavLink>
               }
   
-              {user?.photoURL && <img ref={userPanelIconRef} className="avatar" src={user?.photoURL} onMouseOver={addAvatarHover}></img>}
+              {user?.photoURL && <img ref={userPanelIconRef} className="avatar" src={user?.photoURL} onMouseOver={addAvatarHover} onClick={navigateToUserPanel}></img>}
               
-              <div ref={userPanelBoxRef} className={isHover ? "isHover" : "isNotHover"}  >
-                 {user?.photoURL && <img className="user-avatar-dropdown" src={user?.photoURL}></img>}
-                 <div className="user-name-dropdown">{user?.displayName}</div>                       
-                 <div><button>Panel użytkownika</button></div>
+              <div ref={userPanelBoxRef} className={isHover ? "isHover" : "isNotHover"} >
+                 {user?.photoURL && <img className="user-avatar-dropdown" src={user?.photoURL} onClick={navigateToUserPanel}></img>}
+                 <div className="user-name-dropdown">{user?.displayName}</div> 
+                 <div className="user-email-dropdown">{user?.email}</div>                      
+                 <div><button onClick={navigateToUserPanel }>Panel użytkownika</button></div>
                  <button className='button-logout-dropdown' onClick={handleLogOut}>Wyloguj</button>
               </div>
 
               
 
             {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
-
-                <div className="options-avatar-hover">
-                   <button className='button-logout' onClick={handleLogOut}>Wyloguj</button>
-                   {/* <div className="user-name">{user?.displayName}</div>
-                   <h2>Przejdz do panelu użytkownika</h2> */}
-                </div>
               </div>
             </div>
 
