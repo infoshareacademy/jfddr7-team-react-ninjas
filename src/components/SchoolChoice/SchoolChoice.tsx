@@ -1,6 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 import image from '../../img/takingNotes.png'
 import './SchoolChoice.style.css'
 import logo from '../../img/logo.png'
@@ -15,6 +15,7 @@ export const CityChoice = () => {
     const {school, setSchool} = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation()
+    const user = auth.currentUser;
     
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
@@ -53,12 +54,12 @@ export const CityChoice = () => {
       }
 
       const selectSchool = (e: any) => {
-        console.log(e.target.value)
         setSchool(e.target.value)        
       }
 
-      const addSchool = () => {
+      const addSchool = async() => {
         console.log(location)
+        await setDoc(doc(db, `${user?.email}`, `${user?.uid}`), {school})
         if(location.state?.from !== "/avatar-choice"){
           navigate("/user-panel")
          }else {

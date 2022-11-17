@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import './Nav.style.css';
 import { UserContext } from "../UserProvider/userProvider";
-import { useContext} from "react";
+import { useContext, useEffect} from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
 import Dropdown from 'react-dropdown';

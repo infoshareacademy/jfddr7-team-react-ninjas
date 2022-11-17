@@ -16,7 +16,8 @@ import { NoteList } from './components/NoteList/NoteList';
 import { Note } from './components/Note/Note';
 import { UserPanel } from './components/UserPanel/UserPanel';
 import { TestDropdown } from './components/Nav/TestDropdown';
-
+import { getDoc, doc, getDocs, collection } from 'firebase/firestore';
+import { db }  from './firebase'
 
 
 
@@ -25,28 +26,30 @@ function App() {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const {email, setEmail, isAdmin, setIsAdmin, setUserName} = useContext(UserContext) 
+  const {email, setEmail, isAdmin, setIsAdmin, setUserName, school, setSchool} = useContext(UserContext) 
   const {subjects, setSubjects} = useContext(SubjectsListContext)
   
 
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user)=> {
+      if(user){
+        console.log(user)
+        navigate('/subjects')
+        setEmail(user.email || '')
+        setIsAdmin(false)
+        setUserName(user.displayName || "")
+        const chosenSchool = await getDoc(doc(db,`${user?.email}`, `${user?.uid}`) )
+        if(chosenSchool.exists()){setSchool(chosenSchool.data().school)}
+        if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
+          setIsAdmin(true)
+          console.log('admin')
+        }
+      } else {
+        navigate('/login')
+      }
+    })
+  },[])
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if(user){
-  //       console.log(user)
-  //       navigate('/subjects')
-  //       setEmail(user.email || '')
-  //       setIsAdmin(false)
-  //       setUserName(user.displayName || "")
-  //       if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
-  //         setIsAdmin(true)
-  //         console.log('admin')
-  //       }
-  //     } else {
-  //       navigate('/login')
-  //     }
-  //   })
-  // },[])
 
 
   return (
