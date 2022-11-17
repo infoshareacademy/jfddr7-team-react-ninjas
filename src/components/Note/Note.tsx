@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { Key, useEffect, useState } from "react";
 import { Nav } from "../Nav/Nav";
+import './Note.style.css'
 
 
 export const Note = () => {
@@ -25,6 +26,7 @@ export const Note = () => {
     const [ranking, setRanking] = useState<string | any>();
     const [comment ,setComment] = useState('');
     const [commentList, setCommentList] = useState<string | any>([]);
+    const [date, setDate] = useState<any>();
     const user = auth.currentUser;
     const navigate = useNavigate();
     
@@ -63,6 +65,12 @@ export const Note = () => {
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
                 setDocument(doc.id);
+                const timeStamp = note?.ID;
+                const data = new Date(timeStamp);
+                const dateFormat = data.getHours() + ":" + data.getMinutes() + ", "+ data.toDateString();
+                setDate(dateFormat)
+                console.log(dateFormat);
+                
             })
         }
         //Ta funkcja w useEffecie pobiera komentarze
@@ -120,66 +128,94 @@ export const Note = () => {
         addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`), {
             Date: new Date(). getTime(),
             Body: comment,
-            Author: auth.currentUser?.email,
+            Author: auth.currentUser?.displayName,
         })
+    }
+
+    const isEdited = () => {
+        if (showEdit === true) {
+            setShowEdit(false);
+        } else {
+            setShowEdit(true);
+        }
     }
     
     return (
         <>
             <Nav/>
-            <div>Notatka</div>
-            <div>Autor notatki: {note?.Author}</div>
-            <div>Tytuł notatki: {note?.Title}</div>
-            <div>Treśc notatki: {note?.Note}</div>
-            <div>
-                {ranking && (
+            <div className="note-container">
+                <div className="note-info">
+                    <div className="author-date">
+                        <div>Stworzona przez: {note?.Author}</div>
+                        <div>w dniu {date}</div>
+                    </div>
                     <div className="ranking">
-                    <button onClick={handleRanking}>+</button>
-                    {ranking}
+                        <div>
+                            {ranking && (
+                                <div className="plus">
+                                    <button onClick={handleRanking}>+</button>
+                                    <span>{ranking}</span>
+                                </div>
+                            )}
+                            {!ranking && (
+                                <div className="plus">
+                                    <button onClick={handleRanking}>+</button>
+                                    <span>{note?.Ranking}</span>
+                                </div>
+                            )}
+                    </div>
                 </div>
-                )}
-                {!ranking && (
-                    <div className="ranking">
-                    <button onClick={handleRanking}>+</button>
-                    {note?.Ranking}
-                </div>
-                )}
-                
             </div>
-            <button onClick={addToMyNotes}>Dodaj do moich notatek</button>
-            {user?.email === note?.Author && (
-                <div className="container">
-                    <>
-                        <button onClick={handleDelete}>Delte note</button>
-                        <button onClick={() => setShowEdit(true)}>Edit note</button>
-                    </>
-                    {showEdit && (
-                        <div className="edit-section">
-                            <label htmlFor="title">Change title</label>
-                            <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
-                            <label htmlFor="title">Change body of the note</label>
-                            <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
-                            <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
+            <hr />
+                <div className="title">{note?.Title}</div>
+                <article>{note?.Note}</article>
+                <div className="button-section">
+                    <button className="add-btn" onClick={addToMyNotes}>Dodaj do moich notatek</button>
+                    {user?.displayName === note?.Author && (
+                        <div className="edit-and-delete-btn">
+                            <>
+                                <button className="del-btn" onClick={handleDelete}>Usuń notatkę</button>
+                                <button className="edit-btn" onClick={isEdited}>Edytuj notatkę</button>
+                            </>
                         </div>
                     )}
-                </div>
-            )}
-            {user?.email === 'admin@gmail.com' && (
-                <button onClick={handleDelete}>Delte note</button>
-            )}
-            <div className="comment-section">
-                <h1>Sekcja komentarzy</h1>
-                    <div className="comments">
-                        {commentList.map((comment: string, number: Key) => (
-                            <div className="comment" key={number}>{comment}</div>
-                        ))}
+                    {user?.displayName === 'admin@gmail.com' && (
+                        <button onClick={handleDelete}>Delte note</button>
+                    )}
                     </div>
-                    <>
-                        <label htmlFor="comment">Treść komentarza: </label>
-                        <input type="text" onChange={(e) => setComment(e.target.value)}/>
-                        <button onClick={addCommentHandler}>Dodaj Komentarz</button>
-                    </>
+                    {showEdit && (
+                                <div className="edit-section">
+                                    <div className="edit-title">
+                                        <label htmlFor="title">Zmień tytuł notatki</label>
+                                        <input type="text" onChange={(e) => setNewTitle(e.target.value)}/>
+                                    </div>
+                                    <div className="edit-body">
+                                        <label htmlFor="body">Zmień treść notatki</label>
+                                        <input type="text" onChange={(e) => setNewBody(e.target.value)}/>
+                                    </div>
+                                    <button onClick={handleEdit}>Kliknij żeby notatka została edytowana</button>
+                                </div>
+                            )}
+                <div className="comment-section">
+                    <hr />
+                    <h1>Sekcja komentarzy</h1>
+                        <div className="comments">
+                            {commentList.map((comment: string, number: Key) => (
+                                <div className="comment">
+                                    <div className="comment-info">
+                                        <span>Autor: {note?.Author} w dniu {date}</span>
+                                    </div>
+                                    <div className="comment-body" key={number}>{comment}</div>
+                                </div>
+                            ))}
+                        </div>
+                        <>
+                            <label htmlFor="comment">Treść komentarza: </label>
+                            <input type="text" onChange={(e) => setComment(e.target.value)}/>
+                            <button onClick={addCommentHandler}>Dodaj Komentarz</button>
+                        </>
 
+                </div>
             </div>
         </>
     )
