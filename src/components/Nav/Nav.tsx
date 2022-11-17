@@ -4,8 +4,8 @@ import { UserContext } from "../UserProvider/userProvider";
 import { useContext, useEffect} from "react";
 import { auth } from '../../firebase';
 import { signOut } from "firebase/auth";
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+// import Dropdown from 'react-dropdown';
+// import 'react-dropdown/style.css';
 import logo from '../../img/logo.png'
 
 
