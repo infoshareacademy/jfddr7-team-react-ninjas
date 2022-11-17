@@ -43,6 +43,10 @@ export const Nav = () => {
   navigate("/user-panel")
  }
 
+ const navigateToSubjects = () => {
+  navigate("/subjects")
+ }
+
     let activeStyle = {
         borderBottom: "1px solid white",   
         borderLeft: "0px solid white",    
@@ -58,7 +62,7 @@ export const Nav = () => {
         <nav>
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
-                  <img className="navigation-logo" src={logo} alt={'hs notes'}/>
+                  <img onClick={navigateToSubjects} className="navigation-logo" src={logo} alt={'hs notes'}/>
                   {/* <div className="user-school">{school}</div> */}
               </div>
 
