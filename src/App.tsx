@@ -15,8 +15,10 @@ import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
 import { NoteList } from './components/NoteList/NoteList';
 import { Note } from './components/Note/Note';
 import { UserPanel } from './components/UserPanel/UserPanel';
+import { TestDropdown } from './components/Nav/TestDropdown';
 import { getDoc, doc, getDocs, collection } from 'firebase/firestore';
 import { db }  from './firebase'
+
 
 
 function App() {
@@ -49,6 +51,7 @@ function App() {
   },[])
 
 
+
   return (
     <div className="App">
     <Routes>
@@ -73,6 +76,7 @@ function App() {
       <Route path='/my-notes' element={<MyNotes />}>
       </Route>
       <Route path='/user-panel' element={<UserPanel />}/>
+      <Route path='/dropdown' element={<TestDropdown />}/>
     </Routes>
     </div>
   );
