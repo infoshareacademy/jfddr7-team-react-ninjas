@@ -14,9 +14,15 @@ export const Note = () => {
         Note: string,
         Title: string,
     }
+
+    interface CommentData {
+        Author: string,
+        Body: string,
+        Date: number,
+    }
     const params = useParams();
-    const subject = decodeURIComponent(window.location.href.split('/')[5]);
-    const topic  = decodeURIComponent(window.location.href.split('/')[6]);
+    let subject = decodeURIComponent(window.location.href.split('/')[5]);
+    let topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState<Obj | any>();
     const [object, setObject] = useState([]);
     const [document, setDocument] = useState('');
@@ -27,9 +33,19 @@ export const Note = () => {
     const [comment ,setComment] = useState('');
     const [commentList, setCommentList] = useState<string | any>([]);
     const [date, setDate] = useState<any>();
+    const [allComments, setAllComments] = useState<CommentData | any>();
     const user = auth.currentUser;
     const navigate = useNavigate();
-    
+    const array = window.location.href.split('/');
+    console.log(array);
+
+    if (array.length == 8) {
+        subject = decodeURIComponent(window.location.href.split('/')[5]);
+        topic  = decodeURIComponent(window.location.href.split('/')[6]);
+   } else if (array.length == 9) {
+       subject = decodeURIComponent(window.location.href.split('/')[6]);
+        topic  = decodeURIComponent(window.location.href.split('/')[7]);
+   }
     
     // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
     //obj = {Biologia: asudausbdubasdasd, Matematyka: asdasdasd}
@@ -62,6 +78,7 @@ export const Note = () => {
             const notesRef = collection(db, `/Subjects/${subject}/Topics/${object}/Notes`);
             const q = query(notesRef, where("Title", "==", params.id))
             const querySnapshot = await getDocs(q);
+            
             querySnapshot.docs.forEach((doc) => {
                 setNote(doc.data());
                 setDocument(doc.id);
@@ -76,12 +93,19 @@ export const Note = () => {
         //Ta funkcja w useEffecie pobiera komentarze
         const downloadComments = async () => {
             let comments: string[] = [];
+            let authors: string[] = [];
+            let dates: string[] = [];
             if(!object.length){return}
             const querySnapshot = await getDocs(collection(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}/Comments`));
             querySnapshot.docs.forEach((doc) => {
                 comments.push(doc.data().Body);
+                authors.push(doc.data().Author);
+                dates.push(doc.data().Date);
+                setAllComments(doc.data());
+                
             })
             setCommentList(comments);
+
         }
         downloadNote();
         downloadComments();

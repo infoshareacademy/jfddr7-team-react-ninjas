@@ -1,4 +1,4 @@
-import { addDoc, collection, collectionGroup, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
@@ -8,15 +8,23 @@ import './NoteList.styles.css'
 export const NoteList = () => {
 
     const params = useParams();
-    const subject = decodeURIComponent(window.location.href.split('/')[5]);
-    const topic  = decodeURIComponent(window.location.href.split('/')[6]);
+    let subject = decodeURIComponent(window.location.href.split('/')[5]);
+    let topic  = decodeURIComponent(window.location.href.split('/')[6]);
     const [note, setNote] = useState(['']);
     const [object, setObject] = useState([]);
     const [newNote, setNewNote] = useState('');
     const [newTitle, setNewTitle] = useState('');
     const [showAddInput, setShowAddInput] = useState(false);
     const array = window.location.href.split('/');
-    // console.log(array);
+    console.log(array);
+
+    if (array.length == 7) {
+         subject = decodeURIComponent(window.location.href.split('/')[5]);
+         topic  = decodeURIComponent(window.location.href.split('/')[6]);
+    } else if (array.length == 8) {
+        subject = decodeURIComponent(window.location.href.split('/')[6]);
+         topic  = decodeURIComponent(window.location.href.split('/')[7]);
+    }
     
     // funkcja, która pobierze obiekt, łączący przedmioty razem z nazwami poszczególnych dokumentów: 
     //obj = {Biologia: asudausbdubasdasd, Matematyka: asdasdasd}
@@ -73,7 +81,7 @@ export const NoteList = () => {
        }
 
        const showInputHandler = () => {
-        if (showAddInput == false) {
+        if (showAddInput === false) {
             setShowAddInput(true);
         } else {
             setShowAddInput(false)
