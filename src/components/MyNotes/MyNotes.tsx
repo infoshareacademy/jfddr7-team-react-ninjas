@@ -75,7 +75,7 @@ export const MyNotes = () => {
                 }
                     >
                         <div className='note-details'>
-                            <div className='topic'>{note.Note}</div>
+                            <div className='topic'>{note.Title}</div>
                             <div className='author'>Autor: {note.Author}</div>
                             <div className='ranking'>{note.Ranking} <img className="like-img" src={like}></img></div>
                         </div>
@@ -85,8 +85,8 @@ export const MyNotes = () => {
                             <button className='remove-note-button' 
                                     onClick={async (event) => (
                                         event.stopPropagation(),
-                                        await deleteDoc(doc(db, `${user?.email}`, `${note.Note}`)), 
-                                        setNoteToBeDeleted(note?.Note)
+                                        await deleteDoc(doc(db, `${user?.email}notes`, `${note.ID}`)), 
+                                        setNoteToBeDeleted(note?.Author)
                                     )}
                             ><img className="bin-img" src={bin}></img></button>
                         </div>
