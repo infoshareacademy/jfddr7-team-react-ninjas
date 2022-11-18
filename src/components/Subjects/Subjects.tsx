@@ -1,18 +1,16 @@
 import { db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import './Subjects.style.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Nav } from '../Nav/Nav'
 import { SubjectsListContext } from '../SubjectsListProvider/SubjectListProvider';
-import { UserContext } from '../UserProvider/userProvider';
+
 
 export const Subjects = () => {
 
    const {subjects, setSubjects} = useContext(SubjectsListContext);
    
-   
-
    const downloadData = async () => {
       getDocs(collection(db, 'Subjects')).then((querySnapshot) => {
          let subjects:string[] = [];
@@ -29,7 +27,6 @@ export const Subjects = () => {
    },[])
    
    
-
     return (
       <>
        <Nav/>
@@ -41,8 +38,6 @@ export const Subjects = () => {
              </Link>
           ))}
        </div>
-       
-      
        </>
     )
 }

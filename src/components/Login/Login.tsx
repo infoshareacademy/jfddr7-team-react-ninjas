@@ -101,7 +101,7 @@ export const Login = () => {
             <form action=''>    
                 <div className="email-area">
                     <label htmlFor="email">Email:</label>
-                    <input type="text" name="email" id="email" placeholder="JohnSnow34" onChange={handleEmail}/>
+                    <input type="text" name="email" id="email" placeholder="Tu wpisz swoj e-mail" onChange={handleEmail}/>
                 </div>
 
                 <div className="password-area">

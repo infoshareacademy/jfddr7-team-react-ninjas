@@ -38,7 +38,7 @@ export const Note = () => {
     const user = auth.currentUser;
     const navigate = useNavigate();
     const array = window.location.href.split('/');
-    console.log(array);
+    // console.log(array);
 
     if (array.length === 8) {
         subject = decodeURIComponent(window.location.href.split('/')[5]);
@@ -86,9 +86,7 @@ export const Note = () => {
                 const timeStamp = note?.ID;
                 const data = new Date(timeStamp);
                 const dateFormat = data.getHours() + ":" + data.getMinutes() + ", "+ data.toDateString();
-                setDate(dateFormat)
-                console.log(dateFormat);
-                
+                setDate(dateFormat);
             })
         }
         //Ta funkcja w useEffecie pobiera komentarze
@@ -106,16 +104,11 @@ export const Note = () => {
                 
             })
             setCommentList(comments);
-
         }
         downloadNote();
         downloadComments();
-
     }, [object, document, renderComment])
 
-    
-
-    
     //Funkcja, która dodaje notatkę do notatek użytkownika
     const addToMyNotes = async () => {
         await setDoc(doc(db, `${user?.email}notes`, `${note.ID}`), {note})
