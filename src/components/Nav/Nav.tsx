@@ -53,7 +53,7 @@ export const Nav = () => {
     userPanelBoxRef.current.addEventListener('mouseleave',()=>{ 
       setIsHover(false)  
     })
-  }
+  }  
  },[])
  
 
@@ -102,7 +102,7 @@ export const Nav = () => {
   
               {user?.photoURL && <img ref={userPanelIconRef} className="avatar" src={user?.photoURL} onMouseOver={addAvatarHover} onClick={navigateToUserPanel}></img>}
               
-              <div ref={userPanelBoxRef} className={isHover ? "isHover" : "isNotHover"} >
+              <div ref={userPanelBoxRef} className={isHover ? "isHover" : "isNotHover"}>
                  {user?.photoURL && <img className="user-avatar-dropdown" src={user?.photoURL} onClick={navigateToUserPanel}></img>}
                  <div className="user-name-dropdown">{user?.displayName}</div> 
                  <div className="user-email-dropdown">{user?.email}</div>                      
