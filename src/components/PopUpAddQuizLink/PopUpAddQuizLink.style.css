@@ -1,0 +1,63 @@
+.modal{
+    z-index: 1;
+    width: 500px;
+    height: 300px;
+    margin: 200px auto;
+    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);
+    background: white;
+    opacity: 100%;
+    border-radius: 8px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.popup-title{
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.popup-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-input{
+    width: 400px;
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.popup-buttons-container{
+    display: flex;
+    gap: 20px;
+}
+
+.close{
+    align-self: flex-end;
+    color: grey;
+}
+
+.close:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.quiz-button-no-cards{
+    background: white;
+    width: 90px;
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 13px;
+    width: 145px;
+}
