@@ -39,10 +39,10 @@ export const Register = () => {
 
     return ( 
 
-        <div className="register-container" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+        <div className="register-container">
 
               <div className="register">
-                <img className="logo" src={logo} alt={'hs notes'}/>
+                <img className="register-logo" src={logo} alt={'hs notes'}/>
                 <h3>Zarejestruj się i korzystaj z bazy notatek!</h3>
                 {error && <div className="error-message">{error}</div>}
                
