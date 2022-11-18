@@ -54,7 +54,7 @@ export const SubjectNotes = () => {
                     <div className="one-topic" key={number}><Link className='link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
                     ))}
             </div> 
-            <div className="div-for-gt-btn"><button onClick={navToSubject} className="btn-go-to-subject">Wróć do oprzedniej strony</button></div>
+            <div className="div-for-gt-btn"><button onClick={navToSubject} className="btn-go-to-subject">Wróć do poprzedniej strony</button></div>
 
         </div>
         <div className="empty-space" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}></div>
