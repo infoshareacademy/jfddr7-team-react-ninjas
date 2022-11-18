@@ -5,8 +5,10 @@
 
 .login-container{
     display: flex;
-    height: 100vh;
     width: 100vw;
+    background-image: url('../../../src/img/takingNotes.png'); 
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -155,3 +157,14 @@ width: 30px;
 .register-link:hover{
     color: black;
 }
+
+@media only screen and (max-width: 615px) {
+    .login-container {
+        background-image: unset;
+        background-color: white;
+    }
+
+   .login-btn, #email, #password, .facebook-login, .google-login {
+    width: 300px;
+   }
+  }

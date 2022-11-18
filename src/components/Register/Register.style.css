@@ -6,7 +6,10 @@
 .register-container{
     display: flex;
     width: 100vw;
-    height: 100vh;
+    background-image: url('../../../src/img/takingNotes.png'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+
 }
 
 .register {
@@ -21,7 +24,7 @@
     margin: 150px auto;
 }
 
-.logo{
+.register-logo{
     width: 200px;
     height: 100px;
     margin-top: 30px;
@@ -112,3 +115,19 @@ input {
     margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 615px) {
+    .register-container {
+        background-image: unset;
+        background-color: white;
+    }
+
+    #name-input, #register-input, #password-input, .register-btn {
+    width: 300px;
+   }
+
+   h3 {
+    padding: 10px;
+    margin-top: 0;
+   }
+  
+  }

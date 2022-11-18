@@ -83,7 +83,7 @@ export const Login = () => {
 
     return (
     
-    <div className="login-container" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+    <div className="login-container">
         
         <div className="login">
 
