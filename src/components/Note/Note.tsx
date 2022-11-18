@@ -86,9 +86,7 @@ export const Note = () => {
                 const timeStamp = note?.ID;
                 const data = new Date(timeStamp);
                 const dateFormat = data.getHours() + ":" + data.getMinutes() + ", "+ data.toDateString();
-                setDate(dateFormat)
-                console.log(dateFormat);
-                
+                setDate(dateFormat);
             })
         }
         //Ta funkcja w useEffecie pobiera komentarze
