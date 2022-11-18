@@ -78,7 +78,6 @@ export const Nav = () => {
           <div className='div-nav-container'>      
               <div className="avatar-school-container">
                   <img onClick={navigateToSubjects} className="navigation-logo" src={logo} alt={'hs notes'}/>
-                  {/* <div className="user-school">{school}</div> */}
               </div>
 
               <div className='div-my-notes-signout-button'>
