@@ -54,18 +54,37 @@ button:hover{
     background: white;
 }
 
-.remove-note-button{
-    background:white;
-    /* border:  1px solid rgb(208, 26, 57); */
-    width: 60px;
-    align-self: flex-end;
+
+.cards-button{
+    background: white;
+    width: 90px;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
+    align-self: flex-end;
 }
 
-.remove-note-button:hover{
+.cards-button:hover{
     background: white;
 }
 
+
+.cards-button-no-cards{
+    background: white;
+    width: 90px;
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.cards-button-no-cards:hover{
+    background: white;
+}
 
 .quiz-button{
     background: white;
@@ -82,18 +101,31 @@ button:hover{
     background: white;
 }
 
-.cards-button{
+.quiz-button-no-quiz{
     background: white;
     width: 90px;
-    color: black;
+    color: lightgray;
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
     align-self: flex-end;
+    margin-right: 60px;
 }
 
-.cards-button:hover{
+.quiz-button-no-quiz:hover{
+    background: white;
+}
+
+.remove-note-button{
+    background:white;
+    /* border:  1px solid rgb(208, 26, 57); */
+    width: 60px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.remove-note-button:hover{
     background: white;
 }
 

@@ -2,18 +2,17 @@ import { Nav } from '../Nav/Nav'
 import '../MyNotes/MyNotes.style.css'
 import { TabsSubjects } from '../TabsSubjects/TabsSubjects';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase'
 import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
-import {Router, Routes, Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import like from '../../img/like.png' 
 import bin from '../../img/bin.png'
-import cards from '../../img/learn.png'
-import quiz from '../../img/quiz.png'
 import takingNotes from '../../img/takingNotes2.png'
-
-
+import Popup from 'reactjs-popup';
+import {PopUpAddLink} from '../PopUpAddLink/PopUpAddLink';
+// import 'reactjs-popup/dist/index.css';
 
 interface MyNotesInterface{
     Author: string;
@@ -83,6 +82,8 @@ export const MyNotes = () => {
                         </div>
                         <div className='note-buttons'>
 
+                            {note.Cards && 
+                            
                             <button 
                                     className='cards-button'
                                     onClick={(event)=>(
@@ -91,20 +92,60 @@ export const MyNotes = () => {
                                         window.open(note.Cards, '_blank', 'noopener, noreferrer')
                                     )}
                             >
-                                <img src={cards}></img>
-                                Fiszki
-                            </button>
+                                <span className="material-symbols-outlined">
+                                school
+                                </span>
 
+                                Fiszki
+                            </button> }
+
+                            {!note.Cards &&
+                            <PopUpAddLink/>
+                            }
+                            
+                             {/* <button 
+                                    className='cards-button-no-cards'
+                                    onClick={(event)=>(
+                                        event.stopPropagation()
+                                        // showAddCardsPopup())
+                                    )}
+                            >
+                                <span className="material-symbols-outlined">
+                                school
+                                </span>
+                                Fiszki
+                            </button> } */}
+                            
+                            
+                            {note.Quiz &&
                             <button 
                                     className='quiz-button' 
                                     onClick={(event)=> (
-                                        event.stopPropagation(), 
+                                        event.stopPropagation(),
                                         window.open(note.Quiz, '_blank', 'noopener, noreferrer')
                                     )}
                             >
-                                <img src={quiz}></img>
+                                <span className="material-symbols-outlined">
+                                quiz
+                                </span>
                                 Quiz
                             </button>
+                            }
+
+                            {!note.Quiz && 
+                             <button 
+                                className='quiz-button-no-quiz' 
+                                onClick={(event)=> (
+                                event.stopPropagation() 
+                                )}
+                            >
+                                <span className="material-symbols-outlined">
+                                quiz
+                                </span>
+                                Quiz
+                            </button>
+                        
+                            }
 
                             <button 
                                     className='remove-note-button' 
@@ -125,8 +166,6 @@ export const MyNotes = () => {
             <div className='my-notes-picture' style={{backgroundImage:`url(${takingNotes})`}}></div>
         </div>
         </>
-
-      
 
      );
 }
