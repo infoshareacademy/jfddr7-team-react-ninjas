@@ -100,7 +100,10 @@ a:hover{
     flex-direction: column;
     gap: 5px;
     padding-bottom: 5px;
+    transition-duration: 500ms;
 }
+
+
 
 .user-avatar-dropdown {
     width: 70px;
@@ -119,4 +122,5 @@ a:hover{
 .isNotHover {
     position: absolute;
     top: -500px;
+    transition-duration: 500ms;
 }

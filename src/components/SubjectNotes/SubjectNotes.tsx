@@ -1,9 +1,10 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState, useCallback } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
+import image from '../../img/takingNotes.png'
 
 // //map zamiast forEach
 
@@ -11,6 +12,7 @@ export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
     const [newTopic, setNewTopic] = useState(null);
     const params = useParams();
+    const navigate = useNavigate()
     
     const [topicList, setTopicList] = useState([''])
 
@@ -50,11 +52,16 @@ export const SubjectNotes = () => {
         setTopicList(topics);
       })
    }, [])
+
+   const navToSubject = () => {
+    navigate("/subjects")
+   }
    
     
     return (
         <>
         <Nav/>
+    <div className="subject-notes-conatiner">
         <div className="subjectNotes">
             <h1>{params.id}</h1>
 
@@ -69,8 +76,10 @@ export const SubjectNotes = () => {
                     <div className="one-topic" key={number}><Link className='link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
                     ))}
             </div> 
-
+            <div className="div-for-gt-btn"><button onClick={navToSubject} className="btn-go-to-subject">Wróć do oprzedniej strony</button></div>
         </div>
+        <div className="empty-space" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}></div>
+    </div>
         </>
     )
 }
