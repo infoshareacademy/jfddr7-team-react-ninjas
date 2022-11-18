@@ -24,6 +24,10 @@
   color: white;
 }
 
+.h2-subject {
+  font-size: 30px;
+}
+
 .main-subject-link {
   min-width: 350px;
   max-width: 525px;

@@ -30,7 +30,7 @@ export const Subjects = () => {
     return (
       <>
        <Nav/>
-       <h2>Wybierz przedmiot z którego notatek chcesz skorzystać !</h2>
+       <h2 className='h2-subject'>Wybierz przedmiot z którego notatek chcesz skorzystać !</h2>
        <div className='div-subject'>
           {subjects.map((subject, number) => (
             <Link className='main-subject-link' to={`/subjects/${subject}`}>
