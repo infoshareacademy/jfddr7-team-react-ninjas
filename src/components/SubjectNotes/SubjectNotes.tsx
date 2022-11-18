@@ -1,49 +1,25 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
 
-// //map zamiast forEach
 
 export const SubjectNotes = () => {
-    const [subjectsObject, setSubjectObject] = useState([]);
     const [newTopic, setNewTopic] = useState(null);
     const params = useParams();
     const navigate = useNavigate();
     const [topicList, setTopicList] = useState([''])
     const [edit, setEdit] = useState(null);
 
-//     const paramsGetter: any = useCallback( async (n: any) => {
-//         const obj: object | any = {};
-//         const querySnapshot = await getDocs(collection(db, 'Subjects'));
-//         let subjects: any = [];
-//         let ids: any = [];
-//         querySnapshot.docs.forEach((doc) => {
-//             ids.push(doc.id);
-//             subjects.push(doc.data().Subject)
-//         })
-//         subjects.forEach((element:any, index: any) => {
-//             obj[element] = ids[index];
-//         });
-//         return obj[n];
-//    }, []);
-
    const addTopicToDb = () => {
     addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
         Topic: newTopic,
     })
-    console.log('navigate');
     setEdit(newTopic);
     navigate(`/subjects/${params.id}/`)
-    console.log('navigated');
    }
-
-    // useEffect(() => {
-    //     paramsGetter(params.id)
-    //     .then((data: any) => setSubjectObject(data))
-    // }, [params.id, paramsGetter])
 
 
    useEffect(() => {
@@ -62,19 +38,16 @@ export const SubjectNotes = () => {
         <Nav/>
         <div className="subjectNotes">
             <h1>{params.id}</h1>
-
             <div className="newTopicPanel">
              <label htmlFor="newTopic">Dodaj nowy temat</label>
              <input type="text" placeholder="Wpisz temat ..." onChange={(e: any) => setNewTopic(e.target.value)}/>
              <button onClick={addTopicToDb}>Dodaj nowy temat</button>
             </div>
-
             <div className="topic-list">
                 {topicList.map((item, number) => (
                     <div className="one-topic" key={number}><Link className='link' to={`/subjects/${params.id}/${item}`}> {item} </Link></div>
                     ))}
             </div> 
-
         </div>
         </>
     )
