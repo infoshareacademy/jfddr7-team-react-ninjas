@@ -94,7 +94,6 @@ button:hover{
     gap: 5px;
     cursor: pointer;
     align-self: flex-end;
-
 }
 
 .quiz-button:hover{
@@ -110,7 +109,6 @@ button:hover{
     gap: 5px;
     cursor: pointer;
     align-self: flex-end;
-    margin-right: 60px;
 }
 
 .quiz-button-no-quiz:hover{

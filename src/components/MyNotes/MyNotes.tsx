@@ -2,17 +2,16 @@ import { Nav } from '../Nav/Nav'
 import '../MyNotes/MyNotes.style.css'
 import { TabsSubjects } from '../TabsSubjects/TabsSubjects';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebase'
-import { SubjectNotes } from '../SubjectNotes/SubjectNotes';
 import {useNavigate} from 'react-router-dom';
 import like from '../../img/like.png' 
 import bin from '../../img/bin.png'
 import takingNotes from '../../img/takingNotes2.png'
-import Popup from 'reactjs-popup';
-import {PopUpAddLink} from '../PopUpAddLink/PopUpAddLink';
-// import 'reactjs-popup/dist/index.css';
+import {PopUpAddQuizLink} from '../PopUpAddQuizLink/PopUpAddQuizLink';
+import {PopUpAddCardsLink} from '../PopUpAddCardsLink/PopUpAddCardsLink';
+
 
 interface MyNotesInterface{
     Author: string;
@@ -100,22 +99,8 @@ export const MyNotes = () => {
                             </button> }
 
                             {!note.Cards &&
-                            <PopUpAddLink/>
+                            <PopUpAddCardsLink/>
                             }
-                            
-                             {/* <button 
-                                    className='cards-button-no-cards'
-                                    onClick={(event)=>(
-                                        event.stopPropagation()
-                                        // showAddCardsPopup())
-                                    )}
-                            >
-                                <span className="material-symbols-outlined">
-                                school
-                                </span>
-                                Fiszki
-                            </button> } */}
-                            
                             
                             {note.Quiz &&
                             <button 
@@ -133,18 +118,7 @@ export const MyNotes = () => {
                             }
 
                             {!note.Quiz && 
-                             <button 
-                                className='quiz-button-no-quiz' 
-                                onClick={(event)=> (
-                                event.stopPropagation() 
-                                )}
-                            >
-                                <span className="material-symbols-outlined">
-                                quiz
-                                </span>
-                                Quiz
-                            </button>
-                        
+                            <PopUpAddQuizLink/>
                             }
 
                             <button 
