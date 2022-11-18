@@ -34,6 +34,7 @@ export const Note = () => {
     const [commentList, setCommentList] = useState<string | any>([]);
     const [date, setDate] = useState<any>();
     const [allComments, setAllComments] = useState<CommentData | any>();
+    const [renderComment, setRenderComment] = useState('')
     const user = auth.currentUser;
     const navigate = useNavigate();
     const array = window.location.href.split('/');
@@ -110,7 +111,7 @@ export const Note = () => {
         downloadNote();
         downloadComments();
 
-    }, [object, document])
+    }, [object, document, renderComment])
 
     
 
@@ -154,6 +155,8 @@ export const Note = () => {
             Body: comment,
             Author: auth.currentUser?.displayName,
         })
+        setRenderComment(comment);
+        navigate(`/subjects/${subject}/${topic}/${params.id}`)
     }
 
     const isEdited = () => {

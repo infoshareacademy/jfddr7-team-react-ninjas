@@ -1,6 +1,6 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState, useCallback } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../../firebase";
 import './SubjectNotes.style.css'
 import { Nav } from '../Nav/Nav'
@@ -11,8 +11,9 @@ export const SubjectNotes = () => {
     const [subjectsObject, setSubjectObject] = useState([]);
     const [newTopic, setNewTopic] = useState(null);
     const params = useParams();
-    
+    const navigate = useNavigate();
     const [topicList, setTopicList] = useState([''])
+    const [edit, setEdit] = useState(null);
 
 //     const paramsGetter: any = useCallback( async (n: any) => {
 //         const obj: object | any = {};
@@ -33,6 +34,10 @@ export const SubjectNotes = () => {
     addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
         Topic: newTopic,
     })
+    console.log('navigate');
+    setEdit(newTopic);
+    navigate(`/subjects/${params.id}/`)
+    console.log('navigated');
    }
 
     // useEffect(() => {
@@ -49,7 +54,7 @@ export const SubjectNotes = () => {
          })
         setTopicList(topics);
       })
-   }, [])
+   }, [edit])
    
     
     return (
