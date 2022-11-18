@@ -54,33 +54,6 @@ button:hover{
     background: white;
 }
 
-.remove-note-button{
-    background:white;
-    /* border:  1px solid rgb(208, 26, 57); */
-    width: 60px;
-    align-self: flex-end;
-    cursor: pointer;
-}
-
-.remove-note-button:hover{
-    background: white;
-}
-
-
-.quiz-button{
-    background: white;
-    color: black;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    align-self: flex-end;
-
-}
-
-.quiz-button:hover{
-    background: white;
-}
 
 .cards-button{
     background: white;
@@ -94,6 +67,63 @@ button:hover{
 }
 
 .cards-button:hover{
+    background: white;
+}
+
+
+.cards-button-no-cards{
+    background: white;
+    width: 90px;
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.cards-button-no-cards:hover{
+    background: white;
+}
+
+.quiz-button{
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.quiz-button:hover{
+    background: white;
+}
+
+.quiz-button-no-quiz{
+    background: white;
+    width: 90px;
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.quiz-button-no-quiz:hover{
+    background: white;
+}
+
+.remove-note-button{
+    background:white;
+    /* border:  1px solid rgb(208, 26, 57); */
+    width: 60px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.remove-note-button:hover{
     background: white;
 }
 
