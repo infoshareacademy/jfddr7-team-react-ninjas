@@ -50,17 +50,17 @@ export const Register = () => {
 
                     <div className="name-area">
                         <label htmlFor="name-input">Nick:</label>
-                        <input className="name-input" id="name-input" placeholder="Johnny34" required onChange={(e) => setUserName(e.target.value)}/>
+                        <input className="name-input" id="name-input" placeholder="Tu wpisz swój nick" required onChange={(e) => setUserName(e.target.value)}/>
                     </div>
 
                     <div className="email-area">
                         <label htmlFor="register-input">Email:</label>
-                        <input className="register-input" id="register-input" placeholder="JohnSnow34" required onChange={(e) => setEmail(e.target.value)}/>
+                        <input className="register-input" id="register-input" placeholder="Tu wpisz swój e-mail" required onChange={(e) => setEmail(e.target.value)}/>
                     </div>
 
                     <div className="password-area">
                         <label htmlFor="password-input">Hasło:</label>
-                        <input className="password-input" id="password-input" type='password' required onChange={(e) => setPassword(e.target.value)}/>
+                        <input className="password-input" id="password-input" type='password' placeholder="Tu wpisz swoje hasło" required onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
                     <button className="register-btn">Zarejestruj</button>    
