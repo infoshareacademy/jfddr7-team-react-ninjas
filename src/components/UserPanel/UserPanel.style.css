@@ -1,41 +1,83 @@
 .user-panel-container {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+}
+
+.user-panel-main {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .profile-logo {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 
-.user-panel-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .user-panel{
     display: flex;
+    justify-content: start;
+    align-items: center;
     flex-direction: column;
-    border: 1px solid black;
-    max-width: 720px;
+    border-radius: 3px;
+    background-color: white;
+    width: 900px;
+    height: 500px;
+    gap: 10px;
+    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);
+}
+
+.user-panel-information {
+    font-size: 25px;
 }
 
 .user-panel-block {
-    font-size: 40px;
+    font-size: 25px;
+    font-weight: lighter;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
 }
+
+.user-panel-avatar-container {
+    margin-top: 30px;
+}
+
+.user-panel-email-container {
+    opacity: 0.5;
+    font-size: 25px;
+}
+
 
 .edit-button {
     width: 20px;
     height: 20px;
+    margin-left: 10px;
+}
+
+.disable {
+    padding-top: 0;
+    width: fit-content;
+    max-width: 420px;
+    border: none;
+    background-color: white;
+    font-size: 25px;
+    font-weight: lighter;
+    color: black;
+    padding-bottom: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+ }
+
+.enabled {
+    border: 1px solid black;
 }
 
 

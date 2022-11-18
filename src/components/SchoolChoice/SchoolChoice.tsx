@@ -1,11 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
-import { db } from "../../firebase";
-import image from '../../img/bookshelf.jpeg'
+import { db, auth } from "../../firebase";
+import image from '../../img/takingNotes.png'
 import './SchoolChoice.style.css'
 import logo from '../../img/logo.png'
 import { UserContext } from "../UserProvider/userProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export const CityChoice = () => {
@@ -14,6 +14,8 @@ export const CityChoice = () => {
     const [filterSchoolList, setFilterSchoolList] = useState([""]);
     const {school, setSchool} = useContext(UserContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    const user = auth.currentUser;
     
    const DownladCities = async () => {
       getDocs(collection(db, 'Cities')).then((querySnapshot) => {
@@ -52,12 +54,17 @@ export const CityChoice = () => {
       }
 
       const selectSchool = (e: any) => {
-        console.log(e.target.value)
         setSchool(e.target.value)        
       }
 
-      const addSchool = () => {
-        navigate('/subjects')
+      const addSchool = async() => {
+        console.log(location)
+        await setDoc(doc(db, `${user?.email}`, `${user?.uid}`), {school})
+        if(location.state?.from !== "/avatar-choice"){
+          navigate("/user-panel")
+         }else {
+          navigate("/subjects")
+         } 
       }
       
 
@@ -67,17 +74,15 @@ export const CityChoice = () => {
 
     <div className="school-choice-container">
       <img className="school-choice-logo" src={logo} alt={'hs notes'}/>
-      <h2 className="school-choice-h2">Wybierz swoje miasto oraz szkołę!</h2>
+      <h2 className="school-choice-h2">Wybierz swoje miasto oraz szkołę</h2>
 
       <div className="school-choice-div">
-      <span className="school-choice-span">Wybierz misto!</span>
 
       <select onChange={cityHandler}  name="selectCity" className="school-choice-select">
           {citiesList.map((city, number) => (
           <option key={number}> {city} </option>))}
       </select>        
       
-      <span className="school-choice-span">Wybierz szkołę!</span>
 
       <select onChange={selectSchool} name="select" className="school-choice-select">
           {filterSchoolList.map((school, number) => (

@@ -1,6 +1,6 @@
 import '../AvatarChoice/AvatarChoice.style.css'
 import { avatars } from '../Avatars/Avatars'
-import image from '../../img/bookshelf.jpeg'
+import image from '../../img/takingNotes.png'
 import { useContext, useState } from 'react'
 import { UserContext } from '../UserProvider/userProvider'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -17,25 +17,25 @@ export const AvatarChoice = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const addAvatar = () => {
+    const addAvatar = async () => {
         if(user){
-            updateProfile(user, {photoURL: avatar})
+           await updateProfile(user, {photoURL: avatar})
         }
-           if(location.state.from === "/register"){
-            navigate("/school-choice")
+            if(location.state.from === "/register"){
+            navigate("/school-choice", {state: {from: '/avatar-choice'}})
            }else {
             navigate("/user-panel")
-           }     
+           }    
         };
-
-        console.log(location)
 
     
 
     return ( 
         
         <div className='background' style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
-            <div className="avatars-container">
+            <div className="avatar-choice-container">
+                <div className='choose-avatar'>Wybierz awatar</div>
+                <div className='avatar-pictures-container'>
                 {avatars.map((avatar) => (
                     <img 
                         key={avatar.id}
@@ -47,6 +47,7 @@ export const AvatarChoice = () => {
                         className={avatar.id === current ? 'active' : ''} 
                     />
                 ))}
+                </div>
                 
                 <button className='Next-button' onClick={addAvatar}>Dalej</button>
             </div>

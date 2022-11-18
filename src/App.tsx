@@ -15,7 +15,8 @@ import { AvatarChoice } from './components/AvatarChoice/AvatarChoice';
 import { NoteList } from './components/NoteList/NoteList';
 import { Note } from './components/Note/Note';
 import { UserPanel } from './components/UserPanel/UserPanel';
-
+import { getDoc, doc, getDocs, collection } from 'firebase/firestore';
+import { db }  from './firebase'
 
 
 
@@ -24,26 +25,30 @@ function App() {
   const auth = getAuth();
   const navigate = useNavigate();
 
-  const {email, setEmail, isAdmin, setIsAdmin} = useContext(UserContext) 
+  const {email, setEmail, isAdmin, setIsAdmin, setUserName, school, setSchool} = useContext(UserContext) 
   const {subjects, setSubjects} = useContext(SubjectsListContext)
-
+  
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user)=> {
       if(user){
         console.log(user)
         navigate('/subjects')
         setEmail(user.email || '')
         setIsAdmin(false)
-
+        setUserName(user.displayName || "")
+        const chosenSchool = await getDoc(doc(db,`${user?.email}`, `${user?.uid}`) )
+        if(chosenSchool.exists()){setSchool(chosenSchool.data().school)}
+        if(user.uid == 'toG7crgaRaPdSmMzT57BMabo3hJ3'){
           setIsAdmin(true)
           console.log('admin')
         }
-      }else{
+      } else {
         navigate('/login')
       }
     })
   },[])
+
 
 
   return (

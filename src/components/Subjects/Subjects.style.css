@@ -3,17 +3,19 @@
   font-size: 26px;
 }
 
+
 .div-subject {
   display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
   width: 100%;
   height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-.div-subjects {
-  width: 100%;
-  /* height: 70px; */
-  background-color: rgb(7, 143, 152);
-}
+
 
 .h1-subjects {
   margin-left: 10px;
@@ -21,19 +23,22 @@
   color: white;
 }
 
-.subject {
-  width: 20%;
+.main-subject-link {
+  min-width: 350px;
+  max-width: 525px;
   height: 20vh;
   margin: 2.5%;
   justify-content: center;
-  border-radius: 2.5%;
+  align-items: center;
+  border-radius: 0%;
   border: 2px solid rgb(7, 143, 152);
   padding-top: 8vh;  
   color: black;
   box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);
 }
 
-.subject:hover {
+.main-subject-link:hover {
   background-color: rgb(7, 143, 152);
+  border: 6px solid rgb(64, 192, 201);
 }
 

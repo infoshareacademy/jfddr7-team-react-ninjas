@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     background: white;
-    border-radius: 10px;
+    border-radius: 3px;
     margin: 150px auto;
 }
 
@@ -108,4 +108,7 @@ input {
     color: black;
 }
 
+.user-panel-paragraf {
+    margin-bottom: 5px;
+}
 

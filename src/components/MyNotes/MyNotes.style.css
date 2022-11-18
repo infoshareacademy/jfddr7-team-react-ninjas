@@ -1,21 +1,137 @@
+.wrapper{
+    display: flex;
+}
+
 .div-my-notes-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 1100px;
+    height: 100vh;
+}
+
+.my-notes-picture{
+    width: 600px;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
 }
 
 .div-notes-card{
-
-    width: 1100px;
-    height: 200px;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 8px 8px 21px -4px rgba(66, 68, 90, 0.39);  
+    box-sizing: border-box;
     display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 900px;
+    height: 100px;
+    border-bottom: 1px solid lightgray;
     align-items: center;
+    color: black;
+    cursor: pointer;
+    margin-top: 30px;
+    text-align: left;
+    font-family: Verdana;
+
 }
 
-img{
-    width: 20%;
-    height: 80%;
+.note-details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.note-buttons{
+    display: flex;
+    align-self: flex-end;
+    gap: 10px;
+    height: 70px;
+    border-radius: 0px;
+}
+
+button:hover{
+    background: white;
+}
+
+.remove-note-button{
+    background:white;
+    /* border:  1px solid rgb(208, 26, 57); */
+    width: 60px;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+.remove-note-button:hover{
+    background: white;
+}
+
+
+.quiz-button{
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+
+}
+
+.quiz-button:hover{
+    background: white;
+}
+
+.cards-button{
+    background: white;
+    width: 90px;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.cards-button:hover{
+    background: white;
+}
+
+.topic{
+    font-size: 18px;
+}
+
+.author{
+    font-size: 14px;
+}
+
+.link{
+    color: black;
+}
+
+.like-img{
+    width: 20px;
+    height: 20px;
+}
+
+.ranking{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    align-self: flex-start;
+}
+
+button img{
+    width: 25px;
+    height: 25px;
+}
+
+link img{
+    width: 25px;
+    height: 25px; 
+}
+
+button img:hover{
+    border: none;
 }
