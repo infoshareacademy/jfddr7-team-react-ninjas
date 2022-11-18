@@ -46,7 +46,7 @@
     background-color: rgb(7, 143, 152);
     width: 15%;
     height: 54.66px;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
 }
 
@@ -71,4 +71,41 @@
 .btn-go-to-subject {
     margin-top: 30px;
     width: 50%;
+}
+
+@media only screen and (max-width: 800px) {
+    .subjectNotes {
+       width: 100%;
+  }
+  .empty-space {
+    width: 0%;
+}
+}
+
+@media only screen and (max-width: 555px) {
+    .subjectNotes {
+       width: 100%;
+  }
+  .empty-space {
+    width: 0%;
+}
+.newTopicPanel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.newTopicPanel button {
+    margin-top: 5px;
+    border: 1px solid rgb(7, 143, 152);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: rgb(7, 143, 152);
+    width: 25%;
+    height: 54.66px;
+    font-size: 16px;
+    color: white;
+}
 }
