@@ -1,6 +1,6 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
 import { Nav } from "../Nav/Nav"
 import './NoteList.styles.css'
@@ -17,8 +17,10 @@ export const NoteList = () => {
     const [newCardsLink, setNewCardsLink] = useState('');
     const [newQuizLink, setNewQuizLink] = useState('');
     const [showAddInput, setShowAddInput] = useState(false);
+    const [noteRender, setNoteRender] = useState('');
     const array = window.location.href.split('/');
-    console.log(array);
+    const navigate = useNavigate();
+    // console.log(array);
 
     if (array.length === 7) {
          subject = decodeURIComponent(window.location.href.split('/')[5]);
@@ -65,7 +67,7 @@ export const NoteList = () => {
              setNote(notes);
         }
         downloadData();
-       }, [object])
+       }, [object, noteRender])
 
        //Funkcja, która dodaj notatkę do bazy danych
        const addNoteToDb = () => {
@@ -82,6 +84,8 @@ export const NoteList = () => {
         })
         console.log('Notatka została dodana do bazy danych...');
         setShowAddInput(false);
+        setNoteRender('a');
+        navigate(`/subjects/${subject}/${topic}`)
        }
 
        const showInputHandler = () => {
