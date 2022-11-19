@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { useEffect, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { db } from "../../firebase";
@@ -14,13 +14,23 @@ export const SubjectNotes = () => {
     const [topicList, setTopicList] = useState([''])
     const [edit, setEdit] = useState(null);
 
-   const addTopicToDb = () => {
-    addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
+//    const addTopicToDb = () => {
+//     addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
+//         Topic: newTopic,
+//     })
+//     setEdit(newTopic);
+//     navigate(`/subjects/${params.id}/`)
+//    }
+
+const noteRef = doc(db, `Subjects/${params.id}/Topics`, `${newTopic}`)
+
+const addTopicToDb = () => {
+    setDoc(noteRef, {
         Topic: newTopic,
     })
-    setEdit(newTopic);
-    navigate(`/subjects/${params.id}/`)
-   }
+    setEdit(newTopic)
+    navigate(`/subjects/${params.id}`)
+}
 
 
    useEffect(() => {

@@ -18,7 +18,7 @@ interface MyNotesInterface{
     Cards: string;
     ID: number;
     Note: string;
-    Ranking: 0;
+    Ranking: number;
     Subject: string;
     Title: string;
     Topic: string;
@@ -99,7 +99,7 @@ export const MyNotes = () => {
                             </button> }
 
                             {!note.Cards &&
-                            <PopUpAddCardsLink/>
+                            <PopUpAddCardsLink note={note}/>
                             }
                             
                             {note.Quiz &&
@@ -118,7 +118,7 @@ export const MyNotes = () => {
                             }
 
                             {!note.Quiz && 
-                            <PopUpAddQuizLink/>
+                            <PopUpAddQuizLink note={note}/>
                             }
 
                             <button 
