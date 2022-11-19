@@ -34,16 +34,17 @@ export const MyNotes = () => {
     const [myNotes, setMyNotes] = useState<MyNotesInterface[]>([])
     const [noteToBeDeleted, setNoteToBeDeleted] = useState('')
     const navigate = useNavigate();
+    const [isLinkUpdated, setIsLinkUpdated] = useState(false)
 
-    useEffect(() => {
-        getDownloadURL(notatkiRef)
-        .then((url)=> {
-            setUrl(url)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }, [user])
+    // useEffect(() => {
+    //     getDownloadURL(notatkiRef)
+    //     .then((url)=> {
+    //         setUrl(url)
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
+    // }, [user])
 
 
     useEffect(()=> {
@@ -56,7 +57,7 @@ export const MyNotes = () => {
             })
             setMyNotes(myNotes)
         })
-    },[noteToBeDeleted])
+    },[noteToBeDeleted, isLinkUpdated])
 
 
     return ( 
@@ -99,7 +100,7 @@ export const MyNotes = () => {
                             </button> }
 
                             {!note.Cards &&
-                            <PopUpAddCardsLink note={note}/>
+                            <PopUpAddCardsLink note={note} setIsLinkUpdated={setIsLinkUpdated}/> 
                             }
                             
                             {note.Quiz &&
@@ -118,7 +119,7 @@ export const MyNotes = () => {
                             }
 
                             {!note.Quiz && 
-                            <PopUpAddQuizLink note={note}/>
+                            <PopUpAddQuizLink note={note} setIsLinkUpdated={setIsLinkUpdated}/>
                             }
 
                             <button 
@@ -126,7 +127,7 @@ export const MyNotes = () => {
                                     onClick={async (event) => (
                                         event.stopPropagation(),
                                         await deleteDoc(doc(db, `${user?.email}notes`, `${note.ID}`)), 
-                                        setNoteToBeDeleted(note?.Author)
+                                        setNoteToBeDeleted(note.Note)
                                     )}
                             >
                             <img className="bin-img" src={bin}></img>

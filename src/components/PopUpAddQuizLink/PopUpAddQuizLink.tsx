@@ -1,6 +1,6 @@
 import Popup from 'reactjs-popup';
 import './PopUpAddQuizLink.style.css';
-import { useState, FC } from 'react';
+import { useState, FC, Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {doc, Firestore, setDoc, collection, updateDoc} from 'firebase/firestore';
 import { db } from '../../firebase';
@@ -17,29 +17,28 @@ interface PopUpProps{
         Topic: string;
         Quiz: string;
     };
+    setIsLinkUpdated:  Dispatch<SetStateAction<boolean>>
 }
 
 
-export const PopUpAddQuizLink: FC<PopUpProps> = ({note}) => {
+export const PopUpAddQuizLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
 
     const navigate = useNavigate()
     const overlayStyle = {backdropFilter: "blur(5px)"}
     const [newQuizLink, setNewQuizLink] = useState('')
+    const [isLinkAdded, setIsLinkAdded] =  useState(false)
+    
 
-    const Quiz = {
-        Quiz: `${newQuizLink}`
-    }
+    const Quiz = `${newQuizLink}`
+
 
 
     const noteRef = doc (db, `Subjects`, note.Subject, 'Topics', note.Topic, 'Notes', `${note.ID}`)
     
     const handleSubmit = async () => {
-        console.log(newQuizLink)
-        console.log(note)
         await updateDoc(noteRef, {Quiz})
-        console.log(note)
-        console.log('link dodany')
-        navigate('/my-notes')
+        setIsLinkAdded(true)
+        setIsLinkUpdated(current => !current)
     }
 
 
@@ -55,13 +54,12 @@ return(
         } 
         {...{overlayStyle}}
         modal
-        closeOnEscape
         closeOnDocumentClick
         arrow={false}
-        >
+        >  
                 <div className='modal'>
-                    <span className="material-symbols-outlined close">close</span>
-                    <div className='popup-title'>Jeszcze nic tu nie ma. Mozesz dodać nowy link.</div>
+                    {!isLinkAdded && <div className='popup-title'>Jeszcze nic tu nie ma. Mozesz dodać nowy link.</div>}
+                    {isLinkAdded && <div className='popup-title-ready'>Gotowe!</div> }
                     <form className='popup-form' onSubmit={handleSubmit}>
                             <input className='popup-input' required onChange={(e)=>setNewQuizLink(e.target.value)}></input>
                             <button type="submit" className="popup-add-link-button">Dodaj link</button>

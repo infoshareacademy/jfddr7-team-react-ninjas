@@ -14,13 +14,6 @@ export const SubjectNotes = () => {
     const [topicList, setTopicList] = useState([''])
     const [edit, setEdit] = useState(null);
 
-//    const addTopicToDb = () => {
-//     addDoc(collection(db, `/Subjects/${params.id}/Topics`), {
-//         Topic: newTopic,
-//     })
-//     setEdit(newTopic);
-//     navigate(`/subjects/${params.id}/`)
-//    }
 
 const noteRef = doc(db, `Subjects/${params.id}/Topics`, `${newTopic}`)
 

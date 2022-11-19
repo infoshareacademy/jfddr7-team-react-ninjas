@@ -20,6 +20,12 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.popup-title-ready{
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
 .popup-form{
     display: flex;
     flex-direction: column;
