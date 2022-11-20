@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { auth, db } from "../../firebase";
@@ -20,7 +20,6 @@ export const NoteList = () => {
     const [noteRender, setNoteRender] = useState('');
     const array = window.location.href.split('/');
     const navigate = useNavigate();
-    // console.log(array);
 
     if (array.length === 7) {
          subject = decodeURIComponent(window.location.href.split('/')[5]);
@@ -71,10 +70,11 @@ export const NoteList = () => {
 
        //Funkcja, która dodaj notatkę do bazy danych
        const addNoteToDb = () => {
-        addDoc(collection(db, `/Subjects/${subject}/Topics/${object}/Notes`), {
+        const Timestamp = new Date(). getTime()
+        setDoc(doc (db, `/Subjects/${subject}/Topics/${object}/Notes`, `${Timestamp}`), {
             Author: auth.currentUser?.displayName,
             Cards: newCardsLink,
-            ID: new Date(). getTime(),
+            ID: Timestamp,
             Note: newNote,
             Quiz: newQuizLink,
             Title: newTitle,
