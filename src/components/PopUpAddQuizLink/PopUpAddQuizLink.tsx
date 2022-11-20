@@ -1,9 +1,10 @@
 import Popup from 'reactjs-popup';
 import './PopUpAddQuizLink.style.css';
-import { useState, FC, Dispatch, SetStateAction } from 'react';
+import { useState, FC, Dispatch, SetStateAction, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {doc, Firestore, setDoc, collection, updateDoc} from 'firebase/firestore';
 import { db } from '../../firebase';
+import { UserContext } from '../UserProvider/userProvider';
 
 interface PopUpProps{
     note: {
@@ -27,16 +28,18 @@ export const PopUpAddQuizLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
     const overlayStyle = {backdropFilter: "blur(5px)"}
     const [newQuizLink, setNewQuizLink] = useState('')
     const [isLinkAdded, setIsLinkAdded] =  useState(false)
+    const {email} = useContext(UserContext)
     
 
     const Quiz = `${newQuizLink}`
 
 
-
-    const noteRef = doc (db, `Subjects`, note.Subject, 'Topics', note.Topic, 'Notes', `${note.ID}`)
+    const noteRef = doc (db, `Subjects`, note.Subject, 'Topics', note.Topic, 'Notes', `${note.ID}`,)
+    const userNoteRef = doc (db, `${email}notes`, `${note.ID}`)
     
     const handleSubmit = async () => {
         await updateDoc(noteRef, {Quiz})
+        await updateDoc(userNoteRef, {Quiz})
         setIsLinkAdded(true)
         setIsLinkUpdated(current => !current)
     }

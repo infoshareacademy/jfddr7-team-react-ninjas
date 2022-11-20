@@ -1,9 +1,10 @@
 import Popup from 'reactjs-popup';
 import './PopUpAddCardsLink.style.css';
-import { useState, FC, Dispatch, SetStateAction } from 'react';
+import { useState, FC, Dispatch, SetStateAction, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase'
+import { UserContext } from '../UserProvider/userProvider'
 
 const overlayStyle = {backdropFilter: "blur(5px)"}
 
@@ -28,18 +29,21 @@ export const PopUpAddCardsLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
     const overlayStyle = {backdropFilter: "blur(5px)"}
     const [newCardsLink, setNewCardsLink] = useState('')
     const [isLinkAdded, setIsLinkAdded] =  useState(false)
+    const {email} = useContext(UserContext)
+
+
+    const Cards = `${newCardsLink}`
 
 
     const noteRef = doc (db, `Subjects`, note.Subject, 'Topics', note.Topic, 'Notes', `${note.ID}`)
-    const Cards = newCardsLink
+    const userNoteRef = doc (db, `${email}notes`, `${note.ID}`)
 
 
     const handleOnClick = async () => {
-        try{
-            await updateDoc(noteRef, {Cards})
-            setIsLinkAdded(true)
-            setIsLinkUpdated(current => !current)
-        } catch (error) {console.log(error)}
+        await updateDoc(noteRef, {Cards})
+        await updateDoc(userNoteRef, {Cards})
+        setIsLinkAdded(true)
+        setIsLinkUpdated(current => !current)
     }
 
     return(
@@ -71,4 +75,5 @@ export const PopUpAddCardsLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
     
     )
 }
+
   

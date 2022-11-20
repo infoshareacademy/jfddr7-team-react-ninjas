@@ -109,9 +109,35 @@ export const Note = () => {
         downloadComments();
     }, [object, document, renderComment])
 
+
+    // const addNoteToDb = () => {
+    //     const Timestamp = new Date(). getTime()
+    //     setDoc(doc (db, `/Subjects/${subject}/Topics/${object}/Notes`, `${Timestamp}`), {
+    //         Author: auth.currentUser?.displayName,
+    //         Cards: newCardsLink,
+    //         ID: Timestamp,
+    //         Note: newNote,
+    //         Quiz: newQuizLink,
+    //         Title: newTitle,
+    //         Topic: topic,
+    //         Subject: subject,
+    //         Ranking: 0,
+    //     })
+
     //Funkcja, która dodaje notatkę do notatek użytkownika
     const addToMyNotes = async () => {
-        await setDoc(doc(db, `${user?.email}notes`, `${note.ID}`), {note})
+        await setDoc(doc(db, `${user?.email}notes`, `${note.ID}`), {
+            Author: note.Author,
+            Cards: note.Cards || '',
+            ID: note.ID, 
+            Note: note.Note, 
+            Quiz: note.Quiz || '', 
+            Title: note.Title, 
+            Topic: note.Topic, 
+            Subject: note.Subject, 
+            Ranking: note.Ranking
+
+        })
         navigate('/my-notes')
     }
     
