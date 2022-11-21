@@ -55,6 +55,8 @@ export const PopUpAddCardsLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
                     </span>Fiszki</button>
                 } 
                 {...{overlayStyle}}
+                // open={false}
+
                 modal
                 closeOnEscape
                 closeOnDocumentClick
@@ -62,7 +64,7 @@ export const PopUpAddCardsLink: FC<PopUpProps> = ({note, setIsLinkUpdated}) => {
                 >
                         <div className='modal'>
                             {!isLinkAdded && <div className='popup-title'>Jeszcze nic tu nie ma. Mozesz dodać nowy link.</div>}
-                            {isLinkAdded && <div className='popup-title-ready'>Gotowe!</div>}
+                            {/* {isLinkAdded && <div className='popup-title-ready'>Gotowe!</div>} */}
         
                             <form className='popup-form'>
                                     <input className='popup-input' required onChange={(e)=> setNewCardsLink(e.target.value)}></input>

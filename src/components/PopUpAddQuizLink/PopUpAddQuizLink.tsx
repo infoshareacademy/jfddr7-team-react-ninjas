@@ -62,7 +62,7 @@ return(
         >  
                 <div className='modal'>
                     {!isLinkAdded && <div className='popup-title'>Jeszcze nic tu nie ma. Mozesz dodać nowy link.</div>}
-                    {isLinkAdded && <div className='popup-title-ready'>Gotowe!</div> }
+                    {/* {isLinkAdded && <div className='popup-title-ready'>Gotowe!</div> } */}
                     <form className='popup-form' onSubmit={handleSubmit}>
                             <input className='popup-input' required onChange={(e)=>setNewQuizLink(e.target.value)}></input>
                             <button type="submit" className="popup-add-link-button">Dodaj link</button>
