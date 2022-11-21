@@ -8,7 +8,6 @@ import logo from '../../img/logo.png'
 import React from "react";
 
 
-
 export const Nav = () => {
 
 
@@ -22,7 +21,7 @@ export const Nav = () => {
 
   const handleLogOut = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    alert('Czy na pewno chcesz się wylogować?')
+    window.confirm('Czy na pewno chcesz się wylogować?')
     signOut(auth)
     .then(()=> {
       setEmail('')
@@ -114,7 +113,6 @@ export const Nav = () => {
             {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
               </div>
             </div>
-
               
         </nav>
     );
