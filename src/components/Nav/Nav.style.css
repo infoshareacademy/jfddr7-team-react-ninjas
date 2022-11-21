@@ -98,6 +98,7 @@ a:hover{
     flex-direction: column;
     padding-bottom: 5px;
     transition-duration: 500ms;
+    gap: 10px;
 }
 
 a.my-notes-style.active {
