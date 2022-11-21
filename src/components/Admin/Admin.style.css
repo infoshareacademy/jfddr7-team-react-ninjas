@@ -2,19 +2,20 @@
     box-sizing: border-box;
   }
 
-
-form{
-    width: 400px;
-    height: 400px;
-    margin: 50px auto;
+.admin-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.admin-h1-div {
-    width: 100%;
-    height: 70px;
-    background-color: rgb(7, 143, 152);
-  }
-
+.form-admin{
+    width: 600px;
+    height: 600px;
+    margin: 100px auto;
+}
 
 .admin-label {
     margin-top: 50px;
@@ -23,13 +24,11 @@ form{
 }
 
 .add-subject-input {
-    width: 100%;
     height: 54.66px;
     margin-bottom: 5px;
 }
 
 .add-subject-button {
-    width: 100%;
     height: 54.66px;
     background-color: rgb(7, 143, 152);
     margin-top: 5px;
