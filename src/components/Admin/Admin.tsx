@@ -24,7 +24,7 @@ export const Admin = () => {
     return ( 
         <>
         <Nav/>
-            <form onSubmit={addNewSubject}>
+            <form className="form-admin" onSubmit={addNewSubject}>
                 <label className='admin-label' htmlFor="add-subject-input">Nazwa przedmiotu:</label>
                 <input className='add-subject-input' type="text" placeholder="Matematyka" onChange={(e)=> setNewSubject(e.target.value)}/>
                 <button className='add-subject-button'>Dodaj przedmiot</button>

@@ -49,7 +49,7 @@ const addTopicToDb = () => {
             <h1>{params.id}</h1>
             <div className="newTopicPanel">
              <label htmlFor="newTopic">Dodaj nowy temat</label>
-             <input type="text" placeholder="Wpisz temat ..." onChange={(e: any) => setNewTopic(e.target.value)}/>
+             <input type="text" placeholder="Wpisz temat ..." onChange={(e: any) => setNewTopic(e.target.value)} required/>
              <button onClick={addTopicToDb}>Dodaj nowy temat</button>
             </div>
             <div className="topic-list">
