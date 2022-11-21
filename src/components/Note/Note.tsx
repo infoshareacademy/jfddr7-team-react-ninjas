@@ -144,7 +144,6 @@ export const Note = () => {
     //Funkcja która pozwala na usuwanie notatek tylko ich właścicielowi, wyłącznie admin może usunąć każdą notatkę
     const handleDelete = async () => {
         await deleteDoc(doc(db, `/Subjects/${subject}/Topics/${object}/Notes/${document}`))
-        alert('Notatka została usunięta');
         navigate(`/subjects/${subject}/${topic}`)
     }
 
