@@ -165,3 +165,33 @@ link img{
 button img:hover{
     border: none;
 }
+
+
+
+@media only screen and (max-width: 1300px) {
+    .div-notes-card {
+       width: 800px;
+      }
+}
+
+@media only screen and (max-width: 1000px) {
+    .my-notes-picture {
+        width: 0px;
+    }
+}
+@media only screen and (max-width: 825px) {
+    .div-notes-card {
+        width: 700px;
+        flex-wrap: wrap;
+       }
+}
+
+@media only screen and (max-width: 700px) {
+    .div-notes-card {
+        max-width: 500px;
+        flex-wrap: wrap;
+        font-size: 15px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-top: 15px;    }
+}
