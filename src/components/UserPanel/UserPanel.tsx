@@ -59,7 +59,7 @@ export const UserPanel = () => {
     return (
         <div className="user-panel-container">
             <Nav />
-            <div className="user-panel-main" style={{backgroundImage:`url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize:'cover'}}>
+            <div className="user-panel-main">
             <div className="user-panel">
             
                 <div className="user-panel-avatar-container">
