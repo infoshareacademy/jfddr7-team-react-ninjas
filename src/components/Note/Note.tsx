@@ -112,7 +112,6 @@ export const Note = () => {
     //Funkcja, która dodaje notatkę do notatek użytkownika
     const addToMyNotes = async () => {
         await setDoc(doc(db, `${user?.email}notes`, `${note.ID}`), {note})
-        window.alert('notatka dodana do Twojej bazy')
     }
     
     //Funkcja która pozwala na usuwanie notatek tylko ich właścicielowi, wyłącznie admin może usunąć każdą notatkę
@@ -128,7 +127,6 @@ export const Note = () => {
             Note: newBody,
             Title: newTitle,
         })
-        alert('Notatka została edytowana')
         navigate(`/subjects/${subject}/${topic}`);
     }
 
