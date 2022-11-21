@@ -18,7 +18,7 @@ interface MyNotesInterface{
     Cards: string;
     ID: number;
     Note: string;
-    Ranking: 0;
+    Ranking: number;
     Subject: string;
     Title: string;
     Topic: string;
@@ -34,16 +34,17 @@ export const MyNotes = () => {
     const [myNotes, setMyNotes] = useState<MyNotesInterface[]>([])
     const [noteToBeDeleted, setNoteToBeDeleted] = useState('')
     const navigate = useNavigate();
+    const [isLinkUpdated, setIsLinkUpdated] = useState(false)
 
-    useEffect(() => {
-        getDownloadURL(notatkiRef)
-        .then((url)=> {
-            setUrl(url)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }, [user])
+    // useEffect(() => {
+    //     getDownloadURL(notatkiRef)
+    //     .then((url)=> {
+    //         setUrl(url)
+    //     })
+    //     .catch((error) => {
+    //         console.log(error)
+    //     })
+    // }, [user])
 
 
     useEffect(()=> {
@@ -51,12 +52,13 @@ export const MyNotes = () => {
         .then((querySnapshot) => {
             let myNotes: MyNotesInterface[] = [];
             querySnapshot.docs.forEach((doc) => {
-                let noteObject = doc.data().note as MyNotesInterface
+                let noteObject = doc.data() as MyNotesInterface
+                console.log(noteObject)
                 myNotes.push(noteObject)
             })
             setMyNotes(myNotes)
         })
-    },[noteToBeDeleted])
+    },[noteToBeDeleted, isLinkUpdated])
 
 
     return ( 
@@ -81,7 +83,7 @@ export const MyNotes = () => {
                         </div>
                         <div className='note-buttons'>
 
-                            {note.Cards && 
+                            {note.Cards !== '' && 
                             
                             <button 
                                     className='cards-button'
@@ -98,11 +100,11 @@ export const MyNotes = () => {
                                 Fiszki
                             </button> }
 
-                            {!note.Cards &&
-                            <PopUpAddCardsLink/>
+                            {note.Cards == '' &&
+                            <PopUpAddCardsLink note={note} setIsLinkUpdated={setIsLinkUpdated}/> 
                             }
                             
-                            {note.Quiz &&
+                            {note.Quiz !== '' &&
                             <button 
                                     className='quiz-button' 
                                     onClick={(event)=> (
@@ -117,8 +119,8 @@ export const MyNotes = () => {
                             </button>
                             }
 
-                            {!note.Quiz && 
-                            <PopUpAddQuizLink/>
+                            {note.Quiz == '' && 
+                            <PopUpAddQuizLink note={note} setIsLinkUpdated={setIsLinkUpdated}/>
                             }
 
                             <button 
@@ -126,7 +128,7 @@ export const MyNotes = () => {
                                     onClick={async (event) => (
                                         event.stopPropagation(),
                                         await deleteDoc(doc(db, `${user?.email}notes`, `${note.ID}`)), 
-                                        setNoteToBeDeleted(note?.Author)
+                                        setNoteToBeDeleted(note.Note)
                                     )}
                             >
                             <img className="bin-img" src={bin}></img>
