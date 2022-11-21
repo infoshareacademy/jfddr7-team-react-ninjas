@@ -167,31 +167,39 @@ button img:hover{
 }
 
 
-
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1200px) {
     .div-notes-card {
-       width: 800px;
+       padding-left: 10px;
+       padding-right: 10px;
       }
 }
 
+
 @media only screen and (max-width: 1000px) {
-    .my-notes-picture {
-        width: 0px;
-    }
-}
-@media only screen and (max-width: 825px) {
     .div-notes-card {
-        width: 700px;
-        flex-wrap: wrap;
-       }
+       width: 100%;
+      }
+      .my-notes-picture{
+        width: 0%;
+      }
+      .div-my-notes-container {
+        width: 100%;
+      }
 }
 
-@media only screen and (max-width: 700px) {
-    .div-notes-card {
-        max-width: 500px;
-        flex-wrap: wrap;
-        font-size: 15px;
-        padding-left: 5px;
-        padding-right: 5px;
-        margin-top: 15px;    }
+
+@media only screen and (max-width: 488px) {
+     .note-details {
+        font-size: 13px;
+        gap: 5px;
+     }
+     .note-buttons {
+        font-size: 13px;
+        gap: 3px;
+     }
+     .quiz-button-no-cards {
+        width: 75px;
+     }
 }
+
+
