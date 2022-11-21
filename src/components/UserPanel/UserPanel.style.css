@@ -1,3 +1,4 @@
+
 .user-panel-container {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
@@ -7,6 +8,9 @@
 }
 
 .user-panel-main {
+    background-image: url('../../../src/img/takingNotes.png');
+    background-repeat: 'no-repeat';
+     background-size:'cover';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +26,7 @@
 
 .user-panel{
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     border-radius: 3px;
@@ -48,6 +52,7 @@
 
 .user-panel-avatar-container {
     margin-top: 30px;
+    padding-left: 27px;
 }
 
 .user-panel-email-container {
@@ -78,6 +83,16 @@
 
 .enabled {
     border: 1px solid black;
+}
+
+@media only screen and (max-width: 990px) {
+    .user-panel-main {
+        background-image: none;
+    }
+
+    .user-panel {
+        box-shadow: none;
+    }
 }
 
 
