@@ -97,6 +97,16 @@ export const Nav = () => {
                    Moje notatki
                 </NavLink>
               }
+
+              {isAdmin && 
+              <NavLink 
+                to='/admin'
+                style={({ isActive }) =>
+                isActive ? activeStyle : undefined}>
+                
+                Dodaj przedmiot
+              </NavLink>}
+
   
               {user?.photoURL && <img ref={userPanelIconRef} className="avatar" src={user?.photoURL} onMouseOver={addAvatarHover} onClick={navigateToUserPanel}></img>}
               
@@ -108,9 +118,6 @@ export const Nav = () => {
                  <button className='button-logout-dropdown' onClick={handleLogOut}>Wyloguj</button>
               </div>
 
-              
-
-            {isAdmin && <button className='button-add-subject' onClick={navigateToAdmin}>Dodaj przedmiot</button>}
               </div>
             </div>
               

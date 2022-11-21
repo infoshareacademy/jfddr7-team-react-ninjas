@@ -68,6 +68,10 @@ export const MyNotes = () => {
            
             {/* <TabsSubjects/> */}
             <div className='div-my-notes-container'>
+                {/* {!myNotes && <div>
+                    <div>Nie dodałeś jeszcze notatek.</div>
+                    <button className='button-navigate-to-subject-notes'>Przejdź do bazy notatek</button> */}
+                {/* </div> } */}
                 {/* {url !== '' && <div className='div-notes-card'><img src={url}></img></div>} */}
                 {myNotes && myNotes.map((note)=> (
                     <div key={note.ID} className="div-notes-card" 
